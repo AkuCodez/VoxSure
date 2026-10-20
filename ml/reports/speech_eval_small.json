@@ -1,0 +1,317 @@
+{
+  "asr_model": "small",
+  "n_utterances": 76,
+  "voices": [
+    "Microsoft David Desktop",
+    "Microsoft Zira Desktop"
+  ],
+  "conditions": {
+    "clean": {
+      "with_domain_prompt": {
+        "wer": 0.014462809917355372,
+        "latency_s_median": 1.7274559500001487,
+        "latency_s_p95": 1.9273712500012152,
+        "exact_match_rate": 0.9342105263157895,
+        "pipeline_B_argmax": {
+          "n": 76,
+          "correct_answer": 37,
+          "wrong_answer": 31,
+          "clarify": 0,
+          "fallback": 8,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 6,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.40789473684210525,
+          "clarification_rate": 0.0,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.8431372549019608,
+          "task_completion_with_option_click": 0.8431372549019608
+        },
+        "pipeline_C_error_aware": {
+          "n": 76,
+          "correct_answer": 29,
+          "wrong_answer": 10,
+          "clarify": 29,
+          "fallback": 8,
+          "appropriate_clarify": 14,
+          "unnecessary_clarify": 15,
+          "correct_fallback": 6,
+          "missed_fallback": 0,
+          "recoverable_by_option": 12,
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.6862745098039216,
+          "task_completion_with_option_click": 0.803921568627451
+        },
+        "examples": [
+          {
+            "ref": "How do I request a book that the library does not have?",
+            "hyp": "How do I request a book that the library does not have?",
+            "asr_conf": 0.896
+          },
+          {
+            "ref": "What is the meaning of life?",
+            "hyp": "What is the meaning of life?",
+            "asr_conf": 0.746
+          },
+          {
+            "ref": "How do I complain about noise in the hostel?",
+            "hyp": "How do I complain about noise in the hostel?",
+            "asr_conf": 0.84
+          },
+          {
+            "ref": "Is there a bookstore or stationery shop on campus?",
+            "hyp": "Is there a bookstore or stationary shop on campus?",
+            "asr_conf": 0.779
+          },
+          {
+            "ref": "See you later",
+            "hyp": "See you later.",
+            "asr_conf": 0.789
+          },
+          {
+            "ref": "Hello",
+            "hyp": "Hello.",
+            "asr_conf": 0.601
+          }
+        ]
+      },
+      "no_prompt": {
+        "wer": 0.01652892561983471,
+        "latency_s_median": 1.8172800000002098,
+        "latency_s_p95": 4.255353749999813,
+        "exact_match_rate": 0.9342105263157895
+      },
+      "auto_detect": {
+        "wer": 0.01652892561983471,
+        "detected_english_rate": 1.0,
+        "note": "language=None (auto-detect), as used by the app; audio is English"
+      }
+    },
+    "snr20": {
+      "with_domain_prompt": {
+        "wer": 0.01652892561983471,
+        "latency_s_median": 1.8788386500000342,
+        "latency_s_p95": 4.148395974999858,
+        "exact_match_rate": 0.9342105263157895,
+        "pipeline_B_argmax": {
+          "n": 76,
+          "correct_answer": 36,
+          "wrong_answer": 32,
+          "clarify": 0,
+          "fallback": 8,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 6,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.42105263157894735,
+          "clarification_rate": 0.0,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.8235294117647058,
+          "task_completion_with_option_click": 0.8235294117647058
+        },
+        "pipeline_C_error_aware": {
+          "n": 76,
+          "correct_answer": 29,
+          "wrong_answer": 10,
+          "clarify": 29,
+          "fallback": 8,
+          "appropriate_clarify": 14,
+          "unnecessary_clarify": 15,
+          "correct_fallback": 6,
+          "missed_fallback": 0,
+          "recoverable_by_option": 11,
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.6862745098039216,
+          "task_completion_with_option_click": 0.7843137254901961
+        },
+        "examples": [
+          {
+            "ref": "How do I request a book that the library does not have?",
+            "hyp": "How do I request a book that the library does not have?",
+            "asr_conf": 0.828
+          },
+          {
+            "ref": "What is the meaning of life?",
+            "hyp": "What is the meaning of life?",
+            "asr_conf": 0.791
+          },
+          {
+            "ref": "How do I complain about noise in the hostel?",
+            "hyp": "How do I complain about noise in the hostel?",
+            "asr_conf": 0.788
+          },
+          {
+            "ref": "Is there a bookstore or stationery shop on campus?",
+            "hyp": "Is there a bookstore or stationery shop on campus?",
+            "asr_conf": 0.777
+          },
+          {
+            "ref": "See you later",
+            "hyp": "See you later.",
+            "asr_conf": 0.755
+          },
+          {
+            "ref": "Hello",
+            "hyp": "Hello.",
+            "asr_conf": 0.575
+          }
+        ]
+      }
+    },
+    "snr10": {
+      "with_domain_prompt": {
+        "wer": 0.01652892561983471,
+        "latency_s_median": 1.8858162500000617,
+        "latency_s_p95": 4.226554274999671,
+        "exact_match_rate": 0.9210526315789473,
+        "pipeline_B_argmax": {
+          "n": 76,
+          "correct_answer": 37,
+          "wrong_answer": 31,
+          "clarify": 0,
+          "fallback": 8,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 5,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.40789473684210525,
+          "clarification_rate": 0.0,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.8235294117647058,
+          "task_completion_with_option_click": 0.8235294117647058
+        },
+        "pipeline_C_error_aware": {
+          "n": 76,
+          "correct_answer": 29,
+          "wrong_answer": 10,
+          "clarify": 29,
+          "fallback": 8,
+          "appropriate_clarify": 13,
+          "unnecessary_clarify": 15,
+          "correct_fallback": 5,
+          "missed_fallback": 0,
+          "recoverable_by_option": 11,
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.6666666666666666,
+          "task_completion_with_option_click": 0.7843137254901961
+        },
+        "examples": [
+          {
+            "ref": "How do I request a book that the library does not have?",
+            "hyp": "How do I request a book that the library does not have?",
+            "asr_conf": 0.806
+          },
+          {
+            "ref": "What is the meaning of life?",
+            "hyp": "What is the meaning of life?",
+            "asr_conf": 0.802
+          },
+          {
+            "ref": "How do I complain about noise in the hostel?",
+            "hyp": "How do I complain about noise in the hostel?",
+            "asr_conf": 0.774
+          },
+          {
+            "ref": "Is there a bookstore or stationery shop on campus?",
+            "hyp": "Is there a bookstore or stationery shop on campus?",
+            "asr_conf": 0.752
+          },
+          {
+            "ref": "See you later",
+            "hyp": "See you later.",
+            "asr_conf": 0.727
+          },
+          {
+            "ref": "Hello",
+            "hyp": "Hello.",
+            "asr_conf": 0.612
+          }
+        ]
+      }
+    },
+    "snr5": {
+      "with_domain_prompt": {
+        "wer": 0.03305785123966942,
+        "latency_s_median": 1.8270231000005879,
+        "latency_s_p95": 4.193387374999929,
+        "exact_match_rate": 0.8552631578947368,
+        "pipeline_B_argmax": {
+          "n": 76,
+          "correct_answer": 37,
+          "wrong_answer": 32,
+          "clarify": 0,
+          "fallback": 7,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 5,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.42105263157894735,
+          "clarification_rate": 0.0,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.8235294117647058,
+          "task_completion_with_option_click": 0.8235294117647058
+        },
+        "pipeline_C_error_aware": {
+          "n": 76,
+          "correct_answer": 28,
+          "wrong_answer": 10,
+          "clarify": 31,
+          "fallback": 7,
+          "appropriate_clarify": 14,
+          "unnecessary_clarify": 16,
+          "correct_fallback": 5,
+          "missed_fallback": 0,
+          "recoverable_by_option": 13,
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.40789473684210525,
+          "n_clear": 51,
+          "task_completion_one_turn": 0.6470588235294118,
+          "task_completion_with_option_click": 0.7843137254901961
+        },
+        "examples": [
+          {
+            "ref": "How do I request a book that the library does not have?",
+            "hyp": "How do I request a book that the library does not have?",
+            "asr_conf": 0.817
+          },
+          {
+            "ref": "What is the meaning of life?",
+            "hyp": "What is the meaning of life?",
+            "asr_conf": 0.822
+          },
+          {
+            "ref": "How do I complain about noise in the hostel?",
+            "hyp": "How do I complain about noise in the hostel?",
+            "asr_conf": 0.756
+          },
+          {
+            "ref": "Is there a bookstore or stationery shop on campus?",
+            "hyp": "Is there a bookstore or stationary shop on campus?",
+            "asr_conf": 0.739
+          },
+          {
+            "ref": "See you later",
+            "hyp": "See you later.",
+            "asr_conf": 0.74
+          },
+          {
+            "ref": "Hello",
+            "hyp": "Hello.",
+            "asr_conf": 0.606
+          }
+        ]
+      }
+    }
+  }
+}

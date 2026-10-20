@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T15:09:18+00:00",
+  "generated_at": "2026-10-20T16:12:34+00:00",
   "dataset": {
     "seed_utterances": 340,
     "sizes": {
@@ -549,8 +549,8 @@
     "caveat": "Simulated upper bound: memory only helps EXACT repeats of an already-corrected utterance; it does not generalise."
   },
   "speech": {
-    "asr_model": "base.en",
-    "n_utterances": 64,
+    "asr_model": "small",
+    "n_utterances": 76,
     "voices": [
       "Microsoft David Desktop",
       "Microsoft Zira Desktop"
@@ -558,72 +558,361 @@
     "audio_kind": "synthetic text-to-speech (2 Windows voices); not human speech",
     "conditions": {
       "clean": {
-        "wer": 0.0106951871657754,
-        "wer_no_prompt": 0.0106951871657754,
-        "latency_median_s": 0.807037400000354,
-        "latency_p95_s": 0.9076755950004552,
+        "wer": 0.014462809917355372,
+        "wer_no_prompt": 0.01652892561983471,
+        "auto_detect": {
+          "wer": 0.01652892561983471,
+          "detected_english_rate": 1.0,
+          "note": "language=None (auto-detect), as used by the app; audio is English"
+        },
+        "latency_median_s": 1.7274559500001487,
+        "latency_p95_s": 1.9273712500012152,
         "pipeline_B": {
-          "wrong_answer_rate": 0.421875,
+          "wrong_answer_rate": 0.40789473684210525,
           "clarification_rate": 0.0,
-          "task_completion_one_turn": 0.8461538461538461
+          "task_completion_one_turn": 0.8431372549019608
         },
         "pipeline_C": {
-          "wrong_answer_rate": 0.03125,
-          "clarification_rate": 0.484375,
-          "task_completion_one_turn": 0.6923076923076923
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "task_completion_one_turn": 0.6862745098039216
         }
       },
       "snr20": {
-        "wer": 0.013368983957219251,
-        "wer_no_prompt": 0.0106951871657754,
-        "latency_median_s": 0.7951768499997343,
-        "latency_p95_s": 0.8434474999998656,
+        "wer": 0.01652892561983471,
+        "wer_no_prompt": null,
+        "auto_detect": null,
+        "latency_median_s": 1.8788386500000342,
+        "latency_p95_s": 4.148395974999858,
         "pipeline_B": {
-          "wrong_answer_rate": 0.421875,
+          "wrong_answer_rate": 0.42105263157894735,
           "clarification_rate": 0.0,
-          "task_completion_one_turn": 0.8461538461538461
+          "task_completion_one_turn": 0.8235294117647058
         },
         "pipeline_C": {
-          "wrong_answer_rate": 0.03125,
-          "clarification_rate": 0.484375,
-          "task_completion_one_turn": 0.6923076923076923
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "task_completion_one_turn": 0.6862745098039216
         }
       },
       "snr10": {
-        "wer": 0.02406417112299465,
-        "wer_no_prompt": 0.02406417112299465,
-        "latency_median_s": 0.45805535000044983,
-        "latency_p95_s": 0.8614538849996733,
+        "wer": 0.01652892561983471,
+        "wer_no_prompt": null,
+        "auto_detect": null,
+        "latency_median_s": 1.8858162500000617,
+        "latency_p95_s": 4.226554274999671,
         "pipeline_B": {
-          "wrong_answer_rate": 0.421875,
+          "wrong_answer_rate": 0.40789473684210525,
           "clarification_rate": 0.0,
-          "task_completion_one_turn": 0.8461538461538461
+          "task_completion_one_turn": 0.8235294117647058
         },
         "pipeline_C": {
-          "wrong_answer_rate": 0.03125,
-          "clarification_rate": 0.484375,
-          "task_completion_one_turn": 0.6923076923076923
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.3815789473684211,
+          "task_completion_one_turn": 0.6666666666666666
         }
       },
       "snr5": {
-        "wer": 0.05080213903743316,
-        "wer_no_prompt": 0.0374331550802139,
-        "latency_median_s": 0.7945615000003272,
-        "latency_p95_s": 0.8665161050005735,
+        "wer": 0.03305785123966942,
+        "wer_no_prompt": null,
+        "auto_detect": null,
+        "latency_median_s": 1.8270231000005879,
+        "latency_p95_s": 4.193387374999929,
         "pipeline_B": {
-          "wrong_answer_rate": 0.390625,
+          "wrong_answer_rate": 0.42105263157894735,
           "clarification_rate": 0.0,
-          "task_completion_one_turn": 0.8717948717948718
+          "task_completion_one_turn": 0.8235294117647058
         },
         "pipeline_C": {
-          "wrong_answer_rate": 0.046875,
-          "clarification_rate": 0.453125,
-          "task_completion_one_turn": 0.6923076923076923
+          "wrong_answer_rate": 0.13157894736842105,
+          "clarification_rate": 0.40789473684210525,
+          "task_completion_one_turn": 0.6470588235294118
         }
       }
     }
   },
-  "multilingual": null,
+  "multilingual": {
+    "languages": {
+      "en": {
+        "name": "English",
+        "n": 47,
+        "accuracy": 0.9574468085106383,
+        "macro_f1": 0.959375,
+        "lang_id_accuracy": 1.0,
+        "wrong_answer_rate_B": 0.0425531914893617,
+        "wrong_answer_rate_C": 0.0,
+        "clarification_rate_C": 0.06382978723404255,
+        "task_completion_one_turn_C": 0.9361702127659575,
+        "translate_latency_s_median": 3.0000046535860747e-07,
+        "translate_latency_s_p95": 6.999998731771484e-07,
+        "verified": true,
+        "sample_errors": [
+          {
+            "text": "What are the reading room hours?",
+            "english": "What are the reading room hours?",
+            "gold": "library_hours",
+            "pred": "campus_services"
+          },
+          {
+            "text": "How do I download my hall ticket?",
+            "english": "How do I download my hall ticket?",
+            "gold": "exam_info",
+            "pred": "campus_services"
+          }
+        ],
+        "sample_translations": [
+          {
+            "text": "What time does the library close in the evening?",
+            "english": "What time does the library close in the evening?"
+          },
+          {
+            "text": "Is the library open on Sunday?",
+            "english": "Is the library open on Sunday?"
+          },
+          {
+            "text": "What are the reading room hours?",
+            "english": "What are the reading room hours?"
+          },
+          {
+            "text": "How many books can I borrow?",
+            "english": "How many books can I borrow?"
+          }
+        ]
+      },
+      "hi": {
+        "name": "Hindi",
+        "n": 47,
+        "accuracy": 0.9574468085106383,
+        "macro_f1": 0.9571428571428571,
+        "lang_id_accuracy": 1.0,
+        "wrong_answer_rate_B": 0.0425531914893617,
+        "wrong_answer_rate_C": 0.0,
+        "clarification_rate_C": 0.0851063829787234,
+        "task_completion_one_turn_C": 0.9148936170212766,
+        "translate_latency_s_median": 0.3982304999990447,
+        "translate_latency_s_p95": 0.7721205899993944,
+        "verified": true,
+        "sample_errors": [
+          {
+            "text": "\u0935\u093e\u091a\u0928\u093e\u0932\u092f \u0915\u093e \u0938\u092e\u092f \u0915\u094d\u092f\u093e \u0939\u0948?",
+            "english": "What time is the reading room?",
+            "gold": "library_hours",
+            "pred": "campus_services"
+          },
+          {
+            "text": "\u092e\u0948\u0902 \u0905\u092a\u0928\u093e \u092a\u094d\u0930\u0935\u0947\u0936 \u092a\u0924\u094d\u0930 \u0915\u0948\u0938\u0947 \u0921\u093e\u0909\u0928\u0932\u094b\u0921 \u0915\u0930\u0942\u0901?",
+            "english": "How do I download my card?",
+            "gold": "exam_info",
+            "pred": "it_helpdesk"
+          }
+        ],
+        "sample_translations": [
+          {
+            "text": "\u0936\u093e\u092e \u0915\u094b \u092a\u0941\u0938\u094d\u0924\u0915\u093e\u0932\u092f \u0915\u093f\u0924\u0928\u0947 \u092c\u091c\u0947 \u092c\u0902\u0926 \u0939\u094b\u0924\u093e \u0939\u0948?",
+            "english": "What time does the library close in the evening?"
+          },
+          {
+            "text": "\u0915\u094d\u092f\u093e \u0930\u0935\u093f\u0935\u093e\u0930 \u0915\u094b \u092a\u0941\u0938\u094d\u0924\u0915\u093e\u0932\u092f \u0916\u0941\u0932\u093e \u0930\u0939\u0924\u093e \u0939\u0948?",
+            "english": "Is the library open on Sundays?"
+          },
+          {
+            "text": "\u0935\u093e\u091a\u0928\u093e\u0932\u092f \u0915\u093e \u0938\u092e\u092f \u0915\u094d\u092f\u093e \u0939\u0948?",
+            "english": "What time is the reading room?"
+          },
+          {
+            "text": "\u092e\u0948\u0902 \u0915\u093f\u0924\u0928\u0940 \u0915\u093f\u0924\u093e\u092c\u0947\u0902 \u0909\u0927\u093e\u0930 \u0932\u0947 \u0938\u0915\u0924\u093e \u0939\u0942\u0901?",
+            "english": "How many books can I borrow?"
+          }
+        ]
+      },
+      "pa": {
+        "name": "Punjabi",
+        "n": 47,
+        "accuracy": 0.9148936170212766,
+        "macro_f1": 0.9100732600732601,
+        "lang_id_accuracy": 1.0,
+        "wrong_answer_rate_B": 0.06382978723404255,
+        "wrong_answer_rate_C": 0.0,
+        "clarification_rate_C": 0.1276595744680851,
+        "task_completion_one_turn_C": 0.8723404255319149,
+        "translate_latency_s_median": 0.3428704000016296,
+        "translate_latency_s_p95": 0.48788100000037954,
+        "verified": true,
+        "sample_errors": [
+          {
+            "text": "\u0a30\u0a40\u0a21\u0a3f\u0a70\u0a17 \u0a30\u0a42\u0a2e \u0a26\u0a3e \u0a38\u0a2e\u0a3e\u0a02 \u0a15\u0a40 \u0a39\u0a48?",
+            "english": "What time is the reading room?",
+            "gold": "library_hours",
+            "pred": "campus_services"
+          },
+          {
+            "text": "\u0a2e\u0a48\u0a02 \u0a06\u0a2a\u0a23\u0a3e \u0a39\u0a3e\u0a32 \u0a1f\u0a3f\u0a15\u0a1f \u0a15\u0a3f\u0a35\u0a47\u0a02 \u0a21\u0a3e\u0a0a\u0a28\u0a32\u0a4b\u0a21 \u0a15\u0a30\u0a3e\u0a02?",
+            "english": "How can I download my current ticket?",
+            "gold": "exam_info",
+            "pred": "fee_payment"
+          },
+          {
+            "text": "\u0a2d\u0a30\u0a24\u0a40 \u0a32\u0a08 \u0a15\u0a3f\u0a39\u0a5c\u0a40\u0a06\u0a02 \u0a15\u0a70\u0a2a\u0a28\u0a40\u0a06\u0a02 \u0a06\u0a09\u0a02\u0a26\u0a40\u0a06\u0a02 \u0a39\u0a28?",
+            "english": "What companies come to recruit?",
+            "gold": "placement_process",
+            "pred": "out_of_scope"
+          },
+          {
+            "text": "\u0a38\u0a24 \u0a38\u0a4d\u0a30\u0a40 \u0a05\u0a15\u0a3e\u0a32",
+            "english": "Sat Sri Akal",
+            "gold": "greeting",
+            "pred": "hostel_info"
+          }
+        ],
+        "sample_translations": [
+          {
+            "text": "\u0a38\u0a3c\u0a3e\u0a2e \u0a28\u0a42\u0a70 \u0a32\u0a3e\u0a07\u0a2c\u0a4d\u0a30\u0a47\u0a30\u0a40 \u0a15\u0a3f\u0a70\u0a28\u0a47 \u0a35\u0a1c\u0a47 \u0a2c\u0a70\u0a26 \u0a39\u0a41\u0a70\u0a26\u0a40 \u0a39\u0a48?",
+            "english": "What time does the library close in the evening?"
+          },
+          {
+            "text": "\u0a15\u0a40 \u0a10\u0a24\u0a35\u0a3e\u0a30 \u0a28\u0a42\u0a70 \u0a32\u0a3e\u0a07\u0a2c\u0a4d\u0a30\u0a47\u0a30\u0a40 \u0a16\u0a41\u0a71\u0a32\u0a4d\u0a39\u0a40 \u0a39\u0a41\u0a70\u0a26\u0a40 \u0a39\u0a48?",
+            "english": "Is the library open on Sundays?"
+          },
+          {
+            "text": "\u0a30\u0a40\u0a21\u0a3f\u0a70\u0a17 \u0a30\u0a42\u0a2e \u0a26\u0a3e \u0a38\u0a2e\u0a3e\u0a02 \u0a15\u0a40 \u0a39\u0a48?",
+            "english": "What time is the reading room?"
+          },
+          {
+            "text": "\u0a2e\u0a48\u0a02 \u0a15\u0a3f\u0a70\u0a28\u0a40\u0a06\u0a02 \u0a15\u0a3f\u0a24\u0a3e\u0a2c\u0a3e\u0a02 \u0a09\u0a27\u0a3e\u0a30 \u0a32\u0a48 \u0a38\u0a15\u0a26\u0a3e \u0a39\u0a3e\u0a02?",
+            "english": "How many books can I borrow?"
+          }
+        ]
+      },
+      "de": {
+        "name": "German",
+        "n": 47,
+        "accuracy": 0.8297872340425532,
+        "macro_f1": 0.8252518315018316,
+        "lang_id_accuracy": 0.9574468085106383,
+        "wrong_answer_rate_B": 0.14893617021276595,
+        "wrong_answer_rate_C": 0.06382978723404255,
+        "clarification_rate_C": 0.1276595744680851,
+        "task_completion_one_turn_C": 0.7872340425531915,
+        "translate_latency_s_median": 0.31017700000120385,
+        "translate_latency_s_p95": 0.4513870200002201,
+        "verified": true,
+        "sample_errors": [
+          {
+            "text": "Wie hoch ist die Mahngeb\u00fchr bei versp\u00e4teter R\u00fcckgabe?",
+            "english": "How much is a late-return bail?",
+            "gold": "library_borrow",
+            "pred": "fee_payment"
+          },
+          {
+            "text": "Wie lade ich meine Pr\u00fcfungszulassung herunter?",
+            "english": "How do I download my exam certificate?",
+            "gold": "exam_info",
+            "pred": "certificates"
+          },
+          {
+            "text": "Bis wann muss man im Wohnheim zur\u00fcck sein?",
+            "english": "How long do you have to be back at the shelter?",
+            "gold": "hostel_info",
+            "pred": "campus_services"
+          },
+          {
+            "text": "An wen wende ich mich bei IT-Problemen?",
+            "english": "Who do I turn to for IT problems?",
+            "gold": "it_helpdesk",
+            "pred": "help_capabilities"
+          },
+          {
+            "text": "Wie funktioniert das Campus-Placement?",
+            "english": "How's the campus location working?",
+            "gold": "placement_process",
+            "pred": "it_helpdesk"
+          },
+          {
+            "text": "Welche Firmen kommen zum Recruiting?",
+            "english": "What companies are recruiting?",
+            "gold": "placement_process",
+            "pred": "out_of_scope"
+          },
+          {
+            "text": "Ich brauche meinen Notenauszug",
+            "english": "I need my notebook .",
+            "gold": "certificates",
+            "pred": "library_borrow"
+          },
+          {
+            "text": "Um wie viel Uhr \u00f6ffnet die Mensa?",
+            "english": "What time does the mensa open?",
+            "gold": "campus_services",
+            "pred": "library_hours"
+          }
+        ],
+        "sample_translations": [
+          {
+            "text": "Um wie viel Uhr schlie\u00dft die Bibliothek abends?",
+            "english": "What time does the library close at night?"
+          },
+          {
+            "text": "Ist die Bibliothek sonntags ge\u00f6ffnet?",
+            "english": "Is the library open on Sunday?"
+          },
+          {
+            "text": "Wie sind die \u00d6ffnungszeiten des Lesesaals?",
+            "english": "What are the opening hours of the reading room?"
+          },
+          {
+            "text": "Wie viele B\u00fccher kann ich ausleihen?",
+            "english": "How many books can I borrow?"
+          }
+        ]
+      }
+    },
+    "criterion": {
+      "accuracy": 0.8,
+      "wrong_answer_rate_C": 0.1,
+      "lang_id_accuracy": 0.95
+    },
+    "n_per_language": 47,
+    "notes": [
+      "Test sentences were written by the author and are not verified by native speakers.",
+      "Typed text only: speech recognition accuracy for these languages was not measured (no human recordings).",
+      "Verified = intent accuracy >= 80%, wrong-answer rate with recovery <= 10%, language-ID accuracy >= 95% (fixed in advance)."
+    ],
+    "translation_model": "NLLB-200 distilled 600M (int8, CTranslate2)",
+    "machine_translation_number_check": {
+      "hi": {
+        "answers_with_numbers": 4,
+        "numbers_changed_by_machine_translation": 0,
+        "which": []
+      },
+      "pa": {
+        "answers_with_numbers": 4,
+        "numbers_changed_by_machine_translation": 0,
+        "which": []
+      },
+      "de": {
+        "answers_with_numbers": 4,
+        "numbers_changed_by_machine_translation": 1,
+        "which": [
+          "library_hours"
+        ]
+      },
+      "fr": {
+        "answers_with_numbers": 4,
+        "numbers_changed_by_machine_translation": 1,
+        "which": [
+          "campus_services"
+        ]
+      },
+      "es": {
+        "answers_with_numbers": 4,
+        "numbers_changed_by_machine_translation": 1,
+        "which": [
+          "library_hours"
+        ]
+      }
+    },
+    "reply_policy": "hi, pa and de replies use hand-written text (not machine translated). Other languages use NLLB; replies whose numbers changed are flagged to the user."
+  },
   "limitations": [
     "Dataset is author-written and small (2 distinct held-out phrasings per class); real-user accuracy will be lower.",
     "Speech results use synthetic text-to-speech audio only; no human recordings, accents or real microphones.",

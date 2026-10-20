@@ -237,3 +237,11 @@ def test_keys_in_a_dotenv_file_are_honoured(tmp_path, monkeypatch):
     s = Settings(_env_file=str(env))
     assert s.general_api_key == "from-dotenv"
     assert isinstance(build_general(s), OpenAICompatAnswerer)
+
+
+def test_health_names_the_models_in_use(vox):
+    vox.general = CompatFake(ok("x"), provider_name="Groq")
+    h = TestClient(create_app(vox)).get("/api/v1/health").json()
+    assert h["general_provider"] == "Groq" and h["general_model"] == "some-model"
+    assert h["translation_ready"] is True and h["asr_model"] == "fake.en" and h["intent_ready"] is True
+    assert "key" not in str(h).lower()          # never exposes credentials

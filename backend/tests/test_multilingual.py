@@ -20,8 +20,19 @@ def test_script_detection():
     assert detect_text_language("Wann öffnet die Bibliothek und wie lange ist sie geöffnet?") == "de"
 
 
+def test_latin_script_languages_are_detected_and_english_is_not_misrouted():
+    cases = {"es": ["¿A qué hora abre la biblioteca?", "¿Cómo puedo pagar mis tasas de matrícula?", "Necesito un certificado de estudios", "Olvidé la contraseña del portal"],
+             "pt": ["A que horas abre a biblioteca?", "Como posso pagar as propinas?", "Esqueci a senha do portal"],
+             "fr": ["À quelle heure ouvre la bibliothèque ?", "Comment payer mes frais de scolarité ?"],
+             "it": ["A che ora apre la biblioteca?", "Come posso pagare le tasse universitarie?"], "nl": ["Hoe laat gaat de bibliotheek open?"], "tr": ["Kütüphane saat kaçta açılıyor?"]}
+    for lang, xs in cases.items():
+        for x in xs:
+            assert detect_text_language(x) == lang, x
+    assert detect_text_language("Wo ist das Gesundheitszentrum?") == "de"
+
+
 def test_english_text_is_never_misrouted_to_another_language():
-    for t in ["I forgot my portal password", "Who do I contact for IT support?", "Are you a robot?", "Order me a pizza", "Hello"]:
+    for t in ["I forgot my portal password", "Who do I contact for IT support?", "Are you a robot?", "Order me a pizza", "Hello", "What is the capital of France?", "Tell me a joke", "Can I get a receipt?"]:
         assert detect_text_language(t) == "en", t
 
 
@@ -76,7 +87,7 @@ def test_non_curated_language_uses_machine_translation_with_numeric_guard(client
 
 
 def test_numbers_guard_handles_indic_digits():
-    assert numbers_in("सुबह ०८:०० से २२:००") == {"08", "00", "22"}
+    assert numbers_in("सुबह ०८:०० से २२:००") == {"8", "0", "22"}   # leading zeros ignored: "08" == "8"
     assert numbers_preserved("Open 08:00 to 22:00", "ਖੁੱਲ੍ਹੀ ੦੮:੦੦ ਤੋਂ ੨੨:੦੦")
     assert not numbers_preserved("Open 08:00 to 22:00", "open at night")
 

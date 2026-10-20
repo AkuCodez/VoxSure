@@ -36,6 +36,10 @@ async def health(request: Request) -> HealthResponse:
     general_ready = s.general is not None and s.general.available()
     return HealthResponse(
         status="ok" if all(ready) else "degraded", asr_ready=ready[0], intent_ready=ready[1], general_ready=general_ready,
+        translation_ready=s.translator is not None,
+        general_provider=getattr(s.general, "provider_name", None) if s.general is not None else None,
+        general_model=getattr(s.general, "model", None) if s.general is not None else None,
+        asr_multilingual=bool(getattr(s.transcriber, "multilingual", False)),
         db_ready=ready[2], model_version=getattr(s.classifier, "version", None),
         asr_model=getattr(s.transcriber, "model_name", None))
 

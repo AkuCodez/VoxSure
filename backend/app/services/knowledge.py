@@ -9,7 +9,7 @@ _DIGITS = str.maketrans("०१२३४५६७८९੦੧੨੩੪੫੬੭�
 
 def numbers_in(text: str) -> set[str]:
     """Digit sequences in any common script, normalised to ASCII (for the translation numeric guard)."""
-    return set(re.findall(r"\d+", text.translate(_DIGITS)))
+    return {str(int(n)) for n in re.findall(r"\d+", text.translate(_DIGITS))}   # "08" and "8" are the same number
 
 
 def numbers_preserved(source: str, translated: str) -> bool:

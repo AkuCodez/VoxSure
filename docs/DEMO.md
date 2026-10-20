@@ -23,9 +23,9 @@ microphone, or type it. Confidence is shown for the reader only; the UI delibera
 ## Suggested live-demo order (about 3 minutes)
 
 1. Say prompt 1 (voice) → transcript visible, answer, spoken reply.
-2. Say prompt 5 → clarification buttons → tap *Library opening hours*.
+2. Say prompt 5 ("I want to renew") → targeted question with option buttons → tap one.
 3. Prompt 7 → show **Edit and Resend**.
-4. Prompt 8 → transparent fallback.
+4. Prompt 8 → a labelled AI answer (if a provider is configured) or the transparent fallback.
 5. Open Settings → privacy text, memory opt-in, delete.
 
 ## Known issues (honest list)

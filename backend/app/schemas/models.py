@@ -133,6 +133,10 @@ class HealthResponse(BaseModel):
     asr_ready: bool
     intent_ready: bool
     general_ready: bool = False
+    translation_ready: bool = False
+    general_provider: str | None = None
+    general_model: str | None = None
+    asr_multilingual: bool = False
     db_ready: bool
     model_version: str | None = None
     asr_model: str | None = None

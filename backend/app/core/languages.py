@@ -33,7 +33,7 @@ _SCRIPT_RULES = [  # unambiguous scripts first
 _EN_WORDS = {
     "the", "is", "are", "do", "does", "did", "i", "my", "you", "your", "me", "can", "how", "what", "when", "where", "who", "which",
     "would", "to", "of", "and", "for", "it", "there", "this", "that", "have", "has", "need", "want", "please", "hello", "hi",
-    "thanks", "thank", "our", "with", "from", "about", "tell", "not", "get", "a", "be", "if", "or", "any", "much", "many",
+    "thanks", "thank", "our", "with", "from", "about", "tell", "not", "get", "be", "if", "any", "much", "many",
 }
 _LATIN_LANGS = [c for c in LANGS if c not in ("pa", "ta", "te", "bn", "gu", "kn", "ml", "th", "ko", "ja", "zh", "hi", "mr", "ne", "ur", "ar", "ru", "uk")]
 _IDENT = None
@@ -48,23 +48,61 @@ def _identifier():
     return _IDENT
 
 
+# Common function words per language (generic, not tuned to any test sentence). Used for Latin-script text,
+# where the statistical detector is unreliable on short messages.
+_STOP: dict[str, set[str]] = {
+    "es": {"el", "la", "los", "las", "un", "una", "de", "del", "que", "qué", "y", "en", "es", "por", "para", "con", "mi", "mis", "cómo", "como", "cuándo",
+           "cuál", "dónde", "quién", "puedo", "necesito", "quiero", "hay", "está", "hora", "olvidé", "hola", "gracias", "se", "no", "su"},
+    "pt": {"os", "as", "um", "uma", "de", "do", "da", "dos", "das", "que", "em", "é", "por", "para", "com", "meu", "minha", "como", "quando",
+           "qual", "onde", "quem", "posso", "preciso", "quero", "está", "horas", "esqueci", "olá", "obrigado", "obrigada", "não", "você", "se"},
+    "fr": {"le", "la", "les", "un", "une", "des", "de", "du", "que", "qui", "et", "en", "est", "pour", "avec", "mon", "ma", "mes", "je", "j'ai", "comment", "quand",
+           "quel", "quelle", "où", "puis", "peux", "veux", "bonjour", "merci", "à", "au", "aux", "ne", "pas", "ouvre", "mot"},
+    "it": {"il", "lo", "la", "gli", "le", "un", "una", "di", "del", "della", "che", "in", "è", "per", "con", "mio", "mia", "come", "quando", "quale", "dove",
+           "chi", "posso", "devo", "voglio", "ho", "ora", "ciao", "grazie", "non", "apre", "sono", "cosa", "puoi", "può", "fare", "sei", "hai", "questo", "quello"},
+    "de": {"der", "die", "das", "ein", "eine", "und", "ist", "ich", "wie", "wann", "wo", "was", "kann", "muss", "mein", "meine", "mir", "mich", "für", "mit", "nicht",
+           "bitte", "hallo", "danke", "zu", "auf", "im", "von", "den", "dem", "wer", "habe", "bin", "gibt", "es", "du", "kannst", "guten", "morgen", "tun", "können", "sie", "wir", "was"},
+    "nl": {"de", "het", "een", "en", "is", "ik", "hoe", "wanneer", "waar", "wat", "kan", "mijn", "mij", "voor", "met", "niet", "alsjeblieft", "hallo", "dank", "te", "op",
+           "van", "wie", "heb", "ben", "laat", "betaal", "gaat"},
+    "tr": {"bir", "ve", "bu", "ne", "nasıl", "nerede", "kaçta", "saat", "için", "ile", "mi", "mı", "mu", "mü", "benim", "ben", "var", "yok", "merhaba", "teşekkürler", "lütfen", "unuttum"},
+    "id": {"yang", "dan", "di", "ke", "dari", "ini", "itu", "apa", "bagaimana", "kapan", "dimana", "saya", "tolong", "terima", "kasih", "halo", "untuk", "dengan", "tidak", "bisa"},
+}
+
+
+def _stop_scores(tokens: list[str]) -> dict[str, int]:
+    return {lang: sum(t in words for t in tokens) for lang, words in _STOP.items()}
+
+
 def detect_text_language(text: str) -> str:
-    """Script rules first (reliable for Indic scripts); for Latin script be English-biased:
-    common English words win, and another language needs >= 80% model confidence on 2+ words."""
+    """Script rules first (reliable for Indic/CJK scripts). For Latin script: English function words win; otherwise the
+    language with the most function-word hits (ties broken by the statistical model); the statistical model alone is used
+    only when it is very confident on a longer message. Everything uncertain defaults to English."""
     for pat, code in _SCRIPT_RULES:
         if pat.search(text):
             return code
-    tokens = re.findall(r"[^\W\d_]+", text.lower())
+    tokens = re.findall(r"[^\W\d_]+(?:'[^\W\d_]+)?", text.lower())
     if not tokens:
         return "en"
-    hits = sum(t in _EN_WORDS for t in tokens)
-    if hits and hits / len(tokens) >= 0.25:
+    en_hits = sum(t in _EN_WORDS for t in tokens)
+    scores = _stop_scores(tokens)
+    best = max(scores.values())
+    if en_hits and en_hits / len(tokens) >= 0.25 and en_hits >= best:
         return "en"
-    if len(tokens) < 2:
+    if best >= 2 or (best >= 1 and len(tokens) <= 2 and en_hits == 0):
+        cands = [l for l, v in scores.items() if v == best]
+        if len(cands) == 1:
+            return cands[0]
+        try:
+            for lang, _ in _identifier().rank(text):
+                if lang in cands:
+                    return lang
+        except Exception:
+            pass
+        return cands[0]
+    if len(tokens) < 3:
         return "en"
     try:
         code, prob = _identifier().classify(text)
-        return code if (code in LANGS and prob >= 0.80) else "en"
+        return code if (code in LANGS and prob >= 0.95 and en_hits == 0) else "en"
     except Exception:
         return "en"
 

@@ -23,8 +23,14 @@ const EXAMPLES = [
   { q: "What can you do?", tag: "About the assistant", tone: "text-emerald-300" },
 ];
 
-const LANGUAGES: [string, string][] = [
-  ["auto", "Auto-detect language"], ["en", "English"], ["hi", "हिन्दी · Hindi"], ["pa", "ਪੰਜਾਬੀ · Punjabi"], ["de", "Deutsch · German"],
+// Languages measured in the evaluation (typed text) vs. best effort (translation attempted, accuracy not measured).
+const VERIFIED: [string, string][] = [["en", "English"], ["hi", "हिन्दी · Hindi"], ["pa", "ਪੰਜਾਬੀ · Punjabi"], ["de", "Deutsch · German"]];
+const BEST_EFFORT: [string, string][] = [
+  ["es", "Español · Spanish"], ["fr", "Français · French"], ["pt", "Português · Portuguese"], ["it", "Italiano · Italian"], ["nl", "Nederlands · Dutch"],
+  ["ru", "Русский · Russian"], ["uk", "Українська · Ukrainian"], ["pl", "Polski · Polish"], ["sv", "Svenska · Swedish"], ["tr", "Türkçe · Turkish"],
+  ["ar", "العربية · Arabic"], ["ur", "اردو · Urdu"], ["bn", "বাংলা · Bengali"], ["ta", "தமிழ் · Tamil"], ["te", "తెలుగు · Telugu"], ["mr", "मराठी · Marathi"],
+  ["gu", "ગુજરાતી · Gujarati"], ["kn", "ಕನ್ನಡ · Kannada"], ["ml", "മലയാളം · Malayalam"], ["ne", "नेपाली · Nepali"], ["zh", "中文 · Chinese"], ["ja", "日本語 · Japanese"],
+  ["ko", "한국어 · Korean"], ["th", "ไทย · Thai"], ["vi", "Tiếng Việt · Vietnamese"], ["id", "Bahasa Indonesia · Indonesian"],
 ];
 
 const iconBtn = "inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:opacity-40";
@@ -69,7 +75,13 @@ export default function ChatPage() {
           <label className="sr-only" htmlFor="lang">Speech and reply language</label>
           <select id="lang" value={chat.langPref} onChange={(e) => chat.setLangPref(e.target.value)} disabled={locked}
             className="rounded-xl border border-white/10 bg-ink-800 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:opacity-40">
-            {LANGUAGES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            <option value="auto">Auto-detect language</option>
+            <optgroup label="Measured (typed text)">
+              {VERIFIED.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </optgroup>
+            <optgroup label="Best effort (not measured)">
+              {BEST_EFFORT.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+            </optgroup>
           </select>
           {chat.speaking && <button onClick={chat.stopAudio} className={iconBtn}><StopIcon size={16} />Stop audio</button>}
           <button onClick={() => chat.toggleSpeak(!chat.speakOn)} aria-pressed={!chat.speakOn} disabled={!ttsSupported()} className={iconBtn}>

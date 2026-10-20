@@ -55,6 +55,8 @@ export const api = {
     request<{ deleted: number }>(`/api/v1/memory/${id}${item ? `/${item}` : ""}`, { method: "DELETE" }),
 };
 
+export const fetchHealth = () => request<import("../types").Health>("/api/v1/health");
+
 export async function fetchEvaluation(): Promise<import("../types/evaluation").Evaluation> {
   return request("/api/v1/evaluation");
 }

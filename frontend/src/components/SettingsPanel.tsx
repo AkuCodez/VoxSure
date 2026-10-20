@@ -1,4 +1,5 @@
 import type { MemoryItem } from "../types";
+import ModelsInUse from "./ModelsInUse";
 
 interface Props {
   open: boolean;
@@ -69,6 +70,8 @@ export default function SettingsPanel({ open, onClose, speakOn, onSpeak, memoryO
             </div>
           )}
         </section>
+
+        <ModelsInUse />
 
         <section className="mt-8 rounded-xl border border-blue-400/20 bg-blue-500/[0.06] p-4 text-sm leading-relaxed text-slate-300">
           <h3 className="font-semibold text-white">How your data is handled</h3>
