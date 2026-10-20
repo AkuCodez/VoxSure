@@ -18,6 +18,7 @@ In-app evaluation dashboard: `#/evaluation`.
 * Report: [`docs/REPORT.md`](docs/REPORT.md) · Architecture: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) ·
   Traceability: [`docs/TRACEABILITY.md`](docs/TRACEABILITY.md) · Deployment: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
 * Live app: _add URL after deployment_
+* Source code: https://github.com/AkuCodez/VoxSure
 
 ## Run locally (Windows / macOS / Linux, Python 3.10+, Node 20+)
 
