@@ -41,7 +41,7 @@ function Bar({ value, tone = "bg-blue-400", marker }: { value: number; tone?: st
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl bg-white/[0.04] px-3 py-2">
-      <p className="text-[10px] uppercase tracking-wider text-slate-500">{label}</p>
+      <p className="text-[10px] uppercase tracking-wider text-slate-400">{label}</p>
       <p className="mt-0.5 font-mono text-base font-semibold text-slate-100">{value}</p>
     </div>
   );
@@ -53,7 +53,7 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
     <aside className="panel-solid hidden w-[380px] shrink-0 flex-col overflow-y-auto xl:flex" aria-label="Pipeline insights">
       <div className="border-b border-white/[0.07] px-5 py-4">
         <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-300">Pipeline insights</h2>
-        <p className="mt-1 text-xs text-slate-500">What happened to your last request, stage by stage. Scores are model estimates, not guarantees.</p>
+        <p className="mt-1 text-xs text-slate-400">What happened to your last request, stage by stage. Scores are model estimates, not guarantees.</p>
       </div>
 
       {!insight ? (
@@ -111,7 +111,7 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
               <p className="text-slate-400">Skipped: you chose an option directly.</p>
             )}
             {insight.turn.thresholds && insight.turn.candidates.length > 0 && (
-              <p className="mt-3 text-xs text-slate-500">White tick marks the {pct(insight.turn.thresholds.t_high)} answer threshold.</p>
+              <p className="mt-3 text-xs text-slate-400">White tick marks the {pct(insight.turn.thresholds.t_high)} answer threshold.</p>
             )}
           </Stage>
 
@@ -126,7 +126,7 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
             </div>
             <p className="mt-2 leading-snug">{REASONS[insight.turn.reason] ?? insight.turn.reason}</p>
             {insight.turn.thresholds && insight.turn.reason !== "general_ai" && (
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-400">
                 Rule: answer when top ≥ {pct(insight.turn.thresholds.t_high)} and lead ≥ {Math.round(insight.turn.thresholds.margin * 100)} pts.
               </p>
             )}
@@ -142,7 +142,7 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
       )}
 
       <div className="mt-auto border-t border-white/[0.07] p-4">
-        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-500">This session · {turns} turn{turns === 1 ? "" : "s"}</p>
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">This session · {turns} turn{turns === 1 ? "" : "s"}</p>
         <div className="grid grid-cols-3 gap-2 text-center">
           <Metric label="Answered" value={String(counts.answer)} />
           <Metric label="Clarified" value={String(counts.clarify)} />

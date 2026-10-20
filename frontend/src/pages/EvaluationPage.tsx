@@ -10,7 +10,7 @@ function Card({ title, children, note }: { title: string; children: ReactNode; n
     <section className="panel rounded-2xl p-5">
       <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-300">{title}</h2>
       <div className="mt-4">{children}</div>
-      {note && <p className="mt-3 text-xs leading-relaxed text-slate-500">{note}</p>}
+      {note && <p className="mt-3 text-xs leading-relaxed text-slate-400">{note}</p>}
     </section>
   );
 }
@@ -20,7 +20,7 @@ function Kpi({ label, value, sub, tone = "text-white" }: { label: string; value:
     <div className="panel rounded-2xl p-5">
       <p className="text-xs uppercase tracking-wider text-slate-400">{label}</p>
       <p className={`mt-2 font-mono text-3xl font-bold ${tone}`}>{value}</p>
-      {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
+      {sub && <p className="mt-1 text-xs text-slate-400">{sub}</p>}
     </div>
   );
 }
@@ -80,7 +80,7 @@ function Confusion({ m, labels }: { m: number[][]; labels: string[] }) {
           ))}
         </tbody>
       </table>
-      <p className="mt-2 text-xs text-slate-500">Green diagonal = correct. Red = confusions. Rows: true intent; columns: predicted intent.</p>
+      <p className="mt-2 text-xs text-slate-400">Green diagonal = correct. Red = confusions. Rows: true intent; columns: predicted intent.</p>
     </div>
   );
 }
@@ -154,7 +154,7 @@ function Body({ d }: { d: Evaluation }) {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-slate-500"><span className="text-emerald-300">Green</span> DistilBERT · <span className="text-rose-300">red</span> baseline.</p>
+          <p className="mt-3 text-xs text-slate-400"><span className="text-emerald-300">Green</span> DistilBERT · <span className="text-rose-300">red</span> baseline.</p>
         </Card>
 
         <Card title="Calibration and policy" note="Temperature scaling was fitted on validation data only. Policy thresholds were tuned on validation data, then frozen before test evaluation.">
@@ -162,7 +162,7 @@ function Body({ d }: { d: Evaluation }) {
             {[["ECE before", d.intent.calibration.ece_test_uncalibrated.toFixed(3)], ["ECE after", d.intent.calibration.ece_test_calibrated.toFixed(3)],
               ["Temperature", d.intent.calibration.temperature.toFixed(2)], ["Mean confidence", pct(d.intent.calibration.mean_conf_test_calibrated)],
               ["Test accuracy", pct(d.intent.calibration.acc_test)], ["Answer threshold", pct(d.policy.params.t_high, 0)]].map(([k, v]) => (
-              <div key={k} className="rounded-xl bg-white/[0.04] p-3"><dt className="text-[10px] uppercase tracking-wider text-slate-500">{k}</dt><dd className="mt-0.5 font-mono text-lg text-slate-100">{v}</dd></div>
+              <div key={k} className="rounded-xl bg-white/[0.04] p-3"><dt className="text-[10px] uppercase tracking-wider text-slate-400">{k}</dt><dd className="mt-0.5 font-mono text-lg text-slate-100">{v}</dd></div>
             ))}
           </dl>
         </Card>
@@ -174,7 +174,7 @@ function Body({ d }: { d: Evaluation }) {
         <Card title="Speech recognition and latency" note={`${d.speech.audio_kind}. Model: Whisper ${d.speech.asr_model}. White noise added at the stated SNR. Latency measured on the author's laptop CPU. These WERs are lower bounds; real accents and microphones were not measured.`}>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="text-xs uppercase tracking-wider text-slate-500"><tr><th className="py-2">Condition</th><th>WER</th><th>Latency p50 / p95</th><th>Wrong answers (always answer → VoxSure)</th></tr></thead>
+              <thead className="text-xs uppercase tracking-wider text-slate-400"><tr><th className="py-2">Condition</th><th>WER</th><th>Latency p50 / p95</th><th>Wrong answers (always answer → VoxSure)</th></tr></thead>
               <tbody className="text-slate-300">
                 {Object.entries(d.speech.conditions).map(([c, v]) => (
                   <tr key={c} className="border-t border-white/[0.06]">
@@ -194,7 +194,7 @@ function Body({ d }: { d: Evaluation }) {
         <Card title="Multilingual (typed input → translation → classifier → translated reply)" note={(d.multilingual.notes ?? []).join(" ")}>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="text-xs uppercase tracking-wider text-slate-500"><tr><th className="py-2">Language</th><th>n</th><th>Accuracy</th><th>Language ID</th><th>Wrong answers (always answer → VoxSure)</th><th>Status</th></tr></thead>
+              <thead className="text-xs uppercase tracking-wider text-slate-400"><tr><th className="py-2">Language</th><th>n</th><th>Accuracy</th><th>Language ID</th><th>Wrong answers (always answer → VoxSure)</th><th>Status</th></tr></thead>
               <tbody className="text-slate-300">
                 {Object.entries(d.multilingual.languages).map(([c, v]) => (
                   <tr key={c} className="border-t border-white/[0.06]">
@@ -221,7 +221,7 @@ function Body({ d }: { d: Evaluation }) {
 
       <Card title="Limitations (read before trusting any number)">
         <ul className="list-disc space-y-1.5 pl-5 text-sm text-slate-300">{d.limitations.map((l) => <li key={l}>{l}</li>)}</ul>
-        <p className="mt-3 text-xs text-slate-500">Generated {new Date(d.generated_at).toLocaleString()} · dataset: {d.dataset.provenance} · model {d.model.name}, seed {d.model.seed}.</p>
+        <p className="mt-3 text-xs text-slate-400">Generated {new Date(d.generated_at).toLocaleString()} · dataset: {d.dataset.provenance} · model {d.model.name}, seed {d.model.seed}.</p>
       </Card>
     </>
   );

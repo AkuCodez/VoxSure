@@ -60,8 +60,8 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
     const doubtful = item.mode === "voice" && item.asrConfidence !== undefined && item.asrConfidence < 0.6;
     return (
       <li className="fade-up flex justify-end">
-        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-gradient-to-br from-[#2f6be0] to-[#1d3f94] px-5 py-3.5 text-white shadow-lg shadow-blue-950/40 ring-1 ring-white/10 sm:max-w-[72%]">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-100/80">
+        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-gradient-to-br from-[#2454bb] to-[#1d3f94] px-5 py-3.5 text-white shadow-lg shadow-blue-950/40 ring-1 ring-white/10 sm:max-w-[72%]">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-blue-100">
             <span aria-hidden="true">{item.mode === "voice" ? <MicIcon size={12} /> : <EditIcon size={12} />}</span>
             <span>{item.mode === "voice" ? "You said (transcript)" : "You typed"}</span>
             {item.edited ? <span>· edited</span> : null}
@@ -89,7 +89,7 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
             <>
               <p className="mt-1 text-[17px] leading-snug" lang={item.lang} data-testid="user-text"><Transcript text={item.text} words={item.edited ? undefined : item.words} /></p>
               {item.translated && item.translated !== item.text && (
-                <p className="mt-1 text-sm italic text-blue-100/80">Understood as: “{item.translated}”</p>
+                <p className="mt-1 text-sm italic text-blue-100">Understood as: “{item.translated}”</p>
               )}
               {item.words?.some((w) => w.probability < LOW_WORD) && !item.edited && (
                 <p className="mt-1.5 text-xs text-amber-100">Underlined words were hard to hear. Tap Edit to fix them.</p>

@@ -68,7 +68,7 @@ export default function Composer({ recording, starting = false, seconds, maxSeco
             <label htmlFor="typed" className="sr-only">Type your question</label>
             <input id="typed" value={text} onChange={(e) => setText(e.target.value)} maxLength={300}
               placeholder="Type a question, e.g. When does the library open?"
-              className="min-w-0 flex-1 rounded-xl border border-white/10 bg-ink-950/70 px-4 py-3 text-base text-slate-100 placeholder:text-slate-500 focus:border-blue-400/60" />
+              className="min-w-0 flex-1 rounded-xl border border-white/10 bg-ink-950/70 px-4 py-3 text-base text-slate-100 placeholder:text-slate-400 focus:border-blue-400/60" />
             <button type="submit" disabled={!text.trim() || busy || recording || starting}
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 px-5 py-3 font-semibold text-white shadow-lg shadow-blue-900/40 transition hover:brightness-110 disabled:opacity-35">
               <span>Send</span><SendIcon size={16} />
@@ -76,7 +76,7 @@ export default function Composer({ recording, starting = false, seconds, maxSeco
           </div>
         </div>
       </div>
-      <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-slate-500">
+      <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-slate-400">
         VoxSure asks before guessing. Always confirm important details with the official office.
       </p>
     </form>

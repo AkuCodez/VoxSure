@@ -120,7 +120,7 @@ export default function ChatPage() {
                     ))}
                   </ul>
 
-                  <p className="mt-10 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Try one of these</p>
+                  <p className="mt-10 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Try one of these</p>
                   <div className="mt-3 grid gap-3 text-left sm:grid-cols-2">
                     {EXAMPLES.map((e) => (
                       <button key={e.q} onClick={() => ask(e.q)} disabled={locked}
