@@ -1,13 +1,3 @@
----
-title: VoxSure
-emoji: 🎙️
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_port: 7860
-pinned: false
----
-
 # VoxSure: error-aware voice assistant
 
 Voice in → Whisper speech recognition → (translation to English if needed) → fine-tuned DistilBERT intent classifier →
