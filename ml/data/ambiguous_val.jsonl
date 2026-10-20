@@ -1,25 +1,25 @@
-{"text": "Do I need permission?", "plausible": ["hostel_info", "certificates", "placement_process"]}
-{"text": "Is it open on weekends?", "plausible": ["library_hours", "campus_services"]}
+{"text": "Is there a limit?", "plausible": ["library_borrow", "placement_process"]}
+{"text": "Can someone help me with my request?", "plausible": ["it_helpdesk", "certificates", "fee_payment"]}
+{"text": "Tell me about the dates", "plausible": ["academic_calendar", "exam_info"]}
 {"text": "What happens if I am late?", "plausible": ["library_borrow", "fee_payment", "exam_info"]}
-{"text": "Where do I go for that?", "plausible": ["certificates", "it_helpdesk", "campus_services"]}
-{"text": "What are the timings?", "plausible": ["library_hours", "campus_services", "hostel_info"]}
-{"text": "Can I extend it?", "plausible": ["library_borrow", "academic_calendar", "hostel_info"]}
-{"text": "When will it be credited?", "plausible": ["scholarship_aid", "fee_payment"]}
-{"text": "I need help with my form", "plausible": ["scholarship_aid", "certificates", "fee_payment"]}
+{"text": "How do I apply?", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
+{"text": "How much does it cost?", "plausible": ["fee_payment", "hostel_info", "certificates"]}
+{"text": "When does it open?", "plausible": ["library_hours", "campus_services"]}
+{"text": "Tell me about the results", "plausible": ["exam_info", "placement_process"]}
+{"text": "When is the deadline?", "plausible": ["fee_payment", "scholarship_aid", "academic_calendar"]}
+{"text": "Where is the office?", "plausible": ["certificates", "fee_payment", "placement_process"]}
+{"text": "I have a problem with my account", "plausible": ["it_helpdesk", "fee_payment"]}
 {"text": "It is not working", "plausible": ["it_helpdesk", "campus_services"]}
 {"text": "What time does it close?", "plausible": ["library_hours", "campus_services"]}
-{"text": "What documents do I need?", "plausible": ["placement_process", "scholarship_aid", "certificates"]}
-{"text": "I need to reset it", "plausible": ["it_helpdesk", "hostel_info"]}
 {"text": "I want to renew", "plausible": ["library_borrow", "scholarship_aid"]}
-{"text": "Tell me about the results", "plausible": ["exam_info", "placement_process"]}
-{"text": "Is the form available online?", "plausible": ["scholarship_aid", "certificates", "exam_info"]}
-{"text": "Tell me the rules", "plausible": ["hostel_info", "library_borrow", "exam_info"]}
-{"text": "What is the fine?", "plausible": ["library_borrow", "fee_payment"]}
-{"text": "How early should I arrive?", "plausible": ["exam_info", "placement_process"]}
-{"text": "When is the next one?", "plausible": ["academic_calendar", "exam_info", "placement_process"]}
-{"text": "Can I change it?", "plausible": ["hostel_info", "academic_calendar"]}
-{"text": "Tell me about the dates", "plausible": ["academic_calendar", "exam_info"]}
-{"text": "Where can I see the list?", "plausible": ["hostel_info", "placement_process", "exam_info"]}
-{"text": "I want to apply for it", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
-{"text": "How much does it cost?", "plausible": ["fee_payment", "hostel_info", "certificates"]}
+{"text": "I need help with my form", "plausible": ["scholarship_aid", "certificates", "fee_payment"]}
+{"text": "How long does it take?", "plausible": ["certificates", "exam_info"]}
 {"text": "Who is in charge?", "plausible": ["hostel_info", "placement_process", "it_helpdesk"]}
+{"text": "Is it free?", "plausible": ["campus_services", "fee_payment"]}
+{"text": "Do I have to pay for that?", "plausible": ["fee_payment", "certificates", "campus_services"]}
+{"text": "I want to apply for it", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
+{"text": "Is it allowed?", "plausible": ["exam_info", "hostel_info"]}
+{"text": "What are the timings?", "plausible": ["library_hours", "campus_services", "hostel_info"]}
+{"text": "Can I get a receipt?", "plausible": ["fee_payment", "certificates"]}
+{"text": "I need a letter", "plausible": ["certificates", "placement_process"]}
+{"text": "Is there any update?", "plausible": ["exam_info", "scholarship_aid", "hostel_info"]}

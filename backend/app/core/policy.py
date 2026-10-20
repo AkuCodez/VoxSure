@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 
 OOS = "out_of_scope"
-SMALLTALK = {"greeting", "thanks_bye"}
+SMALLTALK = {"greeting", "thanks_bye", "about_bot", "help_capabilities"}
 
 
 @dataclass(frozen=True)

@@ -121,7 +121,7 @@ def baseline_decision(probs):
 
 def utility(c):
     return (c["correct_answer"] + c["correct_fallback"] + 0.6 * c["appropriate_clarify"]
-            - 3.0 * c["wrong_answer"] - 0.3 * c["unnecessary_clarify"] - 0.5 * c["missed_fallback"])
+            - 3.0 * c["wrong_answer"] - 0.6 * c["unnecessary_clarify"] - 0.5 * c["missed_fallback"])
 
 
 def stress(text, rng):

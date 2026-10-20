@@ -9,7 +9,7 @@ Status values: **Done** = implemented and covered by an automated test or a reco
 | FR-02 | Transcript visible | `MessageBubble.tsx` ("You said (transcript)") | `components.test.tsx` | Done |
 | FR-03 | Edit and resubmit transcript | `MessageBubble.tsx`, `useChat.editAndResend` | `components.test.tsx` | Done |
 | FR-04 | DL intent + confidence | `services/intent.py`, `POST /intent` | `test_api.py::test_intent_*`; model metrics in report | Done |
-| FR-05 | Uncertainty recovery | `core/policy.py` | `test_policy.py` (9 tests); experiments B/C | Done |
+| FR-05 | Uncertainty recovery | `core/policy.py` | `test_policy.py` (9 tests), `test_api.py`; experiments B/C | Done |
 | FR-06 | Grounded response | `knowledge_base.json`, `chat_turn` | `test_api.py::test_turn_answer` | Done (sample data) |
 | FR-07 | Speech output play/mute/stop | `lib/speech.ts`, header controls | Manual (browser TTS) | Manual |
 | FR-08 | Opt-in correction memory, reviewable, deletable | `db/database.py`, `SettingsPanel.tsx` | `test_api.py::test_memory_*`, `test_feedback_*` | Done |

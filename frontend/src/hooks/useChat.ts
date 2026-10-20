@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { api } from "../lib/api";
 import { speak, stopSpeaking } from "../lib/speech";
-import { ApiError, type ChatItem, type MemoryItem, type Status, type TurnResponse } from "../types";
+import { ApiError, type ChatItem, type Insight, type MemoryItem, type Status, type TurnResponse } from "../types";
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -29,6 +29,8 @@ export function useChat() {
   const [speaking, setSpeaking] = useState(false);
   const [memoryOn, setMemoryOn] = useState(() => safeGet("voxsure.memory") === "1");
   const [memory, setMemory] = useState<MemoryItem[]>([]);
+  const [insight, setInsight] = useState<Insight | null>(null);
+  const [counts, setCounts] = useState({ answer: 0, clarify: 0, fallback: 0 });
   const attempts = useRef(0);
   const cid = useRef(clientId());
   const busy = status === "uploading" || status === "transcribing" || status === "understanding";
@@ -49,7 +51,8 @@ export function useChat() {
   const stopAudio = useCallback(() => { stopSpeaking(); setSpeaking(false); }, []);
 
   const runTurn = useCallback(async (
-    text: string, mode: "voice" | "text", opts: { asr?: number; chosen?: string; edited?: boolean; userItem?: boolean } = {},
+    text: string, mode: "voice" | "text",
+    opts: { asr?: number; asrMs?: number; durationS?: number; chosen?: string; edited?: boolean } = {},
   ): Promise<TurnResponse | null> => {
     stopAudio();
     setError(null);
@@ -60,6 +63,8 @@ export function useChat() {
         attempts: attempts.current, edited: !!opts.edited, client_id: cid.current, use_memory: memoryOn,
       });
       attempts.current = turn.action === "answer" ? 0 : attempts.current + 1;
+      setInsight({ mode, asrConfidence: opts.asr, asrMs: opts.asrMs, durationS: opts.durationS, turn });
+      setCounts((c) => ({ ...c, [turn.action]: c[turn.action] + 1 }));
       setItems((prev) => {
         const next = prev.map((i) => (i.turn?.action === "clarify" && !i.resolved ? { ...i, resolved: true } : i));
         // reflect memory substitution in the visible user bubble
@@ -94,8 +99,9 @@ export function useChat() {
     try {
       setStatus("transcribing");
       const r = await api.transcribe(blob);
-      setItems((p) => [...p, { id: uid(), role: "user", text: r.transcript, mode: "voice", asrConfidence: r.asr_confidence }]);
-      await runTurn(r.transcript, "voice", { asr: r.asr_confidence });
+      setItems((p) => [...p, { id: uid(), role: "user", text: r.transcript, mode: "voice", asrConfidence: r.asr_confidence,
+        asrMs: r.latency_ms, durationS: r.duration_s }]);
+      await runTurn(r.transcript, "voice", { asr: r.asr_confidence, asrMs: r.latency_ms, durationS: r.duration_s });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
       setStatus("error");
@@ -122,6 +128,7 @@ export function useChat() {
 
   const reset = useCallback(() => {
     stopAudio(); setItems([]); setError(null); setStatus("ready"); attempts.current = 0;
+    setInsight(null); setCounts({ answer: 0, clarify: 0, fallback: 0 });
   }, [stopAudio]);
 
   const deleteMemory = useCallback(async (id?: number) => {
@@ -130,7 +137,7 @@ export function useChat() {
   }, [refreshMemory]);
 
   return {
-    items, status, setStatus, error, setError, busy, speakOn, toggleSpeak, speaking, say, stopAudio,
+    items, insight, counts, status, setStatus, error, setError, busy, speakOn, toggleSpeak, speaking, say, stopAudio,
     memoryOn, toggleMemory, memory, deleteMemory, sendText, sendAudio, editAndResend, choose, reset,
   };
 }

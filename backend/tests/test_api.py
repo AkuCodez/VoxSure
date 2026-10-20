@@ -55,6 +55,13 @@ def test_turn_answer(client):
     assert r["action"] == "answer" and r["intent"] == "library_hours" and "Library" in r["response"]
 
 
+def test_turn_exposes_candidates_and_thresholds(client):
+    r = turn(client, "When does the library open?").json()
+    assert [c["intent"] for c in r["candidates"]][0] == "library_hours" and len(r["candidates"]) == 3
+    assert r["candidates"][0]["probability"] >= r["candidates"][1]["probability"]
+    assert set(r["thresholds"]) == {"t_high", "margin", "t_low"}
+
+
 def test_turn_clarify_options_then_choose(client):
     r = turn(client, "when does it open").json()
     assert r["action"] == "clarify" and r["clarify_kind"] == "disambiguate" and len(r["options"]) >= 2

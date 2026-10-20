@@ -48,7 +48,7 @@ A Colab version of the training step: `ml/notebooks/VoxSure_Train_Colab.ipynb`.
 ## Tests
 
 ```bash
-cd backend && python -m pytest          # 33 tests: policy, all endpoints, failure paths, privacy
+cd backend && python -m pytest          # 34 tests: policy, all endpoints, failure paths, privacy
 cd frontend && npm test                 # 7 component tests
 ```
 
@@ -70,7 +70,8 @@ correction memory is opt-in, inspectable and deletable (Settings).
 
 ## Known limitations
 
-See report §7: small author-written dataset (optimistic metrics), ASR evaluated on synthetic speech only, 44% of
-ambiguous test prompts are still answered, sample knowledge base, browser TTS varies by device.
+See report §7: small author-written dataset (optimistic metrics, high variance per class), ASR evaluated on synthetic
+speech only, the safety-first policy asks a clarification on roughly a quarter of clear requests (report §5.2),
+illustrative knowledge-base content, browser TTS varies by device.
 
 Licence: MIT.

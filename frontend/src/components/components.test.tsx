@@ -7,7 +7,7 @@ import type { ChatItem, TurnResponse } from "../types";
 
 const turn = (over: Partial<TurnResponse>): TurnResponse => ({
   turn_id: "t1", transcript: "x", action: "answer", clarify_kind: null, intent: "library_hours",
-  confidence: 0.95, response: "The library opens at 8.", options: [], reason: "confident",
+  confidence: 0.95, response: "The library opens at 8.", options: [], candidates: [], thresholds: null, reason: "confident",
   memory_applied: false, model_version: "v", latency_ms: 5, ...over,
 });
 

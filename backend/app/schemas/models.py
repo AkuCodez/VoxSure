@@ -47,6 +47,18 @@ class Option(BaseModel):
     label: str
 
 
+class Candidate(BaseModel):
+    intent: str
+    label: str
+    probability: float
+
+
+class Thresholds(BaseModel):
+    t_high: float
+    margin: float
+    t_low: float
+
+
 class TurnResponse(BaseModel):
     turn_id: str
     transcript: str
@@ -56,6 +68,8 @@ class TurnResponse(BaseModel):
     confidence: float
     response: str
     options: list[Option] = []
+    candidates: list[Candidate] = []
+    thresholds: Thresholds | None = None
     reason: str
     memory_applied: bool = False
     model_version: str

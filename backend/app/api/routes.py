@@ -8,7 +8,7 @@ from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
 
 from ..core.policy import OOS, decide
-from ..schemas.models import (FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
+from ..schemas.models import (Candidate, Thresholds, FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
                               IntentResponse, IntentScore, MemoryItem, Option, TranscribeResponse,
                               TurnRequest, TurnResponse)
 from ..services.asr import AudioDecodeError, NoSpeechError
@@ -101,6 +101,7 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
             text, memory_applied = remembered, True
 
     kb = s.kb
+    candidates: list[Candidate] = []
     if body.chosen_intent is not None:
         if not kb.has(body.chosen_intent):
             raise err(422, "unknown_intent", "Unknown intent selection.")
@@ -111,6 +112,8 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
         d = decide(probs, s.policy, asr_conf=body.asr_confidence, attempts=body.attempts)
         action, intent_name, kind, reason = d.action, d.intent, d.clarify_kind, d.reason
         conf = max(probs.values())
+        candidates = [Candidate(intent=k, label=kb.label(k), probability=round(v, 4))
+                      for k, v in sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:3]]
         options = [Option(intent=i, label=kb.label(i)) for i in d.options]
         if action == "answer":
             response = kb.answer(intent_name)
@@ -132,7 +135,9 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
             pass
     return TurnResponse(
         turn_id=turn_id, transcript=text, action=action, clarify_kind=kind, intent=intent_name,
-        confidence=round(float(conf), 4), response=response, options=options, reason=reason,
+        confidence=round(float(conf), 4), response=response, options=options, candidates=candidates,
+        thresholds=Thresholds(t_high=s.policy.t_high, margin=s.policy.margin, t_low=s.policy.t_low),
+        reason=reason,
         memory_applied=memory_applied,
         model_version=getattr(s.classifier, "version", "n/a"), latency_ms=round(latency, 1))
 

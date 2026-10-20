@@ -4,6 +4,17 @@ export type Status =
 
 export interface Option { intent: string; label: string }
 
+export interface Candidate { intent: string; label: string; probability: number }
+export interface Thresholds { t_high: number; margin: number; t_low: number }
+
+export interface Insight {
+  mode: "voice" | "text";
+  asrConfidence?: number;
+  asrMs?: number;
+  durationS?: number;
+  turn: TurnResponse;
+}
+
 export interface TurnResponse {
   turn_id: string;
   transcript: string;
@@ -13,6 +24,8 @@ export interface TurnResponse {
   confidence: number;
   response: string;
   options: Option[];
+  candidates: Candidate[];
+  thresholds: Thresholds | null;
   reason: string;
   memory_applied: boolean;
   model_version: string;
@@ -32,6 +45,8 @@ export interface ChatItem {
   mode?: "voice" | "text";
   turn?: TurnResponse;       // assistant items
   asrConfidence?: number;    // user voice items
+  asrMs?: number;
+  durationS?: number;
   edited?: boolean;
   resolved?: boolean;        // clarification already answered
 }

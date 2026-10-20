@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const MAX_SECONDS = 20;
+const BARS = 48;
 
 function pickMime(): string | undefined {
   const cands = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4", "audio/ogg;codecs=opus"];
@@ -18,26 +19,66 @@ export function recorderSupport(): { ok: boolean; reason?: string } {
 
 export interface RecorderError { code: "denied" | "no_device" | "unsupported" | "failed"; message: string }
 
-/** Start/stop microphone capture. Permission is requested only when start() is called. */
+/**
+ * Start/stop microphone capture. Permission is requested only when start() is called.
+ * `levels` is a rolling window of real input loudness (0..1) from a Web Audio analyser,
+ * used to draw the live waveform.
+ */
 export function useRecorder(onFinished: (blob: Blob) => void, onError: (e: RecorderError) => void) {
   const [recording, setRecording] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [levels, setLevels] = useState<number[]>(() => new Array(BARS).fill(0));
   const rec = useRef<MediaRecorder | null>(null);
   const chunks = useRef<Blob[]>([]);
   const timer = useRef<number | undefined>(undefined);
+  const raf = useRef<number | undefined>(undefined);
+  const audioCtx = useRef<AudioContext | null>(null);
   const cbs = useRef({ onFinished, onError });
   cbs.current = { onFinished, onError };
 
+  const stopMeter = useCallback(() => {
+    if (raf.current !== undefined) cancelAnimationFrame(raf.current);
+    raf.current = undefined;
+    void audioCtx.current?.close().catch(() => undefined);
+    audioCtx.current = null;
+    setLevels(new Array(BARS).fill(0));
+  }, []);
+
   const cleanup = useCallback(() => {
     window.clearInterval(timer.current);
+    stopMeter();
     rec.current?.stream.getTracks().forEach((t) => t.stop());
     rec.current = null;
     setRecording(false);
     setSeconds(0);
-  }, []);
+  }, [stopMeter]);
 
   const stop = useCallback(() => {
     if (rec.current && rec.current.state !== "inactive") rec.current.stop();
+  }, []);
+
+  const startMeter = useCallback((stream: MediaStream) => {
+    try {
+      const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const ctx = new Ctx();
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 512;
+      ctx.createMediaStreamSource(stream).connect(analyser);
+      audioCtx.current = ctx;
+      const buf = new Uint8Array(analyser.fftSize);
+      let last = 0;
+      const tick = (t: number) => {
+        raf.current = requestAnimationFrame(tick);
+        if (t - last < 40) return;
+        last = t;
+        analyser.getByteTimeDomainData(buf);
+        let sum = 0;
+        for (const v of buf) { const d = (v - 128) / 128; sum += d * d; }
+        const level = Math.min(1, Math.sqrt(sum / buf.length) * 5);
+        setLevels((prev) => [...prev.slice(1), level]);
+      };
+      raf.current = requestAnimationFrame(tick);
+    } catch { /* meter is cosmetic; recording still works */ }
   }, []);
 
   const start = useCallback(async () => {
@@ -57,6 +98,7 @@ export function useRecorder(onFinished: (blob: Blob) => void, onError: (e: Recor
       mr.start();
       rec.current = mr;
       setRecording(true);
+      startMeter(stream);
       let s = 0;
       timer.current = window.setInterval(() => {
         s += 1; setSeconds(s);
@@ -70,9 +112,13 @@ export function useRecorder(onFinished: (blob: Blob) => void, onError: (e: Recor
         cbs.current.onError({ code: "no_device", message: "No microphone was found. Connect one, or type your question." });
       else cbs.current.onError({ code: "failed", message: "I couldn't start the microphone. Please try again or type your question." });
     }
-  }, [cleanup, stop]);
+  }, [cleanup, startMeter, stop]);
 
-  useEffect(() => () => { window.clearInterval(timer.current); rec.current?.stream.getTracks().forEach((t) => t.stop()); }, []);
+  useEffect(() => () => {
+    window.clearInterval(timer.current);
+    stopMeter();
+    rec.current?.stream.getTracks().forEach((t) => t.stop());
+  }, [stopMeter]);
 
-  return { recording, seconds, start, stop, maxSeconds: MAX_SECONDS };
+  return { recording, seconds, levels, start, stop, maxSeconds: MAX_SECONDS };
 }
