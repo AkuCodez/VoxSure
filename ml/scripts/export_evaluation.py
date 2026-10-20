@@ -28,6 +28,7 @@ def main() -> None:
     speech_files = sorted(glob.glob(str(ROOT / "reports" / "speech_eval_*.json")))
     speech = load(Path(speech_files[-1])) if speech_files else None
     multi = load(ROOT / "reports" / "multilingual_eval.json")
+    human = load(ROOT / "reports" / "human_speech_eval.json")
 
     doc = {
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
@@ -65,6 +66,7 @@ def main() -> None:
                                "pipeline_C": {k: v["with_domain_prompt"]["pipeline_C_error_aware"][k] for k in ("wrong_answer_rate", "clarification_rate", "task_completion_one_turn")}}
                            for c, v in speech["conditions"].items()}},
         "multilingual": multi,
+        "human_speech": human,
         "limitations": [
             "Dataset is author-written and small (2 distinct held-out phrasings per class); real-user accuracy will be lower.",
             "Speech results use synthetic text-to-speech audio only; no human recordings, accents or real microphones.",

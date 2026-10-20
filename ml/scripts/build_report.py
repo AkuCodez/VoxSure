@@ -137,6 +137,19 @@ def main() -> None:
     else:
         w("_Speech evaluation results are not available in this build._\n")
 
+    hs = L(ROOT / "reports" / "human_speech_eval.json")
+    NL = chr(10)
+    if hs:
+        w("**Real human recordings** (project owner's voice; small sample; reference sentences written by the author, not native-verified):" + NL)
+        w("| Language | Clips | WER (language chosen) | CER | WER (auto-detect) | Language detected correctly | Wrong answers end to end |" + NL + "|---|---|---|---|---|---|---|")
+        for k_, v_ in hs["languages"].items():
+            e_ = v_["end_to_end"]
+            wa_ = pc(e_["wrong_answer_rate"]) if e_.get("wrong_answer_rate") is not None else "n/a"
+            w(f"| {v_['name']} | {v_['n']} | {pc(v_['wer_forced_language'])} | {pc(v_['cer_forced_language'])} | {pc(v_['wer_auto_detect'])} | {pc(v_['language_detect_accuracy'], 0)} | {wa_} |")
+        w(NL + " ".join(hs["notes"]) + NL)
+    else:
+        w("_No human recordings have been scored yet, so speech accuracy for Hindi, Punjabi and German is unmeasured (`ml/scripts/evaluate_human_recordings.py` is ready)._" + NL)
+
     w("### 5.5 Experiment D: correction memory (simulation)\n")
     w(f"Of {D['n_stressed_utterances']} stressed utterances, {D['pass1_not_answered_correctly']} were not answered correctly on first pass and the corrected text was \"remembered\". "
       f"When the same utterances recurred, the correct-answer rate was {pc(D['pass2_correct_answer_rate_memory_off'])} without memory vs {pc(D['pass2_correct_answer_rate_memory_on'])} with it. "

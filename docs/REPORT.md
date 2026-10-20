@@ -85,6 +85,8 @@ With automatic language detection (what the app does by default) on English audi
 
 **Caveats:** the audio is clean synthetic speech from two voices, so these figures say nothing about accents, spontaneous speech or real microphones: WER here is a lower bound. Latency was measured on the author's laptop CPU (int8, no GPU) while other jobs were also using the CPU, so it is pessimistic; an idle machine should be faster. Human recordings were not collected.
 
+_No human recordings have been scored yet, so speech accuracy for Hindi, Punjabi and German is unmeasured (`ml/scripts/evaluate_human_recordings.py` is ready)._
+
 ### 5.5 Experiment D: correction memory (simulation)
 
 Of 337 stressed utterances, 190 were not answered correctly on first pass and the corrected text was "remembered". When the same utterances recurred, the correct-answer rate was 43.6% without memory vs 57.0% with it. This is an **upper bound for exact repeats**: memory matches only the identical normalised utterance and does not generalise. No real-user study was done.

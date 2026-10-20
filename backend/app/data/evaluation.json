@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T16:12:34+00:00",
+  "generated_at": "2026-10-20T16:41:16+00:00",
   "dataset": {
     "seed_utterances": 340,
     "sizes": {
@@ -913,6 +913,7 @@
     },
     "reply_policy": "hi, pa and de replies use hand-written text (not machine translated). Other languages use NLLB; replies whose numbers changed are flagged to the user."
   },
+  "human_speech": null,
   "limitations": [
     "Dataset is author-written and small (2 distinct held-out phrasings per class); real-user accuracy will be lower.",
     "Speech results use synthetic text-to-speech audio only; no human recordings, accents or real microphones.",

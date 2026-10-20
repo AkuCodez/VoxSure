@@ -36,6 +36,20 @@ Browser mic ──MediaRecorder──► POST /api/v1/transcribe ──► faste
 | API | FastAPI + Pydantic (`backend/app/api/routes.py`) | Uniform error envelope `{"error": {"code", "message"}}`. |
 | Persistence | SQLAlchemy 2: SQLite default, PostgreSQL via `DATABASE_URL` | Tables: `correction_memory` (opt-in), `eval_events` (metrics only). |
 
+## Open-domain ("general") answers
+
+Campus questions are always answered from the reviewed knowledge base. A message goes to the optional external AI model only when:
+
+* the classifier says it is clearly **out of scope**, or
+* the classifier is **unsure** about a message that was heard fine (typed, or speech with recogniser confidence above the threshold).
+
+It does **not** go to the AI when the speech recogniser itself was doubtful (the user is asked to check what was heard), when two or more campus
+intents compete (a targeted clarification is asked), after repeated failures, when the user switched AI answers off in Settings, or when the daily cap is reached.
+Questions about the user's own details ("what is my name?") are never answered with the assistant's introduction. The AI reply is written in the user's own
+language, labelled **General answer · AI-generated**, carries a source line saying it is not from the knowledge base, and is not machine-translated by us.
+Only the message and up to six recent real turns (never interface prompts) are sent; no audio, identifiers or database content. Provider and model are chosen
+by environment variables (`GENERAL_*`, `ANTHROPIC_API_KEY`) and shown, without keys, in Settings → Models in use (`GET /api/v1/health`).
+
 ## Multilingual flow
 
 1. Language: voice → Whisper's detected language (or the user's choice); typed text → script rules (Devanagari, Gurmukhi, …) and an English-biased Latin-script detector.

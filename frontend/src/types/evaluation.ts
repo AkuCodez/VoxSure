@@ -33,6 +33,7 @@ export interface Evaluation {
   recovery: { B_no_clarification: Counts; C_error_aware: Counts; stress_B: Counts; stress_C: Counts; stress_text_accuracy: number };
   memory_ablation: Record<string, number | string>;
   speech: null | { asr_model: string; n_utterances: number; voices: string[]; audio_kind: string; conditions: Record<string, SpeechCondition> };
+  human_speech?: null | { asr_model: string; notes: string[]; missing_clips: string[]; languages: Record<string, { name: string; n: number; wer_forced_language: number; cer_forced_language: number; wer_auto_detect: number; language_detect_accuracy: number; latency_s_median: number; end_to_end: { wrong_answer_rate: number | null; answered_correctly: number | null } }> };
   multilingual: null | { languages: Record<string, LangResult>; notes?: string[]; [k: string]: unknown };
   limitations: string[];
 }

@@ -190,6 +190,26 @@ function Body({ d }: { d: Evaluation }) {
         </Card>
       )}
 
+      {d.human_speech ? (
+        <Card title="Real human recordings" note={d.human_speech.notes.join(" ")}>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="text-xs uppercase tracking-wider text-slate-400"><tr><th className="py-2">Language</th><th>Clips</th><th>WER</th><th>CER</th><th>WER (auto-detect)</th><th>Language detected</th></tr></thead>
+              <tbody className="text-slate-300">
+                {Object.entries(d.human_speech.languages).map(([c, v]) => (
+                  <tr key={c} className="border-t border-white/[0.06]">
+                    <td className="py-2 font-medium">{v.name}</td><td className="font-mono">{v.n}</td><td className="font-mono">{pct(v.wer_forced_language)}</td>
+                    <td className="font-mono">{pct(v.cer_forced_language)}</td><td className="font-mono">{pct(v.wer_auto_detect)}</td><td className="font-mono">{pct(v.language_detect_accuracy, 0)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+      ) : (
+        <Card title="Real human recordings"><p className="text-sm text-slate-400">None scored yet: the speech results above use synthetic voices only, and speech accuracy for Hindi, Punjabi and German is unmeasured.</p></Card>
+      )}
+
       {d.multilingual ? (
         <Card title="Multilingual (typed input → translation → classifier → translated reply)" note={(d.multilingual.notes ?? []).join(" ")}>
           <div className="overflow-x-auto">
