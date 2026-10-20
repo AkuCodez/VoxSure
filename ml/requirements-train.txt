@@ -1,0 +1,7 @@
+﻿-r ../backend/requirements.txt
+scikit-learn==1.5.2
+pytest==8.3.4
+httpx==0.28.1
+jiwer==3.0.5
+matplotlib==3.9.4
+accelerate==1.2.1

@@ -1,0 +1,45 @@
+{
+  "base_model": "distilbert-base-uncased",
+  "seed": 42,
+  "epochs": 6,
+  "lr": 5e-05,
+  "batch_size": 16,
+  "max_len": 48,
+  "temperature": 1.2138785123825073,
+  "n_train": 1172,
+  "n_val": 210,
+  "best_val_acc": 0.8904761672019958,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.2384328640768554,
+      "val_acc": 0.7904762029647827
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4543783149519878,
+      "val_acc": 0.8666666746139526
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.054868374611076236,
+      "val_acc": 0.8619047403335571
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.01975145601944,
+      "val_acc": 0.8904761672019958
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.01185170218424789,
+      "val_acc": 0.8761904835700989
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.009894061674691304,
+      "val_acc": 0.8761904835700989
+    }
+  ],
+  "model_version": "distilbert-intent-v1"
+}

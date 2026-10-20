@@ -1,0 +1,61 @@
+{
+  "_notice": "SAMPLE DATA for a fictional campus (Example University). Replace each entry with your institution's reviewed information before any real use. This is not an official university service.",
+  "intents": {
+    "library_hours": {
+      "label": "Library opening hours",
+      "answer": "Sample information: the Central Library is open 8:00 am to 10:00 pm Monday to Friday and 9:00 am to 6:00 pm on Saturday and Sunday. During the final-exam fortnight the reading hall stays open until midnight. It is closed on public holidays."
+    },
+    "library_borrow": {
+      "label": "Borrowing, renewing or fines for library books",
+      "answer": "Sample information: students can borrow up to 4 books for 14 days using their student ID card. Books can be renewed twice online through the library account, unless another member has reserved them. Late returns cost 5 per day, and lost books must be reported to the circulation desk."
+    },
+    "academic_calendar": {
+      "label": "Academic calendar and key dates",
+      "answer": "Sample information: the academic calendar is published on the student portal under Academics. It lists semester start and end dates, holidays, vacations, add/drop deadlines and the convocation date. Check it there for the latest approved dates."
+    },
+    "exam_info": {
+      "label": "Exams, hall tickets and results",
+      "answer": "Sample information: the exam timetable and hall tickets are released on the student portal about two weeks before exams. Carry your hall ticket and student ID. Results are published on the portal, and revaluation requests are accepted for a few days after results through the Examination Office."
+    },
+    "fee_payment": {
+      "label": "Paying fees or getting fee receipts",
+      "answer": "Sample information: fees can be paid online through the student portal (card, net banking or UPI) or at the accounts counter during working hours. A receipt is generated automatically after payment. If money was deducted but the payment failed, contact the accounts office with the transaction reference."
+    },
+    "hostel_info": {
+      "label": "Hostel rooms, rules and fees",
+      "answer": "Sample information: hostel applications open after admission confirmation, and rooms are allotted by the hostel office. Curfew is 10:00 pm, and visitors are allowed in the visitors' lounge only. Report maintenance problems to the hostel warden's office or through the helpdesk."
+    },
+    "it_helpdesk": {
+      "label": "Wi-Fi, passwords or portal login problems",
+      "answer": "Sample information: for password resets use the 'Forgot password' link on the portal login page. For Wi-Fi or portal access problems, raise a ticket with the IT helpdesk, which is located in the main administrative block. Mention your student ID and a short description of the problem."
+    },
+    "placement_process": {
+      "label": "Placements and internships",
+      "answer": "Sample information: students register on the placement portal and upload a resume. Eligible students are shortlisted for company drives, which include tests, interviews and pre-placement talks. The Training and Placement Office also runs mock interviews. Eligibility criteria are announced per company."
+    },
+    "scholarship_aid": {
+      "label": "Scholarships and financial aid",
+      "answer": "Sample information: merit and need-based scholarships are available. Applications are submitted through the student portal with income proof and mark sheets before the notified deadline. You can track your application status on the same page. Contact the Financial Aid Office for eligibility questions."
+    },
+    "certificates": {
+      "label": "Transcripts, bonafide and other certificates",
+      "answer": "Sample information: bonafide, character and transfer certificates, and transcripts, are requested through the student portal's Certificates section. Processing normally takes three to seven working days. Duplicate documents need a written request and a fee at the Registrar's Office."
+    },
+    "campus_services": {
+      "label": "Canteen, medical centre, transport or clubs",
+      "answer": "Sample information: the canteen and food court are open from 8:00 am to 8:00 pm. The medical centre is next to the sports complex and is open on weekdays. A shuttle connects the hostels with the academic block, and clubs open their registrations at the start of each semester."
+    },
+    "greeting": {
+      "label": "Greeting",
+      "answer": "Hello! I'm VoxSure, a student support assistant. Ask me about the library, exams, fees, hostels, placements, scholarships, certificates or IT help."
+    },
+    "thanks_bye": {
+      "label": "Thanks or goodbye",
+      "answer": "You're welcome! Come back any time you need help."
+    }
+  },
+  "fallback_out_of_scope": "That is outside what I can help with. I can answer questions about the library, academic calendar, exams, fee payment, hostels, IT helpdesk, placements, scholarships, certificates and campus services.",
+  "fallback_repeated": "I'm still not sure I understood. You can type your question instead, rephrase it, or press Reset to start again.",
+  "repair_prompt": "I'm not confident I heard that correctly. Please check the transcript and edit it, or say it again.",
+  "clarify_prompt": "I want to be sure I give you the right answer. Which of these do you mean?"
+}

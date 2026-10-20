@@ -1,0 +1,108 @@
+from __future__ import annotations
+
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+from dataclasses import dataclass, field
+from typing import Any
+
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.concurrency import run_in_threadpool
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+
+from .api.routes import router
+from .core.config import Settings, get_settings
+from .core.policy import PolicyParams
+from .db.database import Database
+from .services.knowledge import KnowledgeBase
+
+log = logging.getLogger("voxsure")
+
+
+@dataclass
+class VoxState:
+    settings: Settings
+    kb: KnowledgeBase
+    policy: PolicyParams
+    db: Database
+    classifier: Any = None
+    transcriber: Any = None
+    asr_lock: asyncio.Lock = field(default_factory=asyncio.Lock)
+
+
+def build_state(settings: Settings) -> VoxState:
+    """Load models. Failures degrade gracefully: /health reports it, typed fallback still works."""
+    state = VoxState(settings=settings, kb=KnowledgeBase(settings.knowledge_base_path),
+                     policy=PolicyParams.load(settings.policy_path), db=Database(settings.database_url))
+    try:
+        from .services.intent import IntentClassifier
+        state.classifier = IntentClassifier(settings.intent_model_dir)
+    except Exception:
+        log.exception("intent model failed to load")
+    try:
+        from .services.asr import Transcriber
+        state.transcriber = Transcriber(settings.whisper_model, settings.whisper_compute_type,
+                                        settings.whisper_cache_dir)
+    except Exception:
+        log.exception("ASR model failed to load")
+    return state
+
+
+def create_app(state: VoxState | None = None) -> FastAPI:
+    settings = state.settings if state else get_settings()
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        # Models load once at startup (not at import), so tests and tooling stay fast.
+        if not hasattr(app.state, "vox"):
+            app.state.vox = await run_in_threadpool(build_state, settings)
+        yield
+
+    app = FastAPI(title="VoxSure API", version="1.0.0", lifespan=lifespan)
+    if state is not None:
+        app.state.vox = state
+
+    if settings.cors_origins:
+        app.add_middleware(CORSMiddleware, allow_origins=[o.strip() for o in settings.cors_origins.split(",")],
+                           allow_methods=["*"], allow_headers=["*"])
+
+    @app.exception_handler(HTTPException)
+    async def _http_exc(_: Request, exc: HTTPException):
+        if isinstance(exc.detail, dict) and "code" in exc.detail:
+            return JSONResponse({"error": exc.detail}, status_code=exc.status_code)
+        return JSONResponse({"error": {"code": "http_error", "message": str(exc.detail)}},
+                            status_code=exc.status_code)
+
+    @app.exception_handler(RequestValidationError)
+    async def _validation(_: Request, exc: RequestValidationError):
+        return JSONResponse({"error": {"code": "invalid_request",
+                                       "message": "The request was not valid."}}, status_code=422)
+
+    @app.exception_handler(Exception)
+    async def _unhandled(_: Request, exc: Exception):
+        log.exception("unhandled error")
+        return JSONResponse({"error": {"code": "server_error",
+                                       "message": "Something went wrong. Please try again."}}, status_code=500)
+
+    app.include_router(router)
+
+    dist = settings.frontend_dist
+    if dist.exists():
+        app.mount("/assets", StaticFiles(directory=dist / "assets"), name="assets")
+
+        @app.get("/{path:path}", include_in_schema=False)
+        async def spa(path: str):
+            if path.startswith("api/"):
+                raise HTTPException(404, "Not found")
+            f = (dist / path).resolve()
+            if path and f.is_file() and dist.resolve() in f.parents:
+                return FileResponse(f)
+            return FileResponse(dist / "index.html")
+
+    return app
+
+
+app = create_app()

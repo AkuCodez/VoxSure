@@ -1,0 +1,8 @@
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+D:\VoxSure\.venv\lib\site-packages\huggingface_hub\file_download.py:143: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\paree\.cache\huggingface\hub\models--Systran--faster-whisper-base.en. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+clean  WER prompt=0.000 noprompt=0.000 lat med=0.81s p95=0.87s | B wrong=0.544 C wrong=0.246 C clarify=0.333
+snr20  WER prompt=0.006 noprompt=0.000 lat med=0.92s p95=0.97s | B wrong=0.544 C wrong=0.246 C clarify=0.333
+snr10  WER prompt=0.006 noprompt=0.006 lat med=0.91s p95=0.96s | B wrong=0.526 C wrong=0.246 C clarify=0.316
+snr5   WER prompt=0.025 noprompt=0.021 lat med=0.84s p95=0.95s | B wrong=0.526 C wrong=0.228 C clarify=0.333

@@ -1,0 +1,330 @@
+{
+  "asr_model": "base.en",
+  "n_utterances": 57,
+  "voices": [
+    "Microsoft David Desktop",
+    "Microsoft Zira Desktop"
+  ],
+  "conditions": {
+    "clean": {
+      "with_domain_prompt": {
+        "wer": 0.0,
+        "latency_s_median": 0.9327159999998003,
+        "latency_s_p95": 1.0038904399999409,
+        "exact_match_rate": 1.0,
+        "pipeline_B_argmax": {
+          "n": 57,
+          "correct_answer": 22,
+          "wrong_answer": 31,
+          "clarify": 0,
+          "fallback": 4,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.543859649122807,
+          "clarification_rate": 0.0,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.8125,
+          "task_completion_with_option_click": 0.8125
+        },
+        "pipeline_C_error_aware": {
+          "n": 57,
+          "correct_answer": 20,
+          "wrong_answer": 14,
+          "clarify": 19,
+          "fallback": 4,
+          "appropriate_clarify": 12,
+          "unnecessary_clarify": 6,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 14,
+          "wrong_answer_rate": 0.24561403508771928,
+          "clarification_rate": 0.3333333333333333,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.75,
+          "task_completion_with_option_click": 0.90625
+        },
+        "examples": [
+          {
+            "ref": "When are the final exams?",
+            "hyp": "When are the final exams?",
+            "asr_conf": 0.927
+          },
+          {
+            "ref": "Is there a late entry permission for the hostel?",
+            "hyp": "Is there a late entry permission for the hostel?",
+            "asr_conf": 0.959
+          },
+          {
+            "ref": "How do I get a visa for Canada?",
+            "hyp": "How do I get a visa for Canada?",
+            "asr_conf": 0.925
+          },
+          {
+            "ref": "Does the library stay open late on weekdays?",
+            "hyp": "Does the library stay open late on weekdays?",
+            "asr_conf": 0.956
+          },
+          {
+            "ref": "How do I join a student club?",
+            "hyp": "How do I join a student club?",
+            "asr_conf": 0.939
+          },
+          {
+            "ref": "Who do I contact for IT support?",
+            "hyp": "Who do I contact for IT support?",
+            "asr_conf": 0.949
+          }
+        ]
+      },
+      "no_prompt": {
+        "wer": 0.0,
+        "latency_s_median": 0.9009384000000864,
+        "latency_s_p95": 0.9351249800001824,
+        "exact_match_rate": 1.0
+      }
+    },
+    "snr20": {
+      "with_domain_prompt": {
+        "wer": 0.006134969325153374,
+        "latency_s_median": 0.9189762000000883,
+        "latency_s_p95": 0.9699766799997632,
+        "exact_match_rate": 0.9824561403508771,
+        "pipeline_B_argmax": {
+          "n": 57,
+          "correct_answer": 22,
+          "wrong_answer": 31,
+          "clarify": 0,
+          "fallback": 4,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.543859649122807,
+          "clarification_rate": 0.0,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.8125,
+          "task_completion_with_option_click": 0.8125
+        },
+        "pipeline_C_error_aware": {
+          "n": 57,
+          "correct_answer": 20,
+          "wrong_answer": 14,
+          "clarify": 19,
+          "fallback": 4,
+          "appropriate_clarify": 12,
+          "unnecessary_clarify": 6,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 14,
+          "wrong_answer_rate": 0.24561403508771928,
+          "clarification_rate": 0.3333333333333333,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.75,
+          "task_completion_with_option_click": 0.90625
+        },
+        "examples": [
+          {
+            "ref": "When are the final exams?",
+            "hyp": "When are the final exams?",
+            "asr_conf": 0.787
+          },
+          {
+            "ref": "Is there a late entry permission for the hostel?",
+            "hyp": "Is there a late entry permission for the hostel?",
+            "asr_conf": 0.96
+          },
+          {
+            "ref": "How do I get a visa for Canada?",
+            "hyp": "How do I get a visa for Canada?",
+            "asr_conf": 0.869
+          },
+          {
+            "ref": "Does the library stay open late on weekdays?",
+            "hyp": "Does the library stay open late on weekdays?",
+            "asr_conf": 0.943
+          },
+          {
+            "ref": "How do I join a student club?",
+            "hyp": "How do I join a student club?",
+            "asr_conf": 0.644
+          },
+          {
+            "ref": "Who do I contact for IT support?",
+            "hyp": "Who do I contact for IT support?",
+            "asr_conf": 0.954
+          }
+        ]
+      },
+      "no_prompt": {
+        "wer": 0.0,
+        "latency_s_median": 0.9031047999997099,
+        "latency_s_p95": 0.9442008000000897,
+        "exact_match_rate": 1.0
+      }
+    },
+    "snr10": {
+      "with_domain_prompt": {
+        "wer": 0.006134969325153374,
+        "latency_s_median": 0.7985740999997688,
+        "latency_s_p95": 1.007902339999964,
+        "exact_match_rate": 0.9649122807017544,
+        "pipeline_B_argmax": {
+          "n": 57,
+          "correct_answer": 22,
+          "wrong_answer": 30,
+          "clarify": 0,
+          "fallback": 5,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.5263157894736842,
+          "clarification_rate": 0.0,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.8125,
+          "task_completion_with_option_click": 0.8125
+        },
+        "pipeline_C_error_aware": {
+          "n": 57,
+          "correct_answer": 20,
+          "wrong_answer": 14,
+          "clarify": 18,
+          "fallback": 5,
+          "appropriate_clarify": 11,
+          "unnecessary_clarify": 6,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 13,
+          "wrong_answer_rate": 0.24561403508771928,
+          "clarification_rate": 0.3157894736842105,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.75,
+          "task_completion_with_option_click": 0.90625
+        },
+        "examples": [
+          {
+            "ref": "When are the final exams?",
+            "hyp": "When are the final exams?",
+            "asr_conf": 0.641
+          },
+          {
+            "ref": "Is there a late entry permission for the hostel?",
+            "hyp": "Is there a late entry permission for the hostel?",
+            "asr_conf": 0.948
+          },
+          {
+            "ref": "How do I get a visa for Canada?",
+            "hyp": "How do I get a visa for Canada?",
+            "asr_conf": 0.643
+          },
+          {
+            "ref": "Does the library stay open late on weekdays?",
+            "hyp": "Does the library stay open late on weekdays?",
+            "asr_conf": 0.912
+          },
+          {
+            "ref": "How do I join a student club?",
+            "hyp": "How do I join a student club?",
+            "asr_conf": 0.908
+          },
+          {
+            "ref": "Who do I contact for IT support?",
+            "hyp": "Who do I contact for IT support?",
+            "asr_conf": 0.914
+          }
+        ]
+      },
+      "no_prompt": {
+        "wer": 0.006134969325153374,
+        "latency_s_median": 0.9007584999999381,
+        "latency_s_p95": 0.9374938999998449,
+        "exact_match_rate": 0.9649122807017544
+      }
+    },
+    "snr5": {
+      "with_domain_prompt": {
+        "wer": 0.024539877300613498,
+        "latency_s_median": 0.841393700000026,
+        "latency_s_p95": 0.9548389799998404,
+        "exact_match_rate": 0.8947368421052632,
+        "pipeline_B_argmax": {
+          "n": 57,
+          "correct_answer": 22,
+          "wrong_answer": 30,
+          "clarify": 0,
+          "fallback": 5,
+          "appropriate_clarify": 0,
+          "unnecessary_clarify": 0,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 0,
+          "wrong_answer_rate": 0.5263157894736842,
+          "clarification_rate": 0.0,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.8125,
+          "task_completion_with_option_click": 0.8125
+        },
+        "pipeline_C_error_aware": {
+          "n": 57,
+          "correct_answer": 20,
+          "wrong_answer": 13,
+          "clarify": 19,
+          "fallback": 5,
+          "appropriate_clarify": 12,
+          "unnecessary_clarify": 6,
+          "correct_fallback": 4,
+          "missed_fallback": 0,
+          "recoverable_by_option": 14,
+          "wrong_answer_rate": 0.22807017543859648,
+          "clarification_rate": 0.3333333333333333,
+          "n_clear": 32,
+          "task_completion_one_turn": 0.75,
+          "task_completion_with_option_click": 0.90625
+        },
+        "examples": [
+          {
+            "ref": "When are the final exams?",
+            "hyp": "When are the final exams?",
+            "asr_conf": 0.613
+          },
+          {
+            "ref": "Is there a late entry permission for the hostel?",
+            "hyp": "Is there a late entry permission for the hostel?",
+            "asr_conf": 0.917
+          },
+          {
+            "ref": "How do I get a visa for Canada?",
+            "hyp": "How do I get a visa for Canada?",
+            "asr_conf": 0.663
+          },
+          {
+            "ref": "Does the library stay open late on weekdays?",
+            "hyp": "Does the library stay open late on weekdays?",
+            "asr_conf": 0.852
+          },
+          {
+            "ref": "How do I join a student club?",
+            "hyp": "How do I join a student club?",
+            "asr_conf": 0.913
+          },
+          {
+            "ref": "Who do I contact for IT support?",
+            "hyp": "Who do I contact for IT support?",
+            "asr_conf": 0.657
+          }
+        ]
+      },
+      "no_prompt": {
+        "wer": 0.02147239263803681,
+        "latency_s_median": 0.7909330000002228,
+        "latency_s_p95": 0.8265546599998743,
+        "exact_match_rate": 0.9122807017543859
+      }
+    }
+  }
+}

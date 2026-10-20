@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+frontend/dist/
+.env
+*.db
+.install_*.log
+.cache/
+ml/eval_audio/
+*.wav
+*.webm

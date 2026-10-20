@@ -1,0 +1,25 @@
+{"text": "Can someone help me with my request?", "plausible": ["it_helpdesk", "certificates", "fee_payment"]}
+{"text": "What's the last date?", "plausible": ["academic_calendar", "fee_payment", "scholarship_aid"]}
+{"text": "When do I get it back?", "plausible": ["library_borrow", "exam_info", "certificates"]}
+{"text": "Is it allowed?", "plausible": ["exam_info", "hostel_info"]}
+{"text": "Check my status", "plausible": ["scholarship_aid", "fee_payment", "exam_info"]}
+{"text": "When is the deadline?", "plausible": ["fee_payment", "scholarship_aid", "academic_calendar"]}
+{"text": "Where is the office?", "plausible": ["certificates", "fee_payment", "placement_process"]}
+{"text": "Is there any update?", "plausible": ["exam_info", "scholarship_aid", "hostel_info"]}
+{"text": "Is there a limit?", "plausible": ["library_borrow", "placement_process"]}
+{"text": "Who do I contact?", "plausible": ["it_helpdesk", "hostel_info", "placement_process"]}
+{"text": "I lost my card", "plausible": ["library_borrow", "certificates"]}
+{"text": "What is the procedure?", "plausible": ["certificates", "exam_info", "placement_process"]}
+{"text": "How do I apply?", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
+{"text": "Do I have to pay for that?", "plausible": ["fee_payment", "certificates", "campus_services"]}
+{"text": "I need a letter", "plausible": ["certificates", "placement_process"]}
+{"text": "Can I get a receipt?", "plausible": ["fee_payment", "certificates"]}
+{"text": "How long does it take?", "plausible": ["certificates", "exam_info"]}
+{"text": "Is it free?", "plausible": ["campus_services", "fee_payment"]}
+{"text": "I missed the date", "plausible": ["academic_calendar", "fee_payment", "scholarship_aid"]}
+{"text": "When does it open?", "plausible": ["library_hours", "campus_services"]}
+{"text": "When does it start?", "plausible": ["academic_calendar", "placement_process", "campus_services"]}
+{"text": "I have a problem with my account", "plausible": ["it_helpdesk", "fee_payment"]}
+{"text": "I want information about registration", "plausible": ["academic_calendar", "placement_process"]}
+{"text": "Tell me more about the process", "plausible": ["placement_process", "certificates", "hostel_info"]}
+{"text": "The portal is not showing it", "plausible": ["it_helpdesk", "exam_info", "fee_payment"]}
