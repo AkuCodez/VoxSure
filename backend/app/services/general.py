@@ -7,7 +7,10 @@ import threading
 import urllib.error
 import urllib.request
 
-import anthropic
+try:  # only needed when Claude is the provider; lite deployments on Gemini/Groq do not install it
+    import anthropic
+except ImportError:  # pragma: no cover
+    anthropic = None  # type: ignore[assignment]
 
 log = logging.getLogger("voxsure.general")
 
@@ -96,6 +99,20 @@ class GeneralAnswerer(_Capped):
         return out or None
 
 
+    def complete(self, system: str, user: str, max_tokens: int = 800) -> str:
+        """Single-shot completion used for translation. Raises RuntimeError on any failure (callers fall back)."""
+        try:
+            resp = self.client.messages.create(
+                model=self.model, max_tokens=max_tokens, system=system, messages=[{"role": "user", "content": user}],
+                extra_body={"output_config": {"effort": "low"}})
+        except Exception as exc:  # SDK errors, network, auth
+            raise RuntimeError(type(exc).__name__) from exc
+        out = " ".join(b.text.strip() for b in resp.content if getattr(b, "type", "") == "text" and b.text.strip()).strip()
+        if not out or getattr(resp, "stop_reason", None) == "refusal":
+            raise RuntimeError("empty or refused")
+        return out
+
+
 class OpenAICompatAnswerer(_Capped):
     """Open-domain answers via any OpenAI-compatible chat-completions endpoint (Groq, Google Gemini's compat
     endpoint, OpenRouter, a local server, ...). Many offer free tiers with rate limits; check the provider's current terms."""
@@ -127,3 +144,15 @@ class OpenAICompatAnswerer(_Capped):
             log.warning("general answer failed: %s", type(exc).__name__)
             return None
         return out or None
+
+    def complete(self, system: str, user: str, max_tokens: int = 800) -> str:
+        """Single-shot completion used for translation. Raises RuntimeError on any failure (callers fall back)."""
+        payload = {"model": self.model, "max_tokens": max_tokens, "temperature": 0.0,
+                   "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+        try:
+            out = (self._post(payload)["choices"][0]["message"].get("content") or "").strip()
+        except (urllib.error.URLError, TimeoutError, KeyError, IndexError, ValueError, OSError) as exc:
+            raise RuntimeError(type(exc).__name__) from exc
+        if not out:
+            raise RuntimeError("empty reply")
+        return out

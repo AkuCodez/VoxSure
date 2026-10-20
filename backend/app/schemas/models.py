@@ -134,6 +134,7 @@ class HealthResponse(BaseModel):
     intent_ready: bool
     general_ready: bool = False
     translation_ready: bool = False
+    translation_engine: str | None = None
     general_provider: str | None = None
     general_model: str | None = None
     asr_multilingual: bool = False

@@ -2,39 +2,16 @@ from __future__ import annotations
 
 import io
 import math
-from dataclasses import dataclass, field
 
 from faster_whisper import WhisperModel
+
+from .asr_types import AudioDecodeError, NoSpeechError, Transcription, WordInfo  # noqa: F401 (re-exported)
 
 # Biases decoding toward the domain vocabulary. Only used when the language is known to be English:
 # an English prompt can distort non-English decoding.
 DOMAIN_PROMPT = ("Student support questions: library, hostel, hall ticket, exam timetable, "
                  "tuition fees, bonafide certificate, scholarship, placement, semester, wifi, "
                  "transcript, canteen.")
-
-
-class NoSpeechError(Exception):
-    """Audio decoded but contained no recognisable speech."""
-
-
-class AudioDecodeError(Exception):
-    """Audio could not be decoded."""
-
-
-@dataclass
-class WordInfo:
-    word: str
-    probability: float
-
-
-@dataclass
-class Transcription:
-    text: str
-    confidence: float      # exp(mean segment avg_logprob), in (0, 1]
-    duration_s: float
-    language: str
-    language_probability: float = 1.0
-    words: list[WordInfo] = field(default_factory=list)
 
 
 class Transcriber:

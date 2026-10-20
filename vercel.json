@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "server.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{frontend/**,docs/**,ml/data/**,ml/reports/**,ml/scripts/**,ml/notebooks/**,ml/eval_audio/**,ml/human_audio/**,ml/artifacts/intent_model/**,ml/artifacts/nllb-ct2/**,backend/tests/**,backend/requirements.txt,.venv/**,.tmp/**,.hf_cache/**,node_modules/**,**/__pycache__/**,**/*.log,*.ps1,Dockerfile}"
+    }
+  }
+}

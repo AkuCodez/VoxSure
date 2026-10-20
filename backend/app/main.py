@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 import time
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
@@ -58,20 +59,33 @@ def build_general(settings: Settings):
     return None
 
 
-def build_state(settings: Settings) -> VoxState:
-    """Load models. Failures degrade gracefully: /health reports it, typed fallback still works."""
-    state = VoxState(settings=settings, kb=KnowledgeBase(settings.knowledge_base_path),
-                     policy=PolicyParams.load(settings.policy_path), db=Database(settings.database_url))
+def build_lite_state(settings: Settings, state: "VoxState") -> None:
+    """Lite mode: ONNX classifier + hosted Whisper (Groq) + LLM translation. No PyTorch, faster-whisper or NLLB."""
+    settings.max_audio_bytes = min(settings.max_audio_bytes, 4_000_000)   # Vercel rejects request bodies over 4.5 MB
+    try:
+        from .services.intent_onnx import OnnxIntentClassifier
+        state.classifier = OnnxIntentClassifier(settings.intent_onnx_dir)
+    except Exception:
+        log.exception("ONNX intent model failed to load")
+    if settings.groq_api_key:
+        from .services.asr_groq import GroqTranscriber
+        state.transcriber = GroqTranscriber(settings.groq_api_key, settings.stt_model, settings.stt_url)
+    else:
+        log.info("No GROQ_API_KEY: voice input is off in lite mode (typed input still works)")
+    if state.general is not None:
+        from .services.translate_llm import LLMTranslator
+        state.translator = LLMTranslator(state.general, settings.translate_daily_cap)
+    else:
+        log.info("No AI provider configured: non-English input and non-campus questions are limited in lite mode")
+
+
+def build_full_state(settings: Settings, state: "VoxState") -> None:
+    """Full mode: PyTorch DistilBERT, local faster-whisper and local NLLB translation."""
     try:
         from .services.intent import IntentClassifier
         state.classifier = IntentClassifier(settings.intent_model_dir)
     except Exception:
         log.exception("intent model failed to load")
-    try:
-        if settings.language_status_path.exists():
-            state.language_status = json.loads(settings.language_status_path.read_text(encoding="utf-8"))
-    except Exception:
-        log.exception("language status failed to load")
     try:
         if (settings.nllb_dir / "model.bin").exists():
             from .services.translate import Translator
@@ -81,17 +95,37 @@ def build_state(settings: Settings) -> VoxState:
     except Exception:
         log.exception("translation model failed to load")
     try:
-        state.general = build_general(settings)
-        if state.general is None:
-            log.info("General AI answers are off (set ANTHROPIC_API_KEY, or GENERAL_API_KEY + GENERAL_BASE_URL + GENERAL_MODEL)")
-    except Exception:
-        log.exception("general answerer failed to initialise")
-    try:
         from .services.asr import Transcriber
         state.transcriber = Transcriber(settings.whisper_model, settings.whisper_compute_type,
                                         settings.whisper_cache_dir)
     except Exception:
         log.exception("ASR model failed to load")
+
+
+def resolve_db_url(url: str) -> str:
+    """On Vercel the project folder is read-only; a relative SQLite path moves to /tmp (writable but ephemeral)."""
+    if os.environ.get("VERCEL") and url.startswith("sqlite:///") and not url.startswith("sqlite:////"):
+        return "sqlite:////tmp/voxsure.db"
+    return url
+
+
+def build_state(settings: Settings) -> VoxState:
+    """Load models. Failures degrade gracefully: /health reports it, typed fallback still works."""
+    db_url = resolve_db_url(settings.database_url)
+    state = VoxState(settings=settings, kb=KnowledgeBase(settings.knowledge_base_path),
+                     policy=PolicyParams.load(settings.policy_path), db=Database(db_url))
+    try:
+        if settings.language_status_path.exists():
+            state.language_status = json.loads(settings.language_status_path.read_text(encoding="utf-8"))
+    except Exception:
+        log.exception("language status failed to load")
+    try:
+        state.general = build_general(settings)
+        if state.general is None:
+            log.info("General AI answers are off (set ANTHROPIC_API_KEY, or GENERAL_API_KEY + GENERAL_BASE_URL + GENERAL_MODEL)")
+    except Exception:
+        log.exception("general answerer failed to initialise")
+    (build_lite_state if settings.mode == "lite" else build_full_state)(settings, state)
     return state
 
 

@@ -1,0 +1,9 @@
+.venv
+.tmp
+.hf_cache
+frontend/node_modules
+ml/artifacts/intent_model
+ml/artifacts/nllb-ct2
+ml/eval_audio
+ml/human_audio
+*.log

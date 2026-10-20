@@ -68,7 +68,7 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
           <Stage n={1} title="Speech recognition" tag="Whisper base.en">
             {insight.mode === "voice" && insight.language && (
               <p className="mb-2 text-xs text-slate-400">Detected language: <span className="font-semibold text-slate-200">{insight.turn.lang_name}</span>
-                {insight.languageProbability !== undefined ? ` (${Math.round(insight.languageProbability * 100)}%)` : ""}</p>
+                {insight.languageProbability !== undefined && insight.languageProbability >= 0 ? ` (${Math.round(insight.languageProbability * 100)}%)` : ""}</p>
             )}
             {insight.mode === "voice" && insight.asrConfidence !== undefined ? (
               <>

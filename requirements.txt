@@ -1,0 +1,14 @@
+# Runtime dependencies for the LITE build (free serverless hosting, e.g. Vercel). No PyTorch, faster-whisper or NLLB.
+# The FULL build (Docker / own server) uses backend/requirements.txt instead.
+fastapi==0.115.6
+uvicorn==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+python-multipart==0.0.20
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+onnxruntime>=1.18,<2
+tokenizers>=0.20,<1
+numpy>=1.26,<2.3
+langid==1.1.6
+# Only if you choose Claude as the AI provider (ANTHROPIC_API_KEY), add:  anthropic>=1.15,<2

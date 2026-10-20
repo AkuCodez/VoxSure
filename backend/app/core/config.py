@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=(REPO_ROOT / ".env", REPO_ROOT / "backend" / ".env"), extra="ignore")
+    model_config = SettingsConfigDict(env_file=(REPO_ROOT / ".env", REPO_ROOT / "backend" / ".env"), extra="ignore",
+                                      populate_by_name=True)
 
     intent_model_dir: Path = REPO_ROOT / "ml" / "artifacts" / "intent_model"
     policy_path: Path = REPO_ROOT / "ml" / "artifacts" / "policy.json"
@@ -18,6 +21,14 @@ class Settings(BaseSettings):
 
     nllb_dir: Path = REPO_ROOT / "ml" / "artifacts" / "nllb-ct2"
     language_status_path: Path = REPO_ROOT / "backend" / "app" / "data" / "language_status.json"
+    # full = local Whisper/NLLB/PyTorch; lite = hosted speech + LLM translation + ONNX (free serverless hosts).
+    # Lite switches on automatically on Vercel; override with VOXSURE_MODE=full|lite.
+    mode: str = Field(default_factory=lambda: "lite" if os.environ.get("VERCEL") else "full", validation_alias="VOXSURE_MODE")
+    intent_onnx_dir: Path = REPO_ROOT / "ml" / "artifacts" / "intent_onnx"
+    groq_api_key: str = ""                  # GROQ_API_KEY: Whisper speech-to-text in lite mode
+    stt_model: str = "whisper-large-v3-turbo"
+    stt_url: str = "https://api.groq.com/openai/v1/audio/transcriptions"
+    translate_daily_cap: int = 600          # lite mode: LLM translation calls per day
     whisper_model: str = "small"  # multilingual; use base.en for English-only/lower latency
     whisper_compute_type: str = "int8"
     whisper_cache_dir: str | None = None

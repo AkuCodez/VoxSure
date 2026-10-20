@@ -1,0 +1,26 @@
+{
+  "onnx_size_mb": 67.6,
+  "quantization": "dynamic int8, per-channel weights",
+  "val": {
+    "n": 337,
+    "prediction_agreement": 0.9554896142433235,
+    "accuracy_pytorch": 0.8219584569732937,
+    "accuracy_onnx": 0.8338278931750742,
+    "macro_f1_pytorch": 0.7965380821956214,
+    "macro_f1_onnx": 0.8160268460608782,
+    "mean_abs_probability_difference": 0.003961977267482873,
+    "max_abs_probability_difference": 0.3994837999343872,
+    "policy_decision_agreement": 0.9643916913946587
+  },
+  "test": {
+    "n": 337,
+    "prediction_agreement": 0.9614243323442137,
+    "accuracy_pytorch": 0.7952522255192879,
+    "accuracy_onnx": 0.7893175074183977,
+    "macro_f1_pytorch": 0.794913783439011,
+    "macro_f1_onnx": 0.7911490122744887,
+    "mean_abs_probability_difference": 0.004505809783804364,
+    "max_abs_probability_difference": 0.36729197204113007,
+    "policy_decision_agreement": 0.9673590504451038
+  }
+}

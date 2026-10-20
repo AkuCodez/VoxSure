@@ -4,7 +4,7 @@ import ModelsInUse from "./ModelsInUse";
 
 afterEach(() => vi.restoreAllMocks());
 const health = { status: "ok", asr_ready: true, intent_ready: true, general_ready: true, translation_ready: false, db_ready: true,
-  asr_model: "base.en", asr_multilingual: false, model_version: "distilbert-intent-v1", general_provider: "Groq", general_model: "llama-3.1-8b-instant" };
+  asr_model: "base.en", asr_multilingual: false, translation_engine: null, model_version: "distilbert-intent-v1", general_provider: "Groq", general_model: "llama-3.1-8b-instant" };
 
 describe("ModelsInUse", () => {
   it("names each model, flags English-only speech and missing translation, and shows the AI provider", async () => {

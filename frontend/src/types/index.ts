@@ -73,7 +73,7 @@ export interface ChatItem {
 
 export interface Health {
   status: "ok" | "degraded";
-  asr_ready: boolean; intent_ready: boolean; general_ready: boolean; translation_ready: boolean; db_ready: boolean;
+  asr_ready: boolean; intent_ready: boolean; general_ready: boolean; translation_ready: boolean; translation_engine: string | null; db_ready: boolean;
   asr_model: string | null; asr_multilingual: boolean; model_version: string | null;
   general_provider: string | null; general_model: string | null;
 }

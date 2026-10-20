@@ -15,6 +15,8 @@ _SENT = re.compile(r"(?<=[.!?।])\s+")
 class Translator:
     """NLLB-200 distilled 600M (int8, CTranslate2) any<->English translation, CPU."""
 
+    engine_name = "NLLB-200 distilled 600M (local)"
+
     def __init__(self, model_dir: Path, threads: int = 4):
         self.dir = Path(model_dir)
         self.model = ctranslate2.Translator(str(self.dir), device="cpu", compute_type="int8", intra_threads=threads)

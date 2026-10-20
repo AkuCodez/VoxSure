@@ -26,9 +26,9 @@ export default function ModelsInUse() {
       {h && (
         <dl className="mt-2">
           <Row label="Speech recognition" ok={h.asr_ready}
-            value={`Whisper ${h.asr_model ?? "?"}${h.asr_model ? (h.asr_multilingual ? " (multilingual)" : " (English only)") : ""}`} />
+            value={`${(h.asr_model ?? "?").toLowerCase().startsWith("whisper") ? "" : "Whisper "}${h.asr_model ?? "?"}${h.asr_model ? (h.asr_multilingual ? " (multilingual)" : " (English only)") : ""}`} />
           <Row label="Intent classifier" ok={h.intent_ready} value={`DistilBERT · ${h.model_version ?? "?"}`} />
-          <Row label="Translation" ok={h.translation_ready} value="NLLB-200 distilled 600M" />
+          <Row label="Translation" ok={h.translation_ready} value={h.translation_engine ?? "none"} />
           <Row label="Non-campus answers" ok={h.general_ready}
             value={h.general_provider ? `${h.general_provider} · ${h.general_model ?? "?"}` : "off (no AI key configured)"} />
         </dl>

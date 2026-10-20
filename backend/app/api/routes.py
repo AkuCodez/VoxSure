@@ -13,7 +13,7 @@ from ..core.policy import OOS, decide
 from ..schemas.models import (Source, Candidate, Thresholds, FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
                               IntentResponse, IntentScore, MemoryItem, Option, TranscribeResponse, WordScore,
                               TurnRequest, TurnResponse)
-from ..services.asr import AudioDecodeError, NoSpeechError
+from ..services.asr_types import AsrUnavailableError, AudioDecodeError, NoSpeechError
 from ..services.knowledge import numbers_preserved
 
 router = APIRouter(prefix="/api/v1")
@@ -40,6 +40,7 @@ async def health(request: Request) -> HealthResponse:
     return HealthResponse(
         status="ok" if all(ready) else "degraded", asr_ready=ready[0], intent_ready=ready[1], general_ready=general_ready,
         translation_ready=s.translator is not None,
+        translation_engine=getattr(s.translator, "engine_name", None) if s.translator is not None else None,
         general_provider=getattr(s.general, "provider_name", None) if s.general is not None else None,
         general_model=getattr(s.general, "model", None) if s.general is not None else None,
         asr_multilingual=bool(getattr(s.transcriber, "multilingual", False)),
@@ -75,6 +76,8 @@ async def transcribe(request: Request, audio: UploadFile = File(...), language: 
         raise err(422, "no_speech", "I couldn't hear any speech. Please try again, closer to the microphone.")
     except AudioDecodeError:
         raise err(422, "decode_failed", "I couldn't read that audio. Please try again or type your question.")
+    except AsrUnavailableError:
+        raise err(503, "asr_unavailable", "Speech recognition is busy or unavailable right now. Please type your question or try again in a minute.")
     return TranscribeResponse(transcript=result.text, asr_confidence=round(result.confidence, 4),
                               duration_s=round(result.duration_s, 2),
                               latency_ms=round((time.perf_counter() - t0) * 1000, 1),
