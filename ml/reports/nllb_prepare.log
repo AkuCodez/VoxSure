@@ -4,4 +4,19 @@ Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed.
 D:\VoxSure\.venv\lib\site-packages\huggingface_hub\file_download.py:143: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in D:\VoxSure\.hf_cache\hub\models--facebook--nllb-200-distilled-600M. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
 To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
   warnings.warn(message)
-Fetching 7 files:  14%|#4        | 1/7 [00:00<00:01,  3.35it/s]Fetching 7 files:  71%|#######1  | 5/7 [00:05<00:02,  1.15s/it]Fetching 7 files:  86%|########5 | 6/7 [00:20<00:03,  3.34s/it]
+Fetching 7 files:  14%|#4        | 1/7 [00:00<00:01,  3.35it/s]Fetching 7 files:  71%|#######1  | 5/7 [00:05<00:02,  1.15s/it]Fetching 7 files:  86%|########5 | 6/7 [00:20<00:03,  3.34s/it]Fetching 7 files: 100%|##########| 7/7 [17:38<00:00, 151.21s/it]Fetching 7 files: 100%|##########| 7/7 [17:38<00:00, 151.21s/it]
+downloaded to D:\VoxSure\.hf_cache\hub\models--facebook--nllb-200-distilled-600M\snapshots\f8d333a098d19b4fd9a8b18f94170487ad3f821d
+Traceback (most recent call last):
+  File "D:\VoxSure\ml\scripts\prepare_nllb.py", line 32, in <module>
+    sys.exit(main())
+  File "D:\VoxSure\ml\scripts\prepare_nllb.py", line 24, in main
+    TransformersConverter(src).convert(str(OUT), quantization="int8", force=True)
+  File "D:\VoxSure\.venv\lib\site-packages\ctranslate2\converters\converter.py", line 89, in convert
+    model_spec = self._load()
+  File "D:\VoxSure\.venv\lib\site-packages\ctranslate2\converters\transformers.py", line 147, in _load
+    model = self.load_model(
+  File "D:\VoxSure\.venv\lib\site-packages\ctranslate2\converters\transformers.py", line 174, in load_model
+    return model_class.from_pretrained(model_name_or_path, **kwargs)
+  File "D:\VoxSure\.venv\lib\site-packages\transformers\modeling_utils.py", line 4130, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+TypeError: M2M100ForConditionalGeneration.__init__() got an unexpected keyword argument 'dtype'

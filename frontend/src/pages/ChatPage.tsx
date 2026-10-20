@@ -17,10 +17,14 @@ const TOPICS = [
 const EXAMPLES = [
   { q: "When does the library open?", tag: "Clear request", tone: "text-emerald-300" },
   { q: "How do I pay my tuition fees?", tag: "Clear request", tone: "text-emerald-300" },
-  { q: "When does it open?", tag: "Ambiguous · I'll ask what you mean", tone: "text-amber-300" },
+  { q: "Can I get a receipt?", tag: "Ambiguous · I'll ask which one you mean", tone: "text-amber-300" },
   { q: "hostile fees for the box", tag: "Misheard · you can edit it", tone: "text-sky-300" },
-  { q: "What's the weather today?", tag: "Out of scope · honest fallback", tone: "text-slate-400" },
+  { q: "What is the capital of France?", tag: "Not about campus · answered by AI, clearly labelled", tone: "text-violet-300" },
   { q: "What can you do?", tag: "About the assistant", tone: "text-emerald-300" },
+];
+
+const LANGUAGES: [string, string][] = [
+  ["auto", "Auto-detect language"], ["en", "English"], ["hi", "हिन्दी · Hindi"], ["pa", "ਪੰਜਾਬੀ · Punjabi"], ["de", "Deutsch · German"],
 ];
 
 const iconBtn = "inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:opacity-40";
@@ -62,6 +66,11 @@ export default function ChatPage() {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <StatusPill status={status} />
+          <label className="sr-only" htmlFor="lang">Speech and reply language</label>
+          <select id="lang" value={chat.langPref} onChange={(e) => chat.setLangPref(e.target.value)} disabled={locked}
+            className="rounded-xl border border-white/10 bg-ink-800 px-3 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/10 disabled:opacity-40">
+            {LANGUAGES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+          </select>
           {chat.speaking && <button onClick={chat.stopAudio} className={iconBtn}><StopIcon size={16} />Stop audio</button>}
           <button onClick={() => chat.toggleSpeak(!chat.speakOn)} aria-pressed={!chat.speakOn} disabled={!ttsSupported()} className={iconBtn}>
             {chat.speakOn ? <VolumeIcon size={16} /> : <MuteIcon size={16} />}{chat.speakOn ? "Mute" : "Unmute"}
@@ -69,6 +78,7 @@ export default function ChatPage() {
           <button onClick={() => setInsights((v) => !v)} aria-pressed={insights} className={`${iconBtn} hidden xl:inline-flex`}>
             <PanelIcon size={16} />Insights
           </button>
+          <a href="#/evaluation" className={iconBtn}><PanelIcon size={16} />Evaluation</a>
           <button onClick={() => setSettings(true)} className={iconBtn}><SettingsIcon size={16} />Settings</button>
           <button onClick={chat.reset} className={iconBtn}><ResetIcon size={16} />Reset</button>
         </div>
@@ -88,7 +98,7 @@ export default function ChatPage() {
                   </p>
                   <h2 className="text-grad mt-4 text-4xl font-bold tracking-tight sm:text-5xl">How can I help you today?</h2>
                   <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-slate-400">
-                    Ask out loud or type. If I'm not sure what you meant, I'll ask instead of guessing.
+                    Ask out loud or type, in English, Hindi, Punjabi, German or another language. I reply in the language you use. If I'm not sure what you meant, I'll ask instead of guessing.
                   </p>
                   {!mic.ok && <p className="mx-auto mt-4 max-w-md rounded-xl bg-amber-400/10 p-3 text-sm text-amber-200">{mic.reason}</p>}
 
@@ -146,7 +156,7 @@ export default function ChatPage() {
       </div>
 
       <SettingsPanel open={settings} onClose={() => setSettings(false)} speakOn={chat.speakOn} onSpeak={chat.toggleSpeak}
-        memoryOn={chat.memoryOn} onMemory={chat.toggleMemory} memory={chat.memory} onDelete={(id) => void chat.deleteMemory(id)} />
+        memoryOn={chat.memoryOn} onMemory={chat.toggleMemory} memory={chat.memory} generalOn={chat.generalOn} onGeneral={chat.setGeneralOn} onDelete={(id) => void chat.deleteMemory(id)} />
     </div>
   );
 }

@@ -29,10 +29,17 @@ export function useChat() {
   const [speaking, setSpeaking] = useState(false);
   const [memoryOn, setMemoryOn] = useState(() => safeGet("voxsure.memory") === "1");
   const [memory, setMemory] = useState<MemoryItem[]>([]);
+  const [generalOn, setGeneralOnState] = useState(() => safeGet("voxsure.general") !== "0");
+  const setGeneralOn = (v: boolean) => { setGeneralOnState(v); safeSet("voxsure.general", v ? "1" : "0"); };
   const [insight, setInsight] = useState<Insight | null>(null);
+  const [langPref, setLangPrefState] = useState<string>(() => safeGet("voxsure.lang") ?? "auto");
+  const langRef = useRef(langPref);
+  const setLangPref = (v: string) => { langRef.current = v; setLangPrefState(v); safeSet("voxsure.lang", v); };
   const [counts, setCounts] = useState({ answer: 0, clarify: 0, fallback: 0 });
   const attempts = useRef(0);
+  const itemsRef = useRef<ChatItem[]>([]);
   const cid = useRef(clientId());
+  itemsRef.current = items;
   const busy = status === "uploading" || status === "transcribing" || status === "understanding";
 
   const refreshMemory = useCallback(async () => {
@@ -43,16 +50,16 @@ export function useChat() {
   const toggleSpeak = (v: boolean) => { setSpeakOn(v); safeSet("voxsure.speak", v ? "1" : "0"); if (!v) { stopSpeaking(); setSpeaking(false); } };
   const toggleMemory = (v: boolean) => { setMemoryOn(v); safeSet("voxsure.memory", v ? "1" : "0"); };
 
-  const say = useCallback((text: string) => {
+  const say = useCallback((text: string, lang = "en") => {
     setSpeaking(true);
-    speak(text, () => setSpeaking(false));
+    speak(text, () => setSpeaking(false), lang);
   }, []);
 
   const stopAudio = useCallback(() => { stopSpeaking(); setSpeaking(false); }, []);
 
   const runTurn = useCallback(async (
     text: string, mode: "voice" | "text",
-    opts: { asr?: number; asrMs?: number; durationS?: number; chosen?: string; edited?: boolean } = {},
+    opts: { asr?: number; asrMs?: number; durationS?: number; chosen?: string; edited?: boolean; lang?: string; langProb?: number } = {},
   ): Promise<TurnResponse | null> => {
     stopAudio();
     setError(null);
@@ -61,28 +68,32 @@ export function useChat() {
       const turn = await api.turn({
         text, input_mode: mode, asr_confidence: opts.asr, chosen_intent: opts.chosen,
         attempts: attempts.current, edited: !!opts.edited, client_id: cid.current, use_memory: memoryOn,
+        lang: opts.lang ?? (langRef.current === "auto" ? undefined : langRef.current),
+        allow_general: generalOn,
+        history: itemsRef.current.slice(-6).map((i) => ({ role: i.role, text: i.text.slice(0, 600) })).filter((h) => h.text.trim()),
       });
       attempts.current = turn.action === "answer" ? 0 : attempts.current + 1;
-      setInsight({ mode, asrConfidence: opts.asr, asrMs: opts.asrMs, durationS: opts.durationS, turn });
+      setInsight({ mode, language: turn.lang, languageProbability: opts.langProb, asrConfidence: opts.asr, asrMs: opts.asrMs, durationS: opts.durationS, turn });
       setCounts((c) => ({ ...c, [turn.action]: c[turn.action] + 1 }));
       setItems((prev) => {
         const next = prev.map((i) => (i.turn?.action === "clarify" && !i.resolved ? { ...i, resolved: true } : i));
-        // reflect memory substitution in the visible user bubble
-        if (turn.memory_applied) {
-          for (let k = next.length - 1; k >= 0; k--)
-            if (next[k].role === "user") { next[k] = { ...next[k], text: turn.transcript }; break; }
-        }
+        for (let k = next.length - 1; k >= 0; k--)
+          if (next[k].role === "user") {
+            next[k] = { ...next[k], text: turn.memory_applied ? turn.transcript : next[k].text,
+              lang: turn.lang, langName: turn.lang_name, langVerified: turn.lang_verified, translated: turn.translated_input };
+            break;
+          }
         return [...next, { id: uid(), role: "assistant", text: turn.response, turn }];
       });
       setStatus(turn.action === "clarify" ? "clarifying" : "answered");
-      if (speakOn) say(turn.response);
+      if (speakOn) say(turn.response, turn.lang);
       return turn;
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
       setStatus("error");
       return null;
     }
-  }, [memoryOn, say, speakOn, stopAudio]);
+  }, [generalOn, memoryOn, say, speakOn, stopAudio]);
 
   const sendText = useCallback(async (text: string) => {
     const t = text.trim();
@@ -98,10 +109,10 @@ export function useChat() {
     if (blob.size === 0) { setError("No audio was captured. Please try again."); setStatus("error"); return; }
     try {
       setStatus("transcribing");
-      const r = await api.transcribe(blob);
+      const r = await api.transcribe(blob, langRef.current === "auto" ? undefined : langRef.current);
       setItems((p) => [...p, { id: uid(), role: "user", text: r.transcript, mode: "voice", asrConfidence: r.asr_confidence,
-        asrMs: r.latency_ms, durationS: r.duration_s }]);
-      await runTurn(r.transcript, "voice", { asr: r.asr_confidence, asrMs: r.latency_ms, durationS: r.duration_s });
+        asrMs: r.latency_ms, durationS: r.duration_s, words: r.words, lang: r.language, langName: r.language_name }]);
+      await runTurn(r.transcript, "voice", { asr: r.asr_confidence, asrMs: r.latency_ms, durationS: r.duration_s, lang: r.language, langProb: r.language_probability });
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
       setStatus("error");
@@ -118,7 +129,7 @@ export function useChat() {
       catch { /* storing a preference is best-effort */ }
     }
     attempts.current = 0;
-    await runTurn(c, item.mode ?? "text", { edited: true, asr: undefined });
+    await runTurn(c, item.mode ?? "text", { edited: true, asr: undefined, lang: item.lang });
   }, [memoryOn, refreshMemory, runTurn]);
 
   const choose = useCallback(async (intent: string, label: string) => {
@@ -137,7 +148,7 @@ export function useChat() {
   }, [refreshMemory]);
 
   return {
-    items, insight, counts, status, setStatus, error, setError, busy, speakOn, toggleSpeak, speaking, say, stopAudio,
+    items, insight, counts, generalOn, setGeneralOn, langPref, setLangPref, status, setStatus, error, setError, busy, speakOn, toggleSpeak, speaking, say, stopAudio,
     memoryOn, toggleMemory, memory, deleteMemory, sendText, sendAudio, editAndResend, choose, reset,
   };
 }

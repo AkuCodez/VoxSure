@@ -1,0 +1,282 @@
+{
+  "languages": {
+    "en": {
+      "name": "English",
+      "n": 47,
+      "accuracy": 0.9574468085106383,
+      "macro_f1": 0.959375,
+      "lang_id_accuracy": 1.0,
+      "wrong_answer_rate_B": 0.0425531914893617,
+      "wrong_answer_rate_C": 0.0,
+      "clarification_rate_C": 0.06382978723404255,
+      "task_completion_one_turn_C": 0.9361702127659575,
+      "translate_latency_s_median": 3.0000046535860747e-07,
+      "translate_latency_s_p95": 6.999998731771484e-07,
+      "verified": true,
+      "sample_errors": [
+        {
+          "text": "What are the reading room hours?",
+          "english": "What are the reading room hours?",
+          "gold": "library_hours",
+          "pred": "campus_services"
+        },
+        {
+          "text": "How do I download my hall ticket?",
+          "english": "How do I download my hall ticket?",
+          "gold": "exam_info",
+          "pred": "campus_services"
+        }
+      ],
+      "sample_translations": [
+        {
+          "text": "What time does the library close in the evening?",
+          "english": "What time does the library close in the evening?"
+        },
+        {
+          "text": "Is the library open on Sunday?",
+          "english": "Is the library open on Sunday?"
+        },
+        {
+          "text": "What are the reading room hours?",
+          "english": "What are the reading room hours?"
+        },
+        {
+          "text": "How many books can I borrow?",
+          "english": "How many books can I borrow?"
+        }
+      ]
+    },
+    "hi": {
+      "name": "Hindi",
+      "n": 47,
+      "accuracy": 0.9574468085106383,
+      "macro_f1": 0.9571428571428571,
+      "lang_id_accuracy": 1.0,
+      "wrong_answer_rate_B": 0.0425531914893617,
+      "wrong_answer_rate_C": 0.0,
+      "clarification_rate_C": 0.0851063829787234,
+      "task_completion_one_turn_C": 0.9148936170212766,
+      "translate_latency_s_median": 0.3982304999990447,
+      "translate_latency_s_p95": 0.7721205899993944,
+      "verified": true,
+      "sample_errors": [
+        {
+          "text": "वाचनालय का समय क्या है?",
+          "english": "What time is the reading room?",
+          "gold": "library_hours",
+          "pred": "campus_services"
+        },
+        {
+          "text": "मैं अपना प्रवेश पत्र कैसे डाउनलोड करूँ?",
+          "english": "How do I download my card?",
+          "gold": "exam_info",
+          "pred": "it_helpdesk"
+        }
+      ],
+      "sample_translations": [
+        {
+          "text": "शाम को पुस्तकालय कितने बजे बंद होता है?",
+          "english": "What time does the library close in the evening?"
+        },
+        {
+          "text": "क्या रविवार को पुस्तकालय खुला रहता है?",
+          "english": "Is the library open on Sundays?"
+        },
+        {
+          "text": "वाचनालय का समय क्या है?",
+          "english": "What time is the reading room?"
+        },
+        {
+          "text": "मैं कितनी किताबें उधार ले सकता हूँ?",
+          "english": "How many books can I borrow?"
+        }
+      ]
+    },
+    "pa": {
+      "name": "Punjabi",
+      "n": 47,
+      "accuracy": 0.9148936170212766,
+      "macro_f1": 0.9100732600732601,
+      "lang_id_accuracy": 1.0,
+      "wrong_answer_rate_B": 0.06382978723404255,
+      "wrong_answer_rate_C": 0.0,
+      "clarification_rate_C": 0.1276595744680851,
+      "task_completion_one_turn_C": 0.8723404255319149,
+      "translate_latency_s_median": 0.3428704000016296,
+      "translate_latency_s_p95": 0.48788100000037954,
+      "verified": true,
+      "sample_errors": [
+        {
+          "text": "ਰੀਡਿੰਗ ਰੂਮ ਦਾ ਸਮਾਂ ਕੀ ਹੈ?",
+          "english": "What time is the reading room?",
+          "gold": "library_hours",
+          "pred": "campus_services"
+        },
+        {
+          "text": "ਮੈਂ ਆਪਣਾ ਹਾਲ ਟਿਕਟ ਕਿਵੇਂ ਡਾਊਨਲੋਡ ਕਰਾਂ?",
+          "english": "How can I download my current ticket?",
+          "gold": "exam_info",
+          "pred": "fee_payment"
+        },
+        {
+          "text": "ਭਰਤੀ ਲਈ ਕਿਹੜੀਆਂ ਕੰਪਨੀਆਂ ਆਉਂਦੀਆਂ ਹਨ?",
+          "english": "What companies come to recruit?",
+          "gold": "placement_process",
+          "pred": "out_of_scope"
+        },
+        {
+          "text": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+          "english": "Sat Sri Akal",
+          "gold": "greeting",
+          "pred": "hostel_info"
+        }
+      ],
+      "sample_translations": [
+        {
+          "text": "ਸ਼ਾਮ ਨੂੰ ਲਾਇਬ੍ਰੇਰੀ ਕਿੰਨੇ ਵਜੇ ਬੰਦ ਹੁੰਦੀ ਹੈ?",
+          "english": "What time does the library close in the evening?"
+        },
+        {
+          "text": "ਕੀ ਐਤਵਾਰ ਨੂੰ ਲਾਇਬ੍ਰੇਰੀ ਖੁੱਲ੍ਹੀ ਹੁੰਦੀ ਹੈ?",
+          "english": "Is the library open on Sundays?"
+        },
+        {
+          "text": "ਰੀਡਿੰਗ ਰੂਮ ਦਾ ਸਮਾਂ ਕੀ ਹੈ?",
+          "english": "What time is the reading room?"
+        },
+        {
+          "text": "ਮੈਂ ਕਿੰਨੀਆਂ ਕਿਤਾਬਾਂ ਉਧਾਰ ਲੈ ਸਕਦਾ ਹਾਂ?",
+          "english": "How many books can I borrow?"
+        }
+      ]
+    },
+    "de": {
+      "name": "German",
+      "n": 47,
+      "accuracy": 0.8297872340425532,
+      "macro_f1": 0.8252518315018316,
+      "lang_id_accuracy": 0.9574468085106383,
+      "wrong_answer_rate_B": 0.14893617021276595,
+      "wrong_answer_rate_C": 0.06382978723404255,
+      "clarification_rate_C": 0.1276595744680851,
+      "task_completion_one_turn_C": 0.7872340425531915,
+      "translate_latency_s_median": 0.31017700000120385,
+      "translate_latency_s_p95": 0.4513870200002201,
+      "verified": true,
+      "sample_errors": [
+        {
+          "text": "Wie hoch ist die Mahngebühr bei verspäteter Rückgabe?",
+          "english": "How much is a late-return bail?",
+          "gold": "library_borrow",
+          "pred": "fee_payment"
+        },
+        {
+          "text": "Wie lade ich meine Prüfungszulassung herunter?",
+          "english": "How do I download my exam certificate?",
+          "gold": "exam_info",
+          "pred": "certificates"
+        },
+        {
+          "text": "Bis wann muss man im Wohnheim zurück sein?",
+          "english": "How long do you have to be back at the shelter?",
+          "gold": "hostel_info",
+          "pred": "campus_services"
+        },
+        {
+          "text": "An wen wende ich mich bei IT-Problemen?",
+          "english": "Who do I turn to for IT problems?",
+          "gold": "it_helpdesk",
+          "pred": "help_capabilities"
+        },
+        {
+          "text": "Wie funktioniert das Campus-Placement?",
+          "english": "How's the campus location working?",
+          "gold": "placement_process",
+          "pred": "it_helpdesk"
+        },
+        {
+          "text": "Welche Firmen kommen zum Recruiting?",
+          "english": "What companies are recruiting?",
+          "gold": "placement_process",
+          "pred": "out_of_scope"
+        },
+        {
+          "text": "Ich brauche meinen Notenauszug",
+          "english": "I need my notebook .",
+          "gold": "certificates",
+          "pred": "library_borrow"
+        },
+        {
+          "text": "Um wie viel Uhr öffnet die Mensa?",
+          "english": "What time does the mensa open?",
+          "gold": "campus_services",
+          "pred": "library_hours"
+        }
+      ],
+      "sample_translations": [
+        {
+          "text": "Um wie viel Uhr schließt die Bibliothek abends?",
+          "english": "What time does the library close at night?"
+        },
+        {
+          "text": "Ist die Bibliothek sonntags geöffnet?",
+          "english": "Is the library open on Sunday?"
+        },
+        {
+          "text": "Wie sind die Öffnungszeiten des Lesesaals?",
+          "english": "What are the opening hours of the reading room?"
+        },
+        {
+          "text": "Wie viele Bücher kann ich ausleihen?",
+          "english": "How many books can I borrow?"
+        }
+      ]
+    }
+  },
+  "criterion": {
+    "accuracy": 0.8,
+    "wrong_answer_rate_C": 0.1,
+    "lang_id_accuracy": 0.95
+  },
+  "n_per_language": 47,
+  "notes": [
+    "Test sentences were written by the author and are not verified by native speakers.",
+    "Typed text only: speech recognition accuracy for these languages was not measured (no human recordings).",
+    "Verified = intent accuracy >= 80%, wrong-answer rate with recovery <= 10%, language-ID accuracy >= 95% (fixed in advance)."
+  ],
+  "translation_model": "NLLB-200 distilled 600M (int8, CTranslate2)",
+  "machine_translation_number_check": {
+    "hi": {
+      "answers_with_numbers": 4,
+      "numbers_changed_by_machine_translation": 0,
+      "which": []
+    },
+    "pa": {
+      "answers_with_numbers": 4,
+      "numbers_changed_by_machine_translation": 0,
+      "which": []
+    },
+    "de": {
+      "answers_with_numbers": 4,
+      "numbers_changed_by_machine_translation": 1,
+      "which": [
+        "library_hours"
+      ]
+    },
+    "fr": {
+      "answers_with_numbers": 4,
+      "numbers_changed_by_machine_translation": 1,
+      "which": [
+        "campus_services"
+      ]
+    },
+    "es": {
+      "answers_with_numbers": 4,
+      "numbers_changed_by_machine_translation": 1,
+      "which": [
+        "library_hours"
+      ]
+    }
+  },
+  "reply_policy": "hi, pa and de replies use hand-written text (not machine translated). Other languages use NLLB; replies whose numbers changed are flagged to the user."
+}

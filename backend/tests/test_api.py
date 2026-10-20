@@ -181,3 +181,57 @@ def test_sql_injection_is_inert(client):
     evil = "x'; DROP TABLE correction_memory; --"
     assert fb(client, True, orig=evil, corr="safe").status_code == 200
     assert len(client.get(f"/api/v1/memory/{CID}").json()) == 1
+
+
+# ---- security: headers and rate limiting ----
+def test_security_headers_present(client):
+    h = client.get("/api/v1/health").headers
+    assert h["x-content-type-options"] == "nosniff" and h["x-frame-options"] == "DENY"
+    assert "microphone=(self)" in h["permissions-policy"]
+
+
+def test_rate_limit_returns_429_with_error_envelope(vox):
+    from fastapi.testclient import TestClient
+    from app.main import create_app
+    vox.settings.rate_limit_heavy_per_min = 3
+    c = TestClient(create_app(vox))
+    codes = [c.post("/api/v1/chat/turn", json={"text": "hello"}).status_code for _ in range(5)]
+    assert codes[:3] == [200, 200, 200] and codes[3:] == [429, 429]
+    r = c.post("/api/v1/chat/turn", json={"text": "hello"})
+    assert r.json()["error"]["code"] == "rate_limited" and r.headers["retry-after"]
+    assert c.get("/api/v1/health").status_code == 200  # light endpoints unaffected by the heavy bucket
+
+
+# ---- source-backed answers and targeted clarification ----
+def test_answers_carry_sources_with_last_updated(client):
+    r = turn(client, "When does the library open?").json()
+    assert r["action"] == "answer" and len(r["sources"]) == 1
+    assert r["sources"][0]["last_updated"] and r["sources"][0]["title"]
+    assert r["sources"][0]["url"] is None  # no link is invented without a real source
+    assert turn(client, "hello").json()["sources"] == []        # small talk has no source
+    assert turn(client, "when does it open").json()["sources"] == []  # clarifications cite nothing
+
+
+def test_clarification_question_names_the_competing_intents(client):
+    r = turn(client, "when does it open").json()
+    assert r["action"] == "clarify" and r["response"].startswith("Just to be sure, do you mean")
+    assert "library" in r["response"].lower() and " or " in r["response"]
+
+
+# ---- evaluation endpoint ----
+def test_evaluation_endpoint_serves_measured_results(client):
+    r = client.get("/api/v1/evaluation")
+    assert r.status_code == 200
+    e = r.json()
+    assert 0 < e["intent"]["distilbert"]["macro_f1"] <= 1 and 0 < e["intent"]["baseline"]["macro_f1"] <= 1
+    n = len(e["dataset"]["classes"])
+    assert len(e["intent"]["confusion_matrix"]) == n and len(e["intent"]["confusion_matrix"][0]) == n
+    assert "limitations" in e and e["recovery"]["C_error_aware"]["wrong_answer_rate"] < e["recovery"]["B_no_clarification"]["wrong_answer_rate"]
+
+
+def test_evaluation_missing_file_is_a_clean_404(vox):
+    from fastapi.testclient import TestClient
+    from app.main import create_app
+    vox.settings.evaluation_path = vox.settings.evaluation_path.parent / "nope.json"
+    r = TestClient(create_app(vox)).get("/api/v1/evaluation")
+    assert r.status_code == 404 and r.json()["error"]["code"] == "no_evaluation"

@@ -9,10 +9,11 @@ from fastapi.concurrency import run_in_threadpool
 
 from ..core.languages import LANGS, detect_text_language, display_name
 from ..core.policy import OOS, decide
-from ..schemas.models import (Candidate, Thresholds, FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
+from ..schemas.models import (Source, Candidate, Thresholds, FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
                               IntentResponse, IntentScore, MemoryItem, Option, TranscribeResponse, WordScore,
                               TurnRequest, TurnResponse)
 from ..services.asr import AudioDecodeError, NoSpeechError
+from ..services.knowledge import numbers_preserved
 
 router = APIRouter(prefix="/api/v1")
 
@@ -32,8 +33,9 @@ def state(request: Request):
 async def health(request: Request) -> HealthResponse:
     s = state(request)
     ready = (s.transcriber is not None, s.classifier is not None, s.db.ping())
+    general_ready = s.general is not None and s.general.available()
     return HealthResponse(
-        status="ok" if all(ready) else "degraded", asr_ready=ready[0], intent_ready=ready[1],
+        status="ok" if all(ready) else "degraded", asr_ready=ready[0], intent_ready=ready[1], general_ready=general_ready,
         db_ready=ready[2], model_version=getattr(s.classifier, "version", None),
         asr_model=getattr(s.transcriber, "model_name", None))
 
@@ -125,34 +127,63 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
     if body.chosen_intent is not None:
         if not kb.has(body.chosen_intent):
             raise err(422, "unknown_intent", "Unknown intent selection.")
-        action, intent_name, kind, options, reason, conf = "answer", body.chosen_intent, None, [], "user_confirmed", 1.0
-        response = kb.answer(intent_name)
+        action, intent_name, kind, d_options, reason, conf = "answer", body.chosen_intent, None, [], "user_confirmed", 1.0
     else:
         probs = await run_in_threadpool(_classify, s, text_en)
         d = decide(probs, s.policy, asr_conf=body.asr_confidence, attempts=body.attempts)
-        action, intent_name, kind, reason = d.action, d.intent, d.clarify_kind, d.reason
+        action, intent_name, kind, reason, d_options = d.action, d.intent, d.clarify_kind, d.reason, d.options
         conf = max(probs.values())
         candidates = [Candidate(intent=k, label=kb.label(k), probability=round(v, 4))
                       for k, v in sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:3]]
-        options = [Option(intent=i, label=kb.label(i)) for i in d.options]
-        if action == "answer":
-            response = kb.answer(intent_name)
-        elif action == "fallback":
-            response = kb.fallback_repeated if reason == "repeated_failure" else kb.fallback_oos
-        elif kind == "disambiguate":
-            response = kb.clarify_prompt
-        else:
-            response = kb.repair_prompt
 
-    # Reply in the user's language (static answers are cached after the first translation).
-    if lang != "en" and tr is not None and translation_available:
-        try:
-            response = await run_in_threadpool(tr.translate, response, "en", lang)
-            options = [Option(intent=o.intent, label=await run_in_threadpool(tr.translate, o.label, "en", lang))
-                       for o in options]
-            candidates = [c.model_copy(update={"label": c.label}) for c in candidates]
-        except Exception:
+    def render(code: str) -> str:
+        if action == "answer":
+            return kb.answer(intent_name, code)
+        if action == "fallback":
+            return kb.fallback(reason, code)
+        if kind == "disambiguate":
+            return kb.clarification_question(d_options, code)
+        return kb.repair(code)
+
+    response = render("en")
+    options = [Option(intent=i, label=kb.label(i)) for i in d_options]
+    response_en, mode, warning = None, None, False
+    answer_source = "knowledge_base" if action == "answer" else "none"
+    sources = [Source(**x) for x in kb.sources(intent_name)] if action == "answer" else []
+
+    # Open-domain questions: the campus classifier says out-of-scope, so (if the user allows it and a key is
+    # configured) a general AI model answers in the user's own language, clearly labelled as AI-generated.
+    general_used = False
+    if (action == "fallback" and reason == "out_of_scope" and body.allow_general
+            and s.general is not None and s.general.available()):
+        hist = [{"role": h.role, "content": h.text} for h in body.history[-6:]]
+        general_text = await run_in_threadpool(s.general.answer, text, hist)
+        if general_text:
+            general_used = True
+            action, intent_name, kind, reason, d_options = "answer", "general_knowledge", None, "general_ai", []
+            response, options, answer_source = general_text, [], "general_ai"
+            sources = [Source(title=f"General answer written by an AI model ({getattr(s.general, 'provider_name', 'AI')}). It is not from the campus knowledge base and may be wrong.")]
+
+    # Reply in the user's language. Curated (hand-written) text where available (hi, pa, de);
+    # otherwise NLLB machine translation guarded by a numeric-consistency check.
+    if lang != "en" and not general_used:
+        response_en = response
+        if kb.has_curated(lang):
+            response = render(lang)
+            options = [Option(intent=i, label=kb.label(i, lang)) for i in d_options]
+            mode = "curated"
+        elif tr is not None and translation_available:
+            try:
+                response = await run_in_threadpool(tr.translate, response_en, "en", lang)
+                options = [Option(intent=o.intent, label=await run_in_threadpool(tr.translate, o.label, "en", lang))
+                           for o in options]
+                mode = "machine"
+                warning = not numbers_preserved(response_en, response)
+            except Exception:
+                translation_available, response, response_en = False, render("en"), None
+        else:
             translation_available = False
+            response_en = None
 
     latency = (time.perf_counter() - t0) * 1000
     turn_id = uuid.uuid4().hex[:16]
@@ -167,10 +198,12 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
     return TurnResponse(
         turn_id=turn_id, transcript=text, action=action, clarify_kind=kind, intent=intent_name,
         confidence=round(float(conf), 4), response=response, options=options, candidates=candidates,
+        sources=sources, answer_source=answer_source,
         thresholds=Thresholds(t_high=s.policy.t_high, margin=s.policy.margin, t_low=s.policy.t_low),
         reason=reason, memory_applied=memory_applied, lang=lang, lang_name=display_name(lang),
         lang_verified=verified, translated_input=text_en if (lang != "en" and tr is not None) else None,
-        translation_available=translation_available,
+        translation_available=translation_available, response_en=response_en, translation_mode=mode,
+        translation_warning=warning,
         model_version=getattr(s.classifier, "version", "n/a"), latency_ms=round(latency, 1))
 
 
@@ -205,6 +238,16 @@ async def delete_memory_item(request: Request, client_id: str, item_id: int) -> 
     if n == 0:
         raise err(404, "not_found", "No such memory item.")
     return {"deleted": n}
+
+
+@router.get("/evaluation")
+async def evaluation(request: Request) -> dict:
+    """Measured results for the in-app dashboard (generated by ml/scripts/export_evaluation.py)."""
+    path = state(request).settings.evaluation_path
+    if not path.exists():
+        raise err(404, "no_evaluation", "Evaluation results have not been generated yet.")
+    import json
+    return await run_in_threadpool(lambda: json.loads(path.read_text(encoding="utf-8")))
 
 
 @router.get("/metrics/summary")

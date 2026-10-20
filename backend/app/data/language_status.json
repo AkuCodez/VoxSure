@@ -1,0 +1,14 @@
+{
+  "verified": [
+    "hi",
+    "pa",
+    "de"
+  ],
+  "criterion": {
+    "accuracy": 0.8,
+    "wrong_answer_rate_C": 0.1,
+    "lang_id_accuracy": 0.95
+  },
+  "measured_on": "ml/data/multilingual_test.jsonl (typed text; author-written, not native-verified)",
+  "note": "Languages not listed are best effort: translation is attempted but accuracy has not been measured."
+}

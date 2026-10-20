@@ -7,7 +7,7 @@ import type { ChatItem, TurnResponse } from "../types";
 
 const turn = (over: Partial<TurnResponse>): TurnResponse => ({
   turn_id: "t1", transcript: "x", action: "answer", clarify_kind: null, intent: "library_hours",
-  confidence: 0.95, response: "The library opens at 8.", options: [], candidates: [], thresholds: null, reason: "confident",
+  confidence: 0.95, response: "The library opens at 8.", options: [], candidates: [], sources: [], thresholds: null, lang: "en", lang_name: "English", lang_verified: true, translated_input: null, translation_available: true, response_en: null, translation_mode: null, translation_warning: false, answer_source: "knowledge_base" as const, reason: "confident",
   memory_applied: false, model_version: "v", latency_ms: 5, ...over,
 });
 
@@ -73,5 +73,74 @@ describe("Composer", () => {
     fireEvent.click(screen.getByRole("button", { name: "Stop recording" }));
     expect(onMic).toHaveBeenCalled();
     expect(screen.getByText(/Recording… 3s/)).toBeInTheDocument();
+  });
+});
+
+describe("trust features", () => {
+  const base = { memoryOn: false, disabled: false, onEdit: vi.fn(), onChoose: vi.fn(), onSpeak: vi.fn() };
+
+  it("underlines only the words the recogniser was unsure about", () => {
+    const item: ChatItem = { id: "w1", role: "user", text: "when does the libary open", mode: "voice", asrConfidence: 0.8,
+      words: [{ word: "when", probability: 0.99 }, { word: "does", probability: 0.98 }, { word: "the", probability: 0.97 },
+              { word: "libary", probability: 0.2 }, { word: "open", probability: 0.95 }] };
+    const { container } = render(<MessageBubble item={item} {...base} />);
+    const low = container.querySelectorAll("[data-low]");
+    expect(low).toHaveLength(1);
+    expect(low[0]).toHaveTextContent("libary");
+    expect(screen.getByText(/Underlined words were hard to hear/)).toBeInTheDocument();
+  });
+
+  it("shows the language badge and the English text the model understood", () => {
+    const item: ChatItem = { id: "h1", role: "user", text: "पुस्तकालय कब खुलता है", mode: "text", lang: "hi", langName: "Hindi",
+      langVerified: true, translated: "when does the library open" };
+    render(<MessageBubble item={item} {...base} />);
+    expect(screen.getByText(/Hindi · verified/)).toBeInTheDocument();
+    expect(screen.getByText(/Understood as: “when does the library open”/)).toBeInTheDocument();
+  });
+
+  it("labels unverified languages as best effort", () => {
+    const t = turn({ lang: "fr", lang_name: "French", lang_verified: false, response: "Bonjour" });
+    render(<MessageBubble item={{ id: "a9", role: "assistant", text: t.response, turn: t }} {...base} />);
+    expect(screen.getByText(/Best-effort translation/)).toBeInTheDocument();
+  });
+
+  it("shows the source with its last-updated date and only links when a URL exists", () => {
+    const t = turn({ sources: [{ title: "Demo KB entry", url: null, last_updated: "2026-10-20" }] });
+    const { rerender } = render(<MessageBubble item={{ id: "s1", role: "assistant", text: t.response, turn: t }} {...base} />);
+    expect(screen.getByLabelText("Sources")).toHaveTextContent("Demo KB entry");
+    expect(screen.getByLabelText("Sources")).toHaveTextContent(/Last updated/);
+    expect(screen.queryByRole("link")).toBeNull();
+    const t2 = turn({ sources: [{ title: "Library page", url: "https://example.org/lib", last_updated: null }] });
+    rerender(<MessageBubble item={{ id: "s2", role: "assistant", text: t2.response, turn: t2 }} {...base} />);
+    expect(screen.getByRole("link", { name: "Library page" })).toHaveAttribute("rel", expect.stringContaining("noopener"));
+  });
+});
+
+describe("translated replies", () => {
+  const base = { memoryOn: false, disabled: false, onEdit: vi.fn(), onChoose: vi.fn(), onSpeak: vi.fn() };
+  it("offers the English original and says whether the translation was hand-written", () => {
+    const t = turn({ lang: "hi", lang_name: "Hindi", response: "पुस्तकालय 08:00 से 22:00", response_en: "The library is open 08:00 to 22:00", translation_mode: "curated" });
+    render(<MessageBubble item={{ id: "h", role: "assistant", text: t.response, turn: t }} {...base} />);
+    expect(screen.getByText(/English original · hand-written translation/)).toBeInTheDocument();
+    expect(screen.getByText("The library is open 08:00 to 22:00")).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
+  it("warns when machine translation changed a number", () => {
+    const t = turn({ lang: "fr", lang_name: "French", lang_verified: false, response: "ouvert", response_en: "Open 08:00", translation_mode: "machine", translation_warning: true });
+    render(<MessageBubble item={{ id: "f", role: "assistant", text: t.response, turn: t }} {...base} />);
+    expect(screen.getByRole("alert")).toHaveTextContent(/changed a number or time/);
+    expect(screen.getByText(/machine translated \(NLLB-200\)/)).toBeInTheDocument();
+  });
+});
+
+describe("general AI answers", () => {
+  const base = { memoryOn: false, disabled: false, onEdit: vi.fn(), onChoose: vi.fn(), onSpeak: vi.fn() };
+  it("labels AI-generated answers clearly and cites no campus source", () => {
+    const t = turn({ intent: "general_knowledge", answer_source: "general_ai", reason: "general_ai", confidence: 0.9, response: "Paris.",
+      sources: [{ title: "General answer written by an AI model (Groq). It is not from the campus knowledge base and may be wrong.", url: null, last_updated: null }] });
+    render(<MessageBubble item={{ id: "g", role: "assistant", text: t.response, turn: t }} {...base} />);
+    expect(screen.getByText(/General answer · AI-generated/)).toBeInTheDocument();
+    expect(screen.getByLabelText("Sources")).toHaveTextContent(/not from the campus knowledge base/);
+    expect(screen.queryByText(/I'm quite sure/)).toBeNull(); // no confidence claim on AI answers
   });
 });

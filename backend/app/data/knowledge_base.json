@@ -3,47 +3,135 @@
   "intents": {
     "library_hours": {
       "label": "Library opening hours",
-      "answer": "The Central Library is open 8:00 am to 10:00 pm Monday to Friday and 9:00 am to 6:00 pm on Saturday and Sunday. During the final-exam fortnight the reading hall stays open until midnight. It is closed on public holidays."
+      "answer": "The Central Library is open 08:00 to 22:00 Monday to Friday and 09:00 to 18:00 on Saturday and Sunday. During the final-exam fortnight the reading hall stays open until 24:00. It is closed on public holidays.",
+      "short": "the library's opening hours",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "library_borrow": {
       "label": "Borrowing, renewing or fines for library books",
-      "answer": "Students can borrow up to 4 books for 14 days using their student ID card. Books can be renewed twice online through the library account, unless another member has reserved them. Late returns cost 5 per day, and lost books must be reported to the circulation desk."
+      "answer": "Students can borrow up to 4 books for 14 days using their student ID card. Books can be renewed twice online through the library account, unless another member has reserved them. Late returns cost 5 per day, and lost books must be reported to the circulation desk.",
+      "short": "borrowing, renewing or fines for library books",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "academic_calendar": {
       "label": "Academic calendar and key dates",
-      "answer": "The academic calendar is published on the student portal under Academics. It lists semester start and end dates, holidays, vacations, add/drop deadlines and the convocation date. Check it there for the latest approved dates."
+      "answer": "The academic calendar is published on the student portal under Academics. It lists semester start and end dates, holidays, vacations, add/drop deadlines and the convocation date. Check it there for the latest approved dates.",
+      "short": "the academic calendar and key dates",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "exam_info": {
       "label": "Exams, hall tickets and results",
-      "answer": "The exam timetable and hall tickets are released on the student portal about two weeks before exams. Carry your hall ticket and student ID. Results are published on the portal, and revaluation requests are accepted for a few days after results through the Examination Office."
+      "answer": "The exam timetable and hall tickets are released on the student portal about two weeks before exams. Carry your hall ticket and student ID. Results are published on the portal, and revaluation requests are accepted for a few days after results through the Examination Office.",
+      "short": "exams, hall tickets or results",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "fee_payment": {
       "label": "Paying fees or getting fee receipts",
-      "answer": "Fees can be paid online through the student portal (card, net banking or UPI) or at the accounts counter during working hours. A receipt is generated automatically after payment. If money was deducted but the payment failed, contact the accounts office with the transaction reference."
+      "answer": "Fees can be paid online through the student portal (card, net banking or UPI) or at the accounts counter during working hours. A receipt is generated automatically after payment. If money was deducted but the payment failed, contact the accounts office with the transaction reference.",
+      "short": "paying fees or fee receipts",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "hostel_info": {
       "label": "Hostel rooms, rules and fees",
-      "answer": "Hostel applications open after admission confirmation, and rooms are allotted by the hostel office. Curfew is 10:00 pm, and visitors are allowed in the visitors' lounge only. Report maintenance problems to the hostel warden's office or through the helpdesk."
+      "answer": "Hostel applications open after admission confirmation, and rooms are allotted by the hostel office. Curfew is 22:00, and visitors are allowed in the visitors' lounge only. Report maintenance problems to the hostel warden's office or through the helpdesk.",
+      "short": "hostel rooms, rules or fees",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "it_helpdesk": {
       "label": "Wi-Fi, passwords or portal login problems",
-      "answer": "For password resets use the 'Forgot password' link on the portal login page. For Wi-Fi or portal access problems, raise a ticket with the IT helpdesk, which is located in the main administrative block. Mention your student ID and a short description of the problem."
+      "answer": "For password resets use the 'Forgot password' link on the portal login page. For Wi-Fi or portal access problems, raise a ticket with the IT helpdesk, which is located in the main administrative block. Mention your student ID and a short description of the problem.",
+      "short": "Wi-Fi, passwords or portal login problems",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "placement_process": {
       "label": "Placements and internships",
-      "answer": "Students register on the placement portal and upload a resume. Eligible students are shortlisted for company drives, which include tests, interviews and pre-placement talks. The Training and Placement Office also runs mock interviews. Eligibility criteria are announced per company."
+      "answer": "Students register on the placement portal and upload a resume. Eligible students are shortlisted for company drives, which include tests, interviews and pre-placement talks. The Training and Placement Office also runs mock interviews. Eligibility criteria are announced per company.",
+      "short": "placements and internships",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "scholarship_aid": {
       "label": "Scholarships and financial aid",
-      "answer": "Merit and need-based scholarships are available. Applications are submitted through the student portal with income proof and mark sheets before the notified deadline. You can track your application status on the same page. Contact the Financial Aid Office for eligibility questions."
+      "answer": "Merit and need-based scholarships are available. Applications are submitted through the student portal with income proof and mark sheets before the notified deadline. You can track your application status on the same page. Contact the Financial Aid Office for eligibility questions.",
+      "short": "scholarships and financial aid",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "certificates": {
       "label": "Transcripts, bonafide and other certificates",
-      "answer": "Bonafide, character and transfer certificates, and transcripts, are requested through the student portal's Certificates section. Processing normally takes three to seven working days. Duplicate documents need a written request and a fee at the Registrar's Office."
+      "answer": "Bonafide, character and transfer certificates, and transcripts, are requested through the student portal's Certificates section. Processing normally takes three to seven working days. Duplicate documents need a written request and a fee at the Registrar's Office.",
+      "short": "transcripts, bonafide or other certificates",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "campus_services": {
       "label": "Canteen, medical centre, transport or clubs",
-      "answer": "The canteen and food court are open from 8:00 am to 8:00 pm. The medical centre is next to the sports complex and is open on weekdays. A shuttle connects the hostels with the academic block, and clubs open their registrations at the start of each semester."
+      "answer": "The canteen and food court are open from 08:00 to 20:00. The medical centre is next to the sports complex and is open on weekdays. A shuttle connects the hostels with the academic block, and clubs open their registrations at the start of each semester.",
+      "short": "campus services such as the canteen, medical centre or transport",
+      "sources": [
+        {
+          "title": "VoxSure demo knowledge base (author-written sample entry)",
+          "url": null,
+          "last_updated": "2026-10-20"
+        }
+      ]
     },
     "greeting": {
       "label": "Greeting",
@@ -65,5 +153,8 @@
   "fallback_out_of_scope": "That's outside what I can help with, so I won't guess. I can answer questions about the library, calendar, exams, fees, hostels, IT help, placements, scholarships, certificates and campus services. Try rephrasing, or ask me \"What can you do?\"",
   "fallback_repeated": "I'm still not sure I understood. You can type your question instead, rephrase it, or press Reset to start again.",
   "repair_prompt": "I'm not confident I heard that correctly. Please check the transcript and edit it, or say it again.",
-  "clarify_prompt": "I want to be sure I give you the right answer. Which of these do you mean?"
+  "clarify_prompt": "I want to be sure I give you the right answer. Which of these do you mean?",
+  "last_updated": "2026-10-20",
+  "clarify_prompt_template": "Just to be sure, do you mean {options}?",
+  "clarify_or": "or"
 }

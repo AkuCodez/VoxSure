@@ -74,10 +74,13 @@ def main() -> None:
     clean = {m["file"]: load(AUDIO / m["file"]) for m in manifest}
     rng = np.random.default_rng(SEED)
 
-    def transcribe(x, prompt):
+    detected = []
+
+    def transcribe(x, prompt, language="en"):
         t0 = time.perf_counter()
-        segs, info = asr.transcribe(pad(x), beam_size=1, language="en", vad_filter=True,
+        segs, info = asr.transcribe(pad(x), beam_size=1, language=language, vad_filter=True,
                                     initial_prompt=prompt, condition_on_previous_text=False)
+        detected.append(info.language)
         segs = list(segs)
         dt = time.perf_counter() - t0
         text = " ".join(s.text.strip() for s in segs).strip()
@@ -93,7 +96,8 @@ def main() -> None:
     for cond, snr in (("clean", None), ("snr20", 20), ("snr10", 10), ("snr5", 5)):
         noisy = {m["file"]: (clean[m["file"]] if snr is None else add_noise(clean[m["file"]], snr, rng)) for m in manifest}
         res = {}
-        for pname, prompt in (("with_domain_prompt", DOMAIN_PROMPT), ("no_prompt", None)):
+        arms = (("with_domain_prompt", DOMAIN_PROMPT), ("no_prompt", None)) if cond == "clean" else (("with_domain_prompt", DOMAIN_PROMPT),)
+        for pname, prompt in arms:
             hyps, confs, lats = [], [], []
             for m in manifest:
                 h, c, dt = transcribe(noisy[m["file"]], prompt)
@@ -116,9 +120,18 @@ def main() -> None:
                 res[pname]["pipeline_C_error_aware"] = score(rows, probs_c)
                 res[pname]["examples"] = [{"ref": m["text"], "hyp": h, "asr_conf": round(c, 3)}
                                           for m, h, c in list(zip(manifest, hyps, confs))[:6]]
+        if cond == "clean":  # what the app does by default: auto-detect the language, no English prompt
+            detected.clear()
+            hyps_auto = [transcribe(noisy[m["file"]], None, None)[0] for m in manifest]
+            refs = [norm(m["text"]) for m in manifest]
+            res["auto_detect"] = {"wer": float(jiwer.wer(refs, [norm(h) or "<empty>" for h in hyps_auto])),
+                                  "detected_english_rate": float(np.mean([d == "en" for d in detected])),
+                                  "note": "language=None (auto-detect), as used by the app; audio is English"}
         report["conditions"][cond] = res
         w = res["with_domain_prompt"]
-        print(f"{cond:6s} WER prompt={w['wer']:.3f} noprompt={res['no_prompt']['wer']:.3f} "
+        if "auto_detect" in res:
+            print(f"auto-detect: WER={res['auto_detect']['wer']:.3f} detected_en={res['auto_detect']['detected_english_rate']:.3f}", flush=True)
+        print(f"{cond:6s} WER prompt={w['wer']:.3f} noprompt={res.get('no_prompt', {}).get('wer', float('nan')):.3f} "
               f"lat med={w['latency_s_median']:.2f}s p95={w['latency_s_p95']:.2f}s | "
               f"B wrong={w['pipeline_B_argmax']['wrong_answer_rate']:.3f} "
               f"C wrong={w['pipeline_C_error_aware']['wrong_answer_rate']:.3f} C clarify={w['pipeline_C_error_aware']['clarification_rate']:.3f}")

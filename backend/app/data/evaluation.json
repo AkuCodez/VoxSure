@@ -1,0 +1,633 @@
+{
+  "generated_at": "2026-10-20T15:09:18+00:00",
+  "dataset": {
+    "seed_utterances": 340,
+    "sizes": {
+      "train": 1582,
+      "val": 337,
+      "test": 337,
+      "ambiguous_val": 25,
+      "ambiguous_test": 25
+    },
+    "classes": [
+      "about_bot",
+      "academic_calendar",
+      "campus_services",
+      "certificates",
+      "exam_info",
+      "fee_payment",
+      "greeting",
+      "help_capabilities",
+      "hostel_info",
+      "it_helpdesk",
+      "library_borrow",
+      "library_hours",
+      "out_of_scope",
+      "placement_process",
+      "scholarship_aid",
+      "thanks_bye"
+    ],
+    "provenance": "Author-written seeds expanded programmatically; no real users."
+  },
+  "model": {
+    "name": "distilbert-intent-v1",
+    "base": "distilbert-base-uncased",
+    "epochs": 6,
+    "best_val_acc": 0.8219584822654724,
+    "temperature": 1.0363622903823853,
+    "seed": 42
+  },
+  "intent": {
+    "baseline": {
+      "accuracy": 0.5192878338278932,
+      "macro_f1": 0.5020415601217791
+    },
+    "distilbert": {
+      "accuracy": 0.7952522255192879,
+      "macro_f1": 0.794913783439011
+    },
+    "per_class": {
+      "about_bot": {
+        "distilbert_f1": 0.7272727272727273,
+        "baseline_f1": 0.0,
+        "support": 14
+      },
+      "academic_calendar": {
+        "distilbert_f1": 0.42105263157894735,
+        "baseline_f1": 0.4166666666666667,
+        "support": 14
+      },
+      "campus_services": {
+        "distilbert_f1": 0.5957446808510638,
+        "baseline_f1": 0.56,
+        "support": 28
+      },
+      "certificates": {
+        "distilbert_f1": 0.7777777777777778,
+        "baseline_f1": 0.42424242424242425,
+        "support": 14
+      },
+      "exam_info": {
+        "distilbert_f1": 0.46153846153846156,
+        "baseline_f1": 0.358974358974359,
+        "support": 28
+      },
+      "fee_payment": {
+        "distilbert_f1": 0.9491525423728814,
+        "baseline_f1": 0.64,
+        "support": 28
+      },
+      "greeting": {
+        "distilbert_f1": 0.9333333333333333,
+        "baseline_f1": 0.6153846153846154,
+        "support": 15
+      },
+      "help_capabilities": {
+        "distilbert_f1": 0.8,
+        "baseline_f1": 0.5,
+        "support": 14
+      },
+      "hostel_info": {
+        "distilbert_f1": 0.7761194029850746,
+        "baseline_f1": 0.7843137254901961,
+        "support": 28
+      },
+      "it_helpdesk": {
+        "distilbert_f1": 0.47619047619047616,
+        "baseline_f1": 0.15789473684210525,
+        "support": 28
+      },
+      "library_borrow": {
+        "distilbert_f1": 1.0,
+        "baseline_f1": 1.0,
+        "support": 14
+      },
+      "library_hours": {
+        "distilbert_f1": 0.9629629629629629,
+        "baseline_f1": 0.9230769230769231,
+        "support": 14
+      },
+      "out_of_scope": {
+        "distilbert_f1": 0.958904109589041,
+        "baseline_f1": 0.37333333333333335,
+        "support": 36
+      },
+      "placement_process": {
+        "distilbert_f1": 1.0,
+        "baseline_f1": 0.1111111111111111,
+        "support": 14
+      },
+      "scholarship_aid": {
+        "distilbert_f1": 0.9285714285714286,
+        "baseline_f1": 0.39215686274509803,
+        "support": 28
+      },
+      "thanks_bye": {
+        "distilbert_f1": 0.95,
+        "baseline_f1": 0.7755102040816326,
+        "support": 20
+      }
+    },
+    "confusion_matrix": [
+      [
+        8,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        14,
+        0,
+        7,
+        0,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        3,
+        0,
+        15,
+        0,
+        0,
+        0,
+        6,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        28,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        26,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        7,
+        8,
+        0,
+        0,
+        0,
+        0,
+        10,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        13,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        35,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        14,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        26,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        19
+      ]
+    ],
+    "calibration": {
+      "temperature": 1.0363622903823853,
+      "ece_test_uncalibrated": 0.05884636562726615,
+      "ece_test_calibrated": 0.05810457061235558,
+      "ece_val_uncalibrated": 0.05709572622790183,
+      "ece_val_calibrated": 0.046940464117406794,
+      "mean_conf_test_calibrated": 0.8042623096474554,
+      "acc_test": 0.7952522255192879
+    },
+    "bootstrap_95ci": {
+      "n_resamples": 1000,
+      "note": "Resamples test items with replacement; ambiguous items resampled separately.",
+      "macro_f1_distilbert": [
+        0.7491117754512792,
+        0.8335161157892454
+      ],
+      "macro_f1_baseline": [
+        0.45034000848648487,
+        0.5420486972239688
+      ],
+      "wrong_answer_rate_B": [
+        0.20718232044198895,
+        0.2900552486187845
+      ],
+      "wrong_answer_rate_C": [
+        0.024861878453038673,
+        0.06353591160220995
+      ],
+      "wrong_answer_rate_reduction_B_minus_C": [
+        0.16574585635359115,
+        0.24861878453038674
+      ],
+      "clarification_rate_C": [
+        0.281767955801105,
+        0.3839779005524862
+      ]
+    }
+  },
+  "policy": {
+    "params": {
+      "t_high": 0.8,
+      "margin": 0.5,
+      "t_low": 0.15,
+      "t_oos": 0.4,
+      "asr_low": 0.4,
+      "asr_override": 0.97,
+      "min_candidate": 0.08,
+      "max_options": 3,
+      "max_attempts": 2
+    },
+    "tuned_on": "val + ambiguous_val only"
+  },
+  "recovery": {
+    "B_no_clarification": {
+      "n": 362,
+      "correct_answer": 233,
+      "wrong_answer": 90,
+      "clarify": 0,
+      "fallback": 39,
+      "appropriate_clarify": 0,
+      "unnecessary_clarify": 0,
+      "correct_fallback": 35,
+      "missed_fallback": 2,
+      "recoverable_by_option": 0,
+      "wrong_answer_rate": 0.24861878453038674,
+      "clarification_rate": 0.0,
+      "n_clear": 337,
+      "task_completion_one_turn": 0.7952522255192879,
+      "task_completion_with_option_click": 0.7952522255192879
+    },
+    "C_error_aware": {
+      "n": 362,
+      "correct_answer": 187,
+      "wrong_answer": 16,
+      "clarify": 120,
+      "fallback": 39,
+      "appropriate_clarify": 14,
+      "unnecessary_clarify": 105,
+      "correct_fallback": 35,
+      "missed_fallback": 2,
+      "recoverable_by_option": 38,
+      "wrong_answer_rate": 0.04419889502762431,
+      "clarification_rate": 0.3314917127071823,
+      "n_clear": 337,
+      "task_completion_one_turn": 0.658753709198813,
+      "task_completion_with_option_click": 0.7596439169139466
+    },
+    "stress_B": {
+      "n": 362,
+      "correct_answer": 198,
+      "wrong_answer": 120,
+      "clarify": 0,
+      "fallback": 44,
+      "appropriate_clarify": 0,
+      "unnecessary_clarify": 0,
+      "correct_fallback": 28,
+      "missed_fallback": 13,
+      "recoverable_by_option": 0,
+      "wrong_answer_rate": 0.3314917127071823,
+      "clarification_rate": 0.0,
+      "n_clear": 337,
+      "task_completion_one_turn": 0.6706231454005934,
+      "task_completion_with_option_click": 0.6706231454005934
+    },
+    "stress_C": {
+      "n": 362,
+      "correct_answer": 147,
+      "wrong_answer": 18,
+      "clarify": 161,
+      "fallback": 36,
+      "appropriate_clarify": 16,
+      "unnecessary_clarify": 135,
+      "correct_fallback": 26,
+      "missed_fallback": 8,
+      "recoverable_by_option": 58,
+      "wrong_answer_rate": 0.049723756906077346,
+      "clarification_rate": 0.4447513812154696,
+      "n_clear": 337,
+      "task_completion_one_turn": 0.5133531157270029,
+      "task_completion_with_option_click": 0.6676557863501483
+    },
+    "stress_text_accuracy": 0.6706231454005934
+  },
+  "memory_ablation": {
+    "n_stressed_utterances": 337,
+    "pass1_not_answered_correctly": 190,
+    "pass2_correct_answer_rate_memory_off": 0.4362017804154303,
+    "pass2_correct_answer_rate_memory_on": 0.56973293768546,
+    "caveat": "Simulated upper bound: memory only helps EXACT repeats of an already-corrected utterance; it does not generalise."
+  },
+  "speech": {
+    "asr_model": "base.en",
+    "n_utterances": 64,
+    "voices": [
+      "Microsoft David Desktop",
+      "Microsoft Zira Desktop"
+    ],
+    "audio_kind": "synthetic text-to-speech (2 Windows voices); not human speech",
+    "conditions": {
+      "clean": {
+        "wer": 0.0106951871657754,
+        "wer_no_prompt": 0.0106951871657754,
+        "latency_median_s": 0.807037400000354,
+        "latency_p95_s": 0.9076755950004552,
+        "pipeline_B": {
+          "wrong_answer_rate": 0.421875,
+          "clarification_rate": 0.0,
+          "task_completion_one_turn": 0.8461538461538461
+        },
+        "pipeline_C": {
+          "wrong_answer_rate": 0.03125,
+          "clarification_rate": 0.484375,
+          "task_completion_one_turn": 0.6923076923076923
+        }
+      },
+      "snr20": {
+        "wer": 0.013368983957219251,
+        "wer_no_prompt": 0.0106951871657754,
+        "latency_median_s": 0.7951768499997343,
+        "latency_p95_s": 0.8434474999998656,
+        "pipeline_B": {
+          "wrong_answer_rate": 0.421875,
+          "clarification_rate": 0.0,
+          "task_completion_one_turn": 0.8461538461538461
+        },
+        "pipeline_C": {
+          "wrong_answer_rate": 0.03125,
+          "clarification_rate": 0.484375,
+          "task_completion_one_turn": 0.6923076923076923
+        }
+      },
+      "snr10": {
+        "wer": 0.02406417112299465,
+        "wer_no_prompt": 0.02406417112299465,
+        "latency_median_s": 0.45805535000044983,
+        "latency_p95_s": 0.8614538849996733,
+        "pipeline_B": {
+          "wrong_answer_rate": 0.421875,
+          "clarification_rate": 0.0,
+          "task_completion_one_turn": 0.8461538461538461
+        },
+        "pipeline_C": {
+          "wrong_answer_rate": 0.03125,
+          "clarification_rate": 0.484375,
+          "task_completion_one_turn": 0.6923076923076923
+        }
+      },
+      "snr5": {
+        "wer": 0.05080213903743316,
+        "wer_no_prompt": 0.0374331550802139,
+        "latency_median_s": 0.7945615000003272,
+        "latency_p95_s": 0.8665161050005735,
+        "pipeline_B": {
+          "wrong_answer_rate": 0.390625,
+          "clarification_rate": 0.0,
+          "task_completion_one_turn": 0.8717948717948718
+        },
+        "pipeline_C": {
+          "wrong_answer_rate": 0.046875,
+          "clarification_rate": 0.453125,
+          "task_completion_one_turn": 0.6923076923076923
+        }
+      }
+    }
+  },
+  "multilingual": null,
+  "limitations": [
+    "Dataset is author-written and small (2 distinct held-out phrasings per class); real-user accuracy will be lower.",
+    "Speech results use synthetic text-to-speech audio only; no human recordings, accents or real microphones.",
+    "The recovery policy trades usability for safety: it asks for clarification on roughly a third of turns.",
+    "Hindi, Punjabi and German were tested on sentences written by the author, not verified by native speakers."
+  ]
+}

@@ -30,16 +30,41 @@ _SCRIPT_RULES = [  # unambiguous scripts first
 ]
 
 
+_EN_WORDS = {
+    "the", "is", "are", "do", "does", "did", "i", "my", "you", "your", "me", "can", "how", "what", "when", "where", "who", "which",
+    "would", "to", "of", "and", "for", "it", "there", "this", "that", "have", "has", "need", "want", "please", "hello", "hi",
+    "thanks", "thank", "our", "with", "from", "about", "tell", "not", "get", "a", "be", "if", "or", "any", "much", "many",
+}
+_LATIN_LANGS = [c for c in LANGS if c not in ("pa", "ta", "te", "bn", "gu", "kn", "ml", "th", "ko", "ja", "zh", "hi", "mr", "ne", "ur", "ar", "ru", "uk")]
+_IDENT = None
+
+
+def _identifier():
+    global _IDENT
+    if _IDENT is None:
+        from langid.langid import LanguageIdentifier, model
+        _IDENT = LanguageIdentifier.from_modelstring(model, norm_probs=True)
+        _IDENT.set_languages(sorted(set(_LATIN_LANGS) | {"ru", "ar", "uk", "ur"}))
+    return _IDENT
+
+
 def detect_text_language(text: str) -> str:
-    """Script-based detection first (reliable for Indic scripts), langid for Latin/Cyrillic/Arabic."""
+    """Script rules first (reliable for Indic scripts); for Latin script be English-biased:
+    common English words win, and another language needs >= 80% model confidence on 2+ words."""
     for pat, code in _SCRIPT_RULES:
         if pat.search(text):
             return code
+    tokens = re.findall(r"[^\W\d_]+", text.lower())
+    if not tokens:
+        return "en"
+    hits = sum(t in _EN_WORDS for t in tokens)
+    if hits and hits / len(tokens) >= 0.25:
+        return "en"
+    if len(tokens) < 2:
+        return "en"
     try:
-        import langid
-        langid.set_languages([c for c in LANGS if c not in ("pa", "ta", "te", "bn", "gu", "kn", "ml", "th", "ko", "ja", "zh")])
-        code, _ = langid.classify(text)
-        return code if code in LANGS else "en"
+        code, prob = _identifier().classify(text)
+        return code if (code in LANGS and prob >= 0.80) else "en"
     except Exception:
         return "en"
 

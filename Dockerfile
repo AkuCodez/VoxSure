@@ -19,7 +19,12 @@ COPY backend/requirements.txt backend/requirements.txt
 RUN pip install -r backend/requirements.txt
 
 # Bake the Whisper weights into the image so the first request is not a cold download
-RUN python -c "from faster_whisper import WhisperModel; WhisperModel('base.en', device='cpu', compute_type='int8', download_root='/app/.cache/whisper')"
+RUN python -c "from faster_whisper import WhisperModel; WhisperModel('small', device='cpu', compute_type='int8', download_root='/app/.cache/whisper')"
+
+# Translation model (NLLB-200 distilled 600M -> int8 CTranslate2, ~600 MB). Downloads 2.4 GB at build time,
+# converts, then deletes the download cache so the image keeps only the converted model.
+COPY ml/scripts/prepare_nllb.py ml/scripts/prepare_nllb.py
+RUN python ml/scripts/prepare_nllb.py && rm -rf /app/.cache/huggingface
 
 COPY backend/app backend/app
 COPY ml/artifacts ml/artifacts

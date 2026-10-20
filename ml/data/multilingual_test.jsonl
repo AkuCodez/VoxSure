@@ -1,0 +1,188 @@
+{"lang": "en", "text": "What time does the library close in the evening?", "intent": "library_hours"}
+{"lang": "hi", "text": "शाम को पुस्तकालय कितने बजे बंद होता है?", "intent": "library_hours"}
+{"lang": "pa", "text": "ਸ਼ਾਮ ਨੂੰ ਲਾਇਬ੍ਰੇਰੀ ਕਿੰਨੇ ਵਜੇ ਬੰਦ ਹੁੰਦੀ ਹੈ?", "intent": "library_hours"}
+{"lang": "de", "text": "Um wie viel Uhr schließt die Bibliothek abends?", "intent": "library_hours"}
+{"lang": "en", "text": "Is the library open on Sunday?", "intent": "library_hours"}
+{"lang": "hi", "text": "क्या रविवार को पुस्तकालय खुला रहता है?", "intent": "library_hours"}
+{"lang": "pa", "text": "ਕੀ ਐਤਵਾਰ ਨੂੰ ਲਾਇਬ੍ਰੇਰੀ ਖੁੱਲ੍ਹੀ ਹੁੰਦੀ ਹੈ?", "intent": "library_hours"}
+{"lang": "de", "text": "Ist die Bibliothek sonntags geöffnet?", "intent": "library_hours"}
+{"lang": "en", "text": "What are the reading room hours?", "intent": "library_hours"}
+{"lang": "hi", "text": "वाचनालय का समय क्या है?", "intent": "library_hours"}
+{"lang": "pa", "text": "ਰੀਡਿੰਗ ਰੂਮ ਦਾ ਸਮਾਂ ਕੀ ਹੈ?", "intent": "library_hours"}
+{"lang": "de", "text": "Wie sind die Öffnungszeiten des Lesesaals?", "intent": "library_hours"}
+{"lang": "en", "text": "How many books can I borrow?", "intent": "library_borrow"}
+{"lang": "hi", "text": "मैं कितनी किताबें उधार ले सकता हूँ?", "intent": "library_borrow"}
+{"lang": "pa", "text": "ਮੈਂ ਕਿੰਨੀਆਂ ਕਿਤਾਬਾਂ ਉਧਾਰ ਲੈ ਸਕਦਾ ਹਾਂ?", "intent": "library_borrow"}
+{"lang": "de", "text": "Wie viele Bücher kann ich ausleihen?", "intent": "library_borrow"}
+{"lang": "en", "text": "How do I renew my book?", "intent": "library_borrow"}
+{"lang": "hi", "text": "मैं अपनी किताब की अवधि कैसे बढ़ाऊँ?", "intent": "library_borrow"}
+{"lang": "pa", "text": "ਮੈਂ ਆਪਣੀ ਕਿਤਾਬ ਦੀ ਮਿਆਦ ਕਿਵੇਂ ਵਧਾਵਾਂ?", "intent": "library_borrow"}
+{"lang": "de", "text": "Wie verlängere ich mein Buch?", "intent": "library_borrow"}
+{"lang": "en", "text": "What is the fine for late return of books?", "intent": "library_borrow"}
+{"lang": "hi", "text": "किताब देर से लौटाने पर कितना जुर्माना लगता है?", "intent": "library_borrow"}
+{"lang": "pa", "text": "ਕਿਤਾਬ ਦੇਰ ਨਾਲ ਮੋੜਨ 'ਤੇ ਕਿੰਨਾ ਜੁਰਮਾਨਾ ਲੱਗਦਾ ਹੈ?", "intent": "library_borrow"}
+{"lang": "de", "text": "Wie hoch ist die Mahngebühr bei verspäteter Rückgabe?", "intent": "library_borrow"}
+{"lang": "en", "text": "When does the next semester begin?", "intent": "academic_calendar"}
+{"lang": "hi", "text": "अगला सेमेस्टर कब शुरू होगा?", "intent": "academic_calendar"}
+{"lang": "pa", "text": "ਅਗਲਾ ਸਮੈਸਟਰ ਕਦੋਂ ਸ਼ੁਰੂ ਹੋਵੇਗਾ?", "intent": "academic_calendar"}
+{"lang": "de", "text": "Wann beginnt das nächste Semester?", "intent": "academic_calendar"}
+{"lang": "en", "text": "When are the winter holidays?", "intent": "academic_calendar"}
+{"lang": "hi", "text": "सर्दियों की छुट्टियाँ कब हैं?", "intent": "academic_calendar"}
+{"lang": "pa", "text": "ਸਰਦੀਆਂ ਦੀਆਂ ਛੁੱਟੀਆਂ ਕਦੋਂ ਹਨ?", "intent": "academic_calendar"}
+{"lang": "de", "text": "Wann sind die Winterferien?", "intent": "academic_calendar"}
+{"lang": "en", "text": "Where can I see the academic calendar?", "intent": "academic_calendar"}
+{"lang": "hi", "text": "मैं शैक्षणिक कैलेंडर कहाँ देख सकता हूँ?", "intent": "academic_calendar"}
+{"lang": "pa", "text": "ਮੈਂ ਅਕਾਦਮਿਕ ਕੈਲੰਡਰ ਕਿੱਥੇ ਦੇਖ ਸਕਦਾ ਹਾਂ?", "intent": "academic_calendar"}
+{"lang": "de", "text": "Wo finde ich den Semesterkalender?", "intent": "academic_calendar"}
+{"lang": "en", "text": "When are the final exams?", "intent": "exam_info"}
+{"lang": "hi", "text": "अंतिम परीक्षाएँ कब हैं?", "intent": "exam_info"}
+{"lang": "pa", "text": "ਫਾਈਨਲ ਪ੍ਰੀਖਿਆਵਾਂ ਕਦੋਂ ਹਨ?", "intent": "exam_info"}
+{"lang": "de", "text": "Wann sind die Abschlussprüfungen?", "intent": "exam_info"}
+{"lang": "en", "text": "How do I download my hall ticket?", "intent": "exam_info"}
+{"lang": "hi", "text": "मैं अपना प्रवेश पत्र कैसे डाउनलोड करूँ?", "intent": "exam_info"}
+{"lang": "pa", "text": "ਮੈਂ ਆਪਣਾ ਹਾਲ ਟਿਕਟ ਕਿਵੇਂ ਡਾਊਨਲੋਡ ਕਰਾਂ?", "intent": "exam_info"}
+{"lang": "de", "text": "Wie lade ich meine Prüfungszulassung herunter?", "intent": "exam_info"}
+{"lang": "en", "text": "When will the results be declared?", "intent": "exam_info"}
+{"lang": "hi", "text": "परिणाम कब घोषित होंगे?", "intent": "exam_info"}
+{"lang": "pa", "text": "ਨਤੀਜੇ ਕਦੋਂ ਐਲਾਨੇ ਜਾਣਗੇ?", "intent": "exam_info"}
+{"lang": "de", "text": "Wann werden die Ergebnisse veröffentlicht?", "intent": "exam_info"}
+{"lang": "en", "text": "How can I pay my fees online?", "intent": "fee_payment"}
+{"lang": "hi", "text": "मैं अपनी फीस ऑनलाइन कैसे जमा करूँ?", "intent": "fee_payment"}
+{"lang": "pa", "text": "ਮੈਂ ਆਪਣੀ ਫੀਸ ਆਨਲਾਈਨ ਕਿਵੇਂ ਭਰਾਂ?", "intent": "fee_payment"}
+{"lang": "de", "text": "Wie kann ich meine Studiengebühren online bezahlen?", "intent": "fee_payment"}
+{"lang": "en", "text": "What is the last date for fee payment?", "intent": "fee_payment"}
+{"lang": "hi", "text": "फीस जमा करने की आखिरी तारीख क्या है?", "intent": "fee_payment"}
+{"lang": "pa", "text": "ਫੀਸ ਭਰਨ ਦੀ ਆਖਰੀ ਤਾਰੀਖ ਕੀ ਹੈ?", "intent": "fee_payment"}
+{"lang": "de", "text": "Was ist die letzte Frist für die Zahlung der Gebühren?", "intent": "fee_payment"}
+{"lang": "en", "text": "I need a receipt for my fee payment", "intent": "fee_payment"}
+{"lang": "hi", "text": "मुझे अपनी फीस की रसीद चाहिए", "intent": "fee_payment"}
+{"lang": "pa", "text": "ਮੈਨੂੰ ਆਪਣੀ ਫੀਸ ਦੀ ਰਸੀਦ ਚਾਹੀਦੀ ਹੈ", "intent": "fee_payment"}
+{"lang": "de", "text": "Ich brauche eine Quittung für meine Gebührenzahlung", "intent": "fee_payment"}
+{"lang": "en", "text": "How do I apply for a hostel room?", "intent": "hostel_info"}
+{"lang": "hi", "text": "मैं छात्रावास के कमरे के लिए आवेदन कैसे करूँ?", "intent": "hostel_info"}
+{"lang": "pa", "text": "ਮੈਂ ਹੋਸਟਲ ਦੇ ਕਮਰੇ ਲਈ ਅਰਜ਼ੀ ਕਿਵੇਂ ਦੇਵਾਂ?", "intent": "hostel_info"}
+{"lang": "de", "text": "Wie bewerbe ich mich um ein Zimmer im Wohnheim?", "intent": "hostel_info"}
+{"lang": "en", "text": "What are the hostel curfew timings?", "intent": "hostel_info"}
+{"lang": "hi", "text": "छात्रावास में वापस आने का समय क्या है?", "intent": "hostel_info"}
+{"lang": "pa", "text": "ਹੋਸਟਲ ਵਿੱਚ ਵਾਪਸ ਆਉਣ ਦਾ ਸਮਾਂ ਕੀ ਹੈ?", "intent": "hostel_info"}
+{"lang": "de", "text": "Bis wann muss man im Wohnheim zurück sein?", "intent": "hostel_info"}
+{"lang": "en", "text": "Can visitors enter the hostel?", "intent": "hostel_info"}
+{"lang": "hi", "text": "क्या मेहमान छात्रावास में आ सकते हैं?", "intent": "hostel_info"}
+{"lang": "pa", "text": "ਕੀ ਮਹਿਮਾਨ ਹੋਸਟਲ ਵਿੱਚ ਆ ਸਕਦੇ ਹਨ?", "intent": "hostel_info"}
+{"lang": "de", "text": "Dürfen Besucher ins Wohnheim kommen?", "intent": "hostel_info"}
+{"lang": "en", "text": "I forgot my portal password", "intent": "it_helpdesk"}
+{"lang": "hi", "text": "मैं अपने पोर्टल का पासवर्ड भूल गया हूँ", "intent": "it_helpdesk"}
+{"lang": "pa", "text": "ਮੈਂ ਆਪਣੇ ਪੋਰਟਲ ਦਾ ਪਾਸਵਰਡ ਭੁੱਲ ਗਿਆ ਹਾਂ", "intent": "it_helpdesk"}
+{"lang": "de", "text": "Ich habe mein Portal-Passwort vergessen", "intent": "it_helpdesk"}
+{"lang": "en", "text": "The wifi is not working in my room", "intent": "it_helpdesk"}
+{"lang": "hi", "text": "मेरे कमरे में वाईफाई काम नहीं कर रहा है", "intent": "it_helpdesk"}
+{"lang": "pa", "text": "ਮੇਰੇ ਕਮਰੇ ਵਿੱਚ ਵਾਈਫਾਈ ਕੰਮ ਨਹੀਂ ਕਰ ਰਿਹਾ", "intent": "it_helpdesk"}
+{"lang": "de", "text": "Das WLAN in meinem Zimmer funktioniert nicht", "intent": "it_helpdesk"}
+{"lang": "en", "text": "Who do I contact for IT support?", "intent": "it_helpdesk"}
+{"lang": "hi", "text": "आईटी सहायता के लिए मैं किससे संपर्क करूँ?", "intent": "it_helpdesk"}
+{"lang": "pa", "text": "ਆਈਟੀ ਮਦਦ ਲਈ ਮੈਂ ਕਿਸ ਨਾਲ ਸੰਪਰਕ ਕਰਾਂ?", "intent": "it_helpdesk"}
+{"lang": "de", "text": "An wen wende ich mich bei IT-Problemen?", "intent": "it_helpdesk"}
+{"lang": "en", "text": "How does the campus placement process work?", "intent": "placement_process"}
+{"lang": "hi", "text": "कैंपस प्लेसमेंट की प्रक्रिया कैसे काम करती है?", "intent": "placement_process"}
+{"lang": "pa", "text": "ਕੈਂਪਸ ਪਲੇਸਮੈਂਟ ਦੀ ਪ੍ਰਕਿਰਿਆ ਕਿਵੇਂ ਕੰਮ ਕਰਦੀ ਹੈ?", "intent": "placement_process"}
+{"lang": "de", "text": "Wie funktioniert das Campus-Placement?", "intent": "placement_process"}
+{"lang": "en", "text": "How do I register for placements?", "intent": "placement_process"}
+{"lang": "hi", "text": "मैं प्लेसमेंट के लिए पंजीकरण कैसे करूँ?", "intent": "placement_process"}
+{"lang": "pa", "text": "ਮੈਂ ਪਲੇਸਮੈਂਟ ਲਈ ਰਜਿਸਟਰ ਕਿਵੇਂ ਕਰਾਂ?", "intent": "placement_process"}
+{"lang": "de", "text": "Wie melde ich mich für das Placement an?", "intent": "placement_process"}
+{"lang": "en", "text": "Which companies come for recruitment?", "intent": "placement_process"}
+{"lang": "hi", "text": "भर्ती के लिए कौन सी कंपनियाँ आती हैं?", "intent": "placement_process"}
+{"lang": "pa", "text": "ਭਰਤੀ ਲਈ ਕਿਹੜੀਆਂ ਕੰਪਨੀਆਂ ਆਉਂਦੀਆਂ ਹਨ?", "intent": "placement_process"}
+{"lang": "de", "text": "Welche Firmen kommen zum Recruiting?", "intent": "placement_process"}
+{"lang": "en", "text": "What scholarships are available?", "intent": "scholarship_aid"}
+{"lang": "hi", "text": "कौन सी छात्रवृत्तियाँ उपलब्ध हैं?", "intent": "scholarship_aid"}
+{"lang": "pa", "text": "ਕਿਹੜੇ ਵਜ਼ੀਫ਼ੇ ਉਪਲਬਧ ਹਨ?", "intent": "scholarship_aid"}
+{"lang": "de", "text": "Welche Stipendien gibt es?", "intent": "scholarship_aid"}
+{"lang": "en", "text": "How do I apply for a scholarship?", "intent": "scholarship_aid"}
+{"lang": "hi", "text": "मैं छात्रवृत्ति के लिए आवेदन कैसे करूँ?", "intent": "scholarship_aid"}
+{"lang": "pa", "text": "ਮੈਂ ਵਜ਼ੀਫ਼ੇ ਲਈ ਅਰਜ਼ੀ ਕਿਵੇਂ ਦੇਵਾਂ?", "intent": "scholarship_aid"}
+{"lang": "de", "text": "Wie beantrage ich ein Stipendium?", "intent": "scholarship_aid"}
+{"lang": "en", "text": "What is the deadline for scholarship applications?", "intent": "scholarship_aid"}
+{"lang": "hi", "text": "छात्रवृत्ति आवेदन की अंतिम तिथि क्या है?", "intent": "scholarship_aid"}
+{"lang": "pa", "text": "ਵਜ਼ੀਫ਼ੇ ਦੀ ਅਰਜ਼ੀ ਦੀ ਆਖਰੀ ਤਾਰੀਖ ਕੀ ਹੈ?", "intent": "scholarship_aid"}
+{"lang": "de", "text": "Bis wann kann ich mich für ein Stipendium bewerben?", "intent": "scholarship_aid"}
+{"lang": "en", "text": "How do I get a bonafide certificate?", "intent": "certificates"}
+{"lang": "hi", "text": "मुझे बोनाफाइड प्रमाण पत्र कैसे मिलेगा?", "intent": "certificates"}
+{"lang": "pa", "text": "ਮੈਨੂੰ ਬੋਨਾਫਾਈਡ ਸਰਟੀਫਿਕੇਟ ਕਿਵੇਂ ਮਿਲੇਗਾ?", "intent": "certificates"}
+{"lang": "de", "text": "Wie bekomme ich eine Studienbescheinigung?", "intent": "certificates"}
+{"lang": "en", "text": "I need my transcript", "intent": "certificates"}
+{"lang": "hi", "text": "मुझे अपना ट्रांसक्रिप्ट चाहिए", "intent": "certificates"}
+{"lang": "pa", "text": "ਮੈਨੂੰ ਆਪਣਾ ਟ੍ਰਾਂਸਕ੍ਰਿਪਟ ਚਾਹੀਦਾ ਹੈ", "intent": "certificates"}
+{"lang": "de", "text": "Ich brauche meinen Notenauszug", "intent": "certificates"}
+{"lang": "en", "text": "How do I get a duplicate marksheet?", "intent": "certificates"}
+{"lang": "hi", "text": "मुझे डुप्लिकेट अंकपत्र कैसे मिलेगा?", "intent": "certificates"}
+{"lang": "pa", "text": "ਮੈਨੂੰ ਡੁਪਲੀਕੇਟ ਮਾਰਕਸ਼ੀਟ ਕਿਵੇਂ ਮਿਲੇਗੀ?", "intent": "certificates"}
+{"lang": "de", "text": "Wie bekomme ich eine Zweitschrift meines Zeugnisses?", "intent": "certificates"}
+{"lang": "en", "text": "What time does the canteen open?", "intent": "campus_services"}
+{"lang": "hi", "text": "कैंटीन कितने बजे खुलती है?", "intent": "campus_services"}
+{"lang": "pa", "text": "ਕੈਂਟੀਨ ਕਿੰਨੇ ਵਜੇ ਖੁੱਲ੍ਹਦੀ ਹੈ?", "intent": "campus_services"}
+{"lang": "de", "text": "Um wie viel Uhr öffnet die Mensa?", "intent": "campus_services"}
+{"lang": "en", "text": "Where is the medical centre?", "intent": "campus_services"}
+{"lang": "hi", "text": "चिकित्सा केंद्र कहाँ है?", "intent": "campus_services"}
+{"lang": "pa", "text": "ਮੈਡੀਕਲ ਸੈਂਟਰ ਕਿੱਥੇ ਹੈ?", "intent": "campus_services"}
+{"lang": "de", "text": "Wo ist das Gesundheitszentrum?", "intent": "campus_services"}
+{"lang": "en", "text": "Is there a bus service on campus?", "intent": "campus_services"}
+{"lang": "hi", "text": "क्या कैंपस में बस सेवा है?", "intent": "campus_services"}
+{"lang": "pa", "text": "ਕੀ ਕੈਂਪਸ ਵਿੱਚ ਬੱਸ ਸੇਵਾ ਹੈ?", "intent": "campus_services"}
+{"lang": "de", "text": "Gibt es einen Busdienst auf dem Campus?", "intent": "campus_services"}
+{"lang": "en", "text": "Hello", "intent": "greeting"}
+{"lang": "hi", "text": "नमस्ते", "intent": "greeting"}
+{"lang": "pa", "text": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", "intent": "greeting"}
+{"lang": "de", "text": "Hallo", "intent": "greeting"}
+{"lang": "en", "text": "Good morning", "intent": "greeting"}
+{"lang": "hi", "text": "सुप्रभात", "intent": "greeting"}
+{"lang": "pa", "text": "ਸ਼ੁਭ ਸਵੇਰ", "intent": "greeting"}
+{"lang": "de", "text": "Guten Morgen", "intent": "greeting"}
+{"lang": "en", "text": "Thank you", "intent": "thanks_bye"}
+{"lang": "hi", "text": "धन्यवाद", "intent": "thanks_bye"}
+{"lang": "pa", "text": "ਧੰਨਵਾਦ", "intent": "thanks_bye"}
+{"lang": "de", "text": "Danke schön", "intent": "thanks_bye"}
+{"lang": "en", "text": "Goodbye", "intent": "thanks_bye"}
+{"lang": "hi", "text": "अलविदा", "intent": "thanks_bye"}
+{"lang": "pa", "text": "ਅਲਵਿਦਾ", "intent": "thanks_bye"}
+{"lang": "de", "text": "Auf Wiedersehen", "intent": "thanks_bye"}
+{"lang": "en", "text": "What is your name?", "intent": "about_bot"}
+{"lang": "hi", "text": "आपका नाम क्या है?", "intent": "about_bot"}
+{"lang": "pa", "text": "ਤੁਹਾਡਾ ਨਾਮ ਕੀ ਹੈ?", "intent": "about_bot"}
+{"lang": "de", "text": "Wie heißt du?", "intent": "about_bot"}
+{"lang": "en", "text": "Are you a robot?", "intent": "about_bot"}
+{"lang": "hi", "text": "क्या आप रोबोट हैं?", "intent": "about_bot"}
+{"lang": "pa", "text": "ਕੀ ਤੁਸੀਂ ਰੋਬੋਟ ਹੋ?", "intent": "about_bot"}
+{"lang": "de", "text": "Bist du ein Roboter?", "intent": "about_bot"}
+{"lang": "en", "text": "What can you do?", "intent": "help_capabilities"}
+{"lang": "hi", "text": "आप क्या कर सकते हैं?", "intent": "help_capabilities"}
+{"lang": "pa", "text": "ਤੁਸੀਂ ਕੀ ਕਰ ਸਕਦੇ ਹੋ?", "intent": "help_capabilities"}
+{"lang": "de", "text": "Was kannst du tun?", "intent": "help_capabilities"}
+{"lang": "en", "text": "What can I ask you?", "intent": "help_capabilities"}
+{"lang": "hi", "text": "मैं आपसे क्या पूछ सकता हूँ?", "intent": "help_capabilities"}
+{"lang": "pa", "text": "ਮੈਂ ਤੁਹਾਡੇ ਤੋਂ ਕੀ ਪੁੱਛ ਸਕਦਾ ਹਾਂ?", "intent": "help_capabilities"}
+{"lang": "de", "text": "Wobei kannst du mir helfen?", "intent": "help_capabilities"}
+{"lang": "en", "text": "What is the weather today?", "intent": "out_of_scope"}
+{"lang": "hi", "text": "आज मौसम कैसा है?", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਅੱਜ ਮੌਸਮ ਕਿਹੋ ਜਿਹਾ ਹੈ?", "intent": "out_of_scope"}
+{"lang": "de", "text": "Wie ist das Wetter heute?", "intent": "out_of_scope"}
+{"lang": "en", "text": "Tell me a joke", "intent": "out_of_scope"}
+{"lang": "hi", "text": "मुझे एक चुटकुला सुनाओ", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਮੈਨੂੰ ਇੱਕ ਚੁਟਕੁਲਾ ਸੁਣਾਓ", "intent": "out_of_scope"}
+{"lang": "de", "text": "Erzähl mir einen Witz", "intent": "out_of_scope"}
+{"lang": "en", "text": "What is the capital of France?", "intent": "out_of_scope"}
+{"lang": "hi", "text": "फ्रांस की राजधानी क्या है?", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਫਰਾਂਸ ਦੀ ਰਾਜਧਾਨੀ ਕਿਹੜੀ ਹੈ?", "intent": "out_of_scope"}
+{"lang": "de", "text": "Was ist die Hauptstadt von Frankreich?", "intent": "out_of_scope"}
+{"lang": "en", "text": "Order me a pizza", "intent": "out_of_scope"}
+{"lang": "hi", "text": "मेरे लिए पिज़्ज़ा ऑर्डर करो", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਮੇਰੇ ਲਈ ਪੀਜ਼ਾ ਆਰਡਰ ਕਰੋ", "intent": "out_of_scope"}
+{"lang": "de", "text": "Bestelle mir eine Pizza", "intent": "out_of_scope"}
+{"lang": "en", "text": "What is the price of bitcoin?", "intent": "out_of_scope"}
+{"lang": "hi", "text": "बिटकॉइन की कीमत क्या है?", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਬਿਟਕੋਇਨ ਦੀ ਕੀਮਤ ਕੀ ਹੈ?", "intent": "out_of_scope"}
+{"lang": "de", "text": "Was kostet ein Bitcoin?", "intent": "out_of_scope"}
+{"lang": "en", "text": "Who won the cricket match yesterday?", "intent": "out_of_scope"}
+{"lang": "hi", "text": "कल क्रिकेट मैच कौन जीता?", "intent": "out_of_scope"}
+{"lang": "pa", "text": "ਕੱਲ੍ਹ ਕ੍ਰਿਕਟ ਮੈਚ ਕੌਣ ਜਿੱਤਿਆ?", "intent": "out_of_scope"}
+{"lang": "de", "text": "Wer hat gestern das Fußballspiel gewonnen?", "intent": "out_of_scope"}

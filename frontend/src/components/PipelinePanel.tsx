@@ -11,6 +11,7 @@ const REASONS: Record<string, string> = {
   out_of_scope: "Outside the topics this assistant supports.",
   uncertain_out_of_scope: "Might be off-topic or misheard; asking to check.",
   repeated_failure: "Several clarifications failed, so I stopped looping.",
+  general_ai: "Not about campus topics, so a general AI model wrote this answer.",
 };
 
 const pct = (x: number) => `${Math.round(x * 100)}%`;
@@ -65,6 +66,10 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
       ) : (
         <div className="space-y-3 p-4">
           <Stage n={1} title="Speech recognition" tag="Whisper base.en">
+            {insight.mode === "voice" && insight.language && (
+              <p className="mb-2 text-xs text-slate-400">Detected language: <span className="font-semibold text-slate-200">{insight.turn.lang_name}</span>
+                {insight.languageProbability !== undefined ? ` (${Math.round(insight.languageProbability * 100)}%)` : ""}</p>
+            )}
             {insight.mode === "voice" && insight.asrConfidence !== undefined ? (
               <>
                 <div className="flex items-baseline justify-between">
@@ -83,6 +88,12 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
           </Stage>
 
           <Stage n={2} title="Intent classifier" tag="DistilBERT">
+            {insight.turn.translated_input && (
+              <p className="mb-3 rounded-lg bg-white/[0.04] p-2 text-xs text-slate-400">
+                <span className="font-semibold text-slate-300">{insight.turn.lang_name} → English (NLLB-200): </span>
+                “{insight.turn.translated_input}”
+              </p>
+            )}
             {insight.turn.candidates.length > 0 ? (
               <ul className="space-y-2.5">
                 {insight.turn.candidates.map((c, i) => (
@@ -114,14 +125,14 @@ export default function PipelinePanel({ insight, counts }: { insight: Insight | 
               </span>
             </div>
             <p className="mt-2 leading-snug">{REASONS[insight.turn.reason] ?? insight.turn.reason}</p>
-            {insight.turn.thresholds && (
+            {insight.turn.thresholds && insight.turn.reason !== "general_ai" && (
               <p className="mt-2 text-xs text-slate-500">
                 Rule: answer when top ≥ {pct(insight.turn.thresholds.t_high)} and lead ≥ {Math.round(insight.turn.thresholds.margin * 100)} pts.
               </p>
             )}
           </Stage>
 
-          <Stage n={4} title="Response" tag="Knowledge base">
+          <Stage n={4} title="Response" tag={insight.turn.answer_source === "general_ai" ? "AI provider" : "Knowledge base"}>
             <div className="grid grid-cols-2 gap-2">
               <Metric label="Decision time" value={`${Math.round(insight.turn.latency_ms)} ms`} />
               <Metric label="Model" value={insight.turn.model_version.replace("distilbert-", "")} />

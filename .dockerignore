@@ -12,3 +12,7 @@ ml/data
 ml/reports
 ml/notebooks
 docs
+ml/artifacts/nllb-ct2
+.hf_cache
+.tmp
+server.log

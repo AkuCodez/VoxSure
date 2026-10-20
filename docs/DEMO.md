@@ -9,10 +9,11 @@ microphone, or type it. Confidence is shown for the reader only; the UI delibera
 | 2 | Normal | "How do I get a bonafide certificate?" | Answer (certificates), 0.97 |
 | 3 | Normal | "I forgot my student portal password" | Answer (IT helpdesk), 0.97 |
 | 4 | Small talk | "Hello" / "Thanks, bye" | Greeting / goodbye answer |
-| 5 | Ambiguous | "When does it open?" | **Clarify**: options *Canteen, medical centre, transport or clubs* / *Library opening hours*; tapping one gives the answer |
+| 5 | Ambiguous | "Can I get a receipt?" / "I want to renew" | **Clarify** with a targeted question, e.g. "Just to be sure, do you mean transcripts, bonafide or other certificates or paying fees or fee receipts?" plus option buttons; tapping one gives the answer |
 | 6 | Ambiguous | "I need help with my form" | **Clarify**: options *Exams, hall tickets and results* / *Scholarships and financial aid* |
 | 7 | Mis-heard, then corrected | "hostile fees for the box" | **Clarify** (library borrowing vs fees). Tap **Edit**, change to "how do I pay the fees", **Resend** → fee-payment answer; bubble marked "edited" |
-| 8 | Out of scope | "What's the weather today?" / "Tell me a joke" | **Fallback** listing supported topics |
+| 8 | Not about campus | "What is the capital of France?" / "Tell me a joke" | With an AI provider configured: a **General answer · AI-generated** reply in the user's language. Without one (or with the Settings toggle off): a fallback listing supported topics |
+| 8b | Other language | "पुस्तकालय कब खुलता है" | Hindi reply (hand-written), badge "Hindi · verified", "Understood as: when does the library open" |
 | 9 | Gibberish | "asdf qwer zxcv" | Fallback (treated as out of scope) |
 | 10 | Repeated failure | Ask "I need help with my form" again after two failed clarifications | Fallback: "type your question instead, rephrase it, or press Reset" (no endless loop) |
 | 11 | Correction memory | Settings → enable *Correction memory*. Edit a transcript, tick *Remember this correction*, resend. Repeat the original wording | "Used your saved correction." Review/delete the entry in Settings |
@@ -29,7 +30,8 @@ microphone, or type it. Confidence is shown for the reader only; the UI delibera
 
 ## Known issues (honest list)
 
-* Roughly 1 in 4 clear requests triggers an unnecessary clarification (see report §5.2); some ambiguous prompts are still answered confidently.
+* Roughly 1 in 4 clear requests triggers an unnecessary clarification (see report §5.2); some ambiguous prompts are still answered confidently (e.g. "How do I apply?", "When does it open?" are currently answered).
+* AI-generated general answers were tested with stand-in providers only; a live provider call needs the owner's key. They can be wrong.
 * The knowledge base is sample data for a fictional campus.
 * Real-microphone behaviour across devices and accents has not been measured.
 * Free hosting may need a minute to wake after inactivity.

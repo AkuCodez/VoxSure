@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { confidenceWords } from "../lib/speech";
-import type { ChatItem } from "../types";
+import type { ChatItem, WordScore } from "../types";
 import { CheckIcon, EditIcon, HelpIcon, MicIcon, SlashIcon, VolumeIcon } from "./Icons";
 
 interface Props {
@@ -9,7 +9,38 @@ interface Props {
   disabled: boolean;
   onEdit: (item: ChatItem, text: string, remember: boolean) => void;
   onChoose: (intent: string, label: string) => void;
-  onSpeak: (text: string) => void;
+  onSpeak: (text: string, lang?: string) => void;
+}
+
+const LOW_WORD = 0.5;
+
+/** Transcript with the words the recogniser was least sure of underlined (never colour alone). */
+export function Transcript({ text, words }: { text: string; words?: WordScore[] }) {
+  if (!words || words.length === 0) return <>{text}</>;
+  return (
+    <>
+      {words.map((w, i) => {
+        const low = w.probability < LOW_WORD;
+        return (
+          <span key={i} data-low={low || undefined}
+            title={low ? `Low confidence (${Math.round(w.probability * 100)}%): check this word` : undefined}
+            className={low ? "rounded-sm bg-amber-300/25 underline decoration-amber-200 decoration-wavy underline-offset-4" : undefined}>
+            {w.word}{i < words.length - 1 ? " " : ""}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
+function LangBadge({ code, name, verified }: { code?: string; name?: string; verified?: boolean }) {
+  if (!code || code === "en") return null;
+  return (
+    <span className={`ml-1 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold normal-case tracking-normal ring-1 ${
+      verified ? "bg-emerald-400/15 text-emerald-200 ring-emerald-300/30" : "bg-amber-300/15 text-amber-100 ring-amber-200/30"}`}>
+      {name ?? code} · {verified ? "verified" : "best effort"}
+    </span>
+  );
 }
 
 function Avatar() {
@@ -34,6 +65,7 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
             <span aria-hidden="true">{item.mode === "voice" ? <MicIcon size={12} /> : <EditIcon size={12} />}</span>
             <span>{item.mode === "voice" ? "You said (transcript)" : "You typed"}</span>
             {item.edited ? <span>· edited</span> : null}
+            <LangBadge code={item.lang} name={item.langName} verified={item.langVerified} />
           </p>
           {editing ? (
             <form className="mt-2 space-y-2" onSubmit={(e) => { e.preventDefault(); setEditing(false); onEdit(item, draft, remember); }}>
@@ -55,7 +87,13 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
             </form>
           ) : (
             <>
-              <p className="mt-1 text-[17px] leading-snug" data-testid="user-text">{item.text}</p>
+              <p className="mt-1 text-[17px] leading-snug" lang={item.lang} data-testid="user-text"><Transcript text={item.text} words={item.edited ? undefined : item.words} /></p>
+              {item.translated && item.translated !== item.text && (
+                <p className="mt-1 text-sm italic text-blue-100/80">Understood as: “{item.translated}”</p>
+              )}
+              {item.words?.some((w) => w.probability < LOW_WORD) && !item.edited && (
+                <p className="mt-1.5 text-xs text-amber-100">Underlined words were hard to hear. Tap Edit to fix them.</p>
+              )}
               {doubtful && <p className="mt-1.5 rounded-md bg-amber-300/20 px-2 py-1 text-sm text-amber-100">I may have misheard this. Please check it.</p>}
               <button type="button" disabled={disabled} onClick={() => { setDraft(item.text); setEditing(true); }}
                 className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-100 underline underline-offset-2 hover:text-white disabled:opacity-50"
@@ -70,10 +108,11 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
   }
 
   const t = item.turn!;
-  const accent = t.action === "answer" ? "before:bg-emerald-400" : t.action === "clarify" ? "before:bg-amber-400" : "before:bg-slate-400";
-  const tagCls = t.action === "answer" ? "bg-emerald-400/10 text-emerald-300 ring-emerald-400/30" : t.action === "clarify" ? "bg-amber-400/10 text-amber-300 ring-amber-400/30" : "bg-slate-400/10 text-slate-300 ring-slate-400/30";
+  const accent = t.answer_source === "general_ai" ? "before:bg-violet-400" : t.action === "answer" ? "before:bg-emerald-400" : t.action === "clarify" ? "before:bg-amber-400" : "before:bg-slate-400";
+  const isGeneral = t.answer_source === "general_ai";
+  const tagCls = isGeneral ? "bg-violet-400/10 text-violet-200 ring-violet-300/30" : t.action === "answer" ? "bg-emerald-400/10 text-emerald-300 ring-emerald-400/30" : t.action === "clarify" ? "bg-amber-400/10 text-amber-300 ring-amber-400/30" : "bg-slate-400/10 text-slate-300 ring-slate-400/30";
   const TagIcon = t.action === "answer" ? CheckIcon : t.action === "clarify" ? HelpIcon : SlashIcon;
-  const tag = t.action === "answer" ? "Answer" : t.action === "clarify" ? "I need to check" : "I can't help with that";
+  const tag = isGeneral ? "General answer · AI-generated" : t.action === "answer" ? "Answer" : t.action === "clarify" ? "I need to check" : "I can't help with that";
   return (
     <li className="fade-up flex items-start gap-3">
       <Avatar />
@@ -81,9 +120,39 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
         <p className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] ring-1 ${tagCls}`}>
           <TagIcon size={12} />{tag}
         </p>
-        <p className="mt-2.5 whitespace-pre-line text-[17px] leading-relaxed text-slate-100" data-testid="assistant-text">{item.text}</p>
+        <p className="mt-2.5 whitespace-pre-line text-[17px] leading-relaxed text-slate-100" lang={t.lang} data-testid="assistant-text">{item.text}</p>
+        {t.translation_warning && (
+          <p role="alert" className="mt-2 rounded-md bg-rose-400/15 px-2 py-1 text-xs text-rose-100">
+            This machine translation changed a number or time. Please check the English original below before relying on it.
+          </p>
+        )}
+        {t.response_en && (
+          <details className="mt-2 text-xs text-slate-400">
+            <summary className="cursor-pointer text-slate-300 hover:text-white">
+              English original · {t.translation_mode === "curated" ? "hand-written translation" : "machine translated (NLLB-200)"}
+            </summary>
+            <p className="mt-1 whitespace-pre-line leading-relaxed" lang="en">{t.response_en}</p>
+          </details>
+        )}
+        {t.lang !== "en" && !t.lang_verified && (
+          <p className="mt-2 text-xs text-amber-200">Best-effort translation: this language has not been verified, so please double-check important details.</p>
+        )}
+        {t.lang !== "en" && !t.translation_available && (
+          <p className="mt-2 text-xs text-amber-200">Translation is unavailable right now, so this reply is in English.</p>
+        )}
+        {t.sources.length > 0 && (
+          <ul className="mt-3 space-y-0.5 border-t border-white/10 pt-2 text-xs text-slate-400" aria-label="Sources">
+            {t.sources.map((src, i) => (
+              <li key={i}>
+                <span className="font-medium text-slate-300">Source: </span>
+                {src.url ? <a href={src.url} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline">{src.title}</a> : src.title}
+                {src.last_updated ? <span> · Last updated {new Date(src.last_updated).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })}</span> : null}
+              </li>
+            ))}
+          </ul>
+        )}
         {t.memory_applied && <p className="mt-1.5 text-sm text-cyan-300">Used your saved correction.</p>}
-        {t.action === "answer" && t.reason !== "user_confirmed" && !["greeting", "thanks_bye", "about_bot", "help_capabilities"].includes(t.intent ?? "") && (
+        {t.action === "answer" && t.reason !== "user_confirmed" && !["greeting", "thanks_bye", "about_bot", "help_capabilities", "general_knowledge"].includes(t.intent ?? "") && (
           <p className="mt-2 text-sm text-slate-400">{confidenceWords(t.confidence)} If that isn't right, edit what you asked.</p>
         )}
         {t.action === "clarify" && t.clarify_kind === "disambiguate" && !item.resolved && (
@@ -96,7 +165,7 @@ export default function MessageBubble({ item, memoryOn, disabled, onEdit, onChoo
             ))}
           </div>
         )}
-        <button type="button" onClick={() => onSpeak(item.text)}
+        <button type="button" onClick={() => onSpeak(item.text, t.lang)}
           className="mt-3.5 inline-flex items-center gap-1.5 text-sm font-medium text-blue-300 transition hover:text-white">
           <VolumeIcon size={15} />Play aloud
         </button>

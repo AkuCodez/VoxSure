@@ -6,6 +6,11 @@ frontend, build it with `VITE_API_BASE=https://<backend>` and set `CORS_ORIGINS`
 
 **Status: not yet deployed.** Complete the steps below, then run the smoke test and add the URL to the README and report.
 
+## Secrets and optional AI answers
+
+Set these as Space **secrets** (never in the repo): `ANTHROPIC_API_KEY`, or `GENERAL_API_KEY` + `GENERAL_BASE_URL` + `GENERAL_MODEL` for an OpenAI-compatible provider (`GENERAL_PROVIDER_NAME` is shown to users). Optional: `GENERAL_DAILY_CAP`, `GENERAL_ANSWERS_ENABLED`. Without them the app still works; non-campus questions get the standard decline.
+The image also builds the translation model (about 2.4 GB download at build time) and bakes in Whisper `small`; expect a long first build and about 3-4 GB RAM at runtime.
+
 ## Steps
 
 1. Create a Hugging Face account → **New Space** → SDK **Docker**, hardware **CPU basic (free)**, visibility **Public**.

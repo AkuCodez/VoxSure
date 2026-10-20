@@ -8,6 +8,8 @@ interface Props {
   memoryOn: boolean;
   onMemory: (v: boolean) => void;
   memory: MemoryItem[];
+  generalOn?: boolean;
+  onGeneral?: (v: boolean) => void;
   onDelete: (id?: number) => void;
 }
 
@@ -24,11 +26,11 @@ function Toggle({ checked, onChange, label, hint }: { checked: boolean; onChange
   );
 }
 
-export default function SettingsPanel({ open, onClose, speakOn, onSpeak, memoryOn, onMemory, memory, onDelete }: Props) {
+export default function SettingsPanel({ open, onClose, speakOn, onSpeak, memoryOn, onMemory, memory, generalOn = true, onGeneral = () => {}, onDelete }: Props) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-30 flex justify-end bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <aside role="dialog" aria-modal="true" aria-label="Settings and privacy"
+      <div role="dialog" aria-modal="true" aria-label="Settings and privacy"
         className="panel-solid h-full w-full max-w-md overflow-y-auto p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.key === "Escape" && onClose()}>
         <div className="flex items-center justify-between">
@@ -38,6 +40,11 @@ export default function SettingsPanel({ open, onClose, speakOn, onSpeak, memoryO
 
         <section className="mt-6">
           <Toggle checked={speakOn} onChange={onSpeak} label="Speak answers aloud" hint="Uses your browser's built-in speech. Turn off to mute." />
+        </section>
+
+        <section className="mt-6">
+          <Toggle checked={generalOn} onChange={onGeneral} label="Answer non-campus questions with AI"
+            hint="Questions that are not about campus topics are sent to an external general AI model so I can answer almost anything. Those replies are labelled AI-generated and may be wrong. Turn off to keep every question on this server." />
         </section>
 
         <section className="mt-6">
@@ -70,9 +77,10 @@ export default function SettingsPanel({ open, onClose, speakOn, onSpeak, memoryO
             <li>Recordings are sent to the server for transcription and are <b className="text-white">not stored</b>.</li>
             <li>Only anonymous metrics are logged (answer/clarify/fallback, timing). Your words are not logged.</li>
             <li>Corrections are saved only with your opt-in and can be deleted here at any time.</li>
+            <li>If AI answers are on, the text of a non-campus question and your last few messages are sent to the configured external AI provider (for example Anthropic, Groq or Google) to write the reply. Nothing else is sent: no audio, no identifiers.</li>
           </ul>
         </section>
-      </aside>
+      </div>
     </div>
   );
 }

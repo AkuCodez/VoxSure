@@ -40,6 +40,11 @@ class IntentResponse(BaseModel):
     model_version: str
 
 
+class HistoryItem(BaseModel):
+    role: Literal["user", "assistant"]
+    text: str = Field(min_length=1, max_length=600)
+
+
 class TurnRequest(BaseModel):
     text: str = Field(min_length=1, max_length=300)
     input_mode: Literal["voice", "text"] = "text"
@@ -50,11 +55,19 @@ class TurnRequest(BaseModel):
     edited: bool = False
     client_id: str | None = ClientId
     use_memory: bool = False
+    allow_general: bool = True            # user setting: may non-campus questions go to the general AI model?
+    history: list[HistoryItem] = Field(default_factory=list, max_length=8)  # recent turns, used only for general answers
 
 
 class Option(BaseModel):
     intent: str
     label: str
+
+
+class Source(BaseModel):
+    title: str
+    url: str | None = None
+    last_updated: str | None = None
 
 
 class Candidate(BaseModel):
@@ -79,6 +92,7 @@ class TurnResponse(BaseModel):
     response: str
     options: list[Option] = []
     candidates: list[Candidate] = []
+    sources: list[Source] = []
     thresholds: Thresholds | None = None
     reason: str
     memory_applied: bool = False
@@ -87,6 +101,10 @@ class TurnResponse(BaseModel):
     lang_verified: bool = True
     translated_input: str | None = None
     translation_available: bool = True
+    response_en: str | None = None          # English original of a translated reply
+    translation_mode: str | None = None     # 'curated' (hand-written) or 'machine' (NLLB)
+    translation_warning: bool = False       # machine translation changed a number: verify in English
+    answer_source: Literal["knowledge_base", "general_ai", "none"] = "none"
     model_version: str
     latency_ms: float
 
@@ -114,6 +132,7 @@ class HealthResponse(BaseModel):
     status: Literal["ok", "degraded"]
     asr_ready: bool
     intent_ready: bool
+    general_ready: bool = False
     db_ready: bool
     model_version: str | None = None
     asr_model: str | None = None

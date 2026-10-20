@@ -33,15 +33,17 @@ const json = (body: unknown): RequestInit => ({
 });
 
 export const api = {
-  transcribe(blob: Blob): Promise<TranscribeResponse> {
+  transcribe(blob: Blob, language?: string): Promise<TranscribeResponse> {
     const form = new FormData();
+    if (language) form.append("language", language);
     const ext = blob.type.includes("mp4") ? "m4a" : blob.type.includes("ogg") ? "ogg" : "webm";
     form.append("audio", blob, `recording.${ext}`);
     return request("/api/v1/transcribe", { method: "POST", body: form }, 90_000);
   },
   turn(body: {
     text: string; input_mode: "voice" | "text"; asr_confidence?: number; chosen_intent?: string;
-    attempts: number; edited: boolean; client_id?: string; use_memory: boolean;
+    attempts: number; edited: boolean; client_id?: string; use_memory: boolean; lang?: string;
+    allow_general: boolean; history: { role: "user" | "assistant"; text: string }[];
   }): Promise<TurnResponse> {
     return request("/api/v1/chat/turn", json(body));
   },
@@ -52,3 +54,7 @@ export const api = {
   deleteMemory: (id: string, item?: number) =>
     request<{ deleted: number }>(`/api/v1/memory/${id}${item ? `/${item}` : ""}`, { method: "DELETE" }),
 };
+
+export async function fetchEvaluation(): Promise<import("../types/evaluation").Evaluation> {
+  return request("/api/v1/evaluation");
+}
