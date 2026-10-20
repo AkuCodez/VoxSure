@@ -147,7 +147,7 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
             return kb.fallback(reason, code)
         if kind == "disambiguate":
             return kb.clarification_question(d_options, code)
-        return kb.repair(code)
+        return kb.repair(code, typed=body.input_mode == "text")
 
     response = render("en")
     options = [Option(intent=i, label=kb.label(i)) for i in d_options]
@@ -158,7 +158,14 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
     # Open-domain questions: the campus classifier says out-of-scope, so (if the user allows it and a key is
     # configured) a general AI model answers in the user's own language, clearly labelled as AI-generated.
     general_used = False
-    if (action == "fallback" and reason == "out_of_scope" and body.allow_general
+    # Not a confident campus question: either clearly off-topic, or the classifier is unsure about a message that
+    # was heard fine (typed, or voice with decent recogniser confidence). Unsure + doubtful speech stays a "please
+    # check what I heard" prompt; competing campus intents stay a targeted clarification.
+    unsure_but_clear = (action == "clarify" and kind == "repair"
+                        and reason in ("low_confidence", "medium_confidence", "uncertain_out_of_scope")
+                        and (body.asr_confidence is None or body.asr_confidence >= s.policy.asr_low))
+    off_topic = action == "fallback" and reason == "out_of_scope"
+    if ((off_topic or unsure_but_clear) and body.chosen_intent is None and body.allow_general
             and s.general is not None and s.general.available()):
         hist = [{"role": h.role, "content": h.text} for h in body.history[-6:]]
         general_text = await run_in_threadpool(s.general.answer, text, hist)

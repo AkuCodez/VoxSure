@@ -156,5 +156,6 @@
   "clarify_prompt": "I want to be sure I give you the right answer. Which of these do you mean?",
   "last_updated": "2026-10-20",
   "clarify_prompt_template": "Just to be sure, do you mean {options}?",
-  "clarify_or": "or"
+  "clarify_or": "or",
+  "repair_prompt_typed": "I'm not sure I understood that. Could you rephrase it? I can help with the library, exams, fees, hostels, placements, scholarships, certificates and IT help."
 }

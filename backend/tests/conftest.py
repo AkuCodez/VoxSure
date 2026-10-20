@@ -73,7 +73,7 @@ class FakeTranscriber:
 
 @pytest.fixture
 def vox(tmp_path):
-    settings = Settings(database_url=f"sqlite:///{tmp_path/'t.db'}", max_audio_bytes=1000,
+    settings = Settings(_env_file=None, database_url=f"sqlite:///{tmp_path/'t.db'}", max_audio_bytes=1000,
                         asr_timeout_s=0.2, frontend_dist=tmp_path / "nodist")
     return VoxState(settings=settings, kb=KnowledgeBase(settings.knowledge_base_path),
                     policy=PolicyParams(), db=Database(settings.database_url),

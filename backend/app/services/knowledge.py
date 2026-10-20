@@ -27,6 +27,7 @@ class KnowledgeBase:
         self.fallback_oos: str = data["fallback_out_of_scope"]
         self.fallback_repeated: str = data["fallback_repeated"]
         self.repair_prompt: str = data["repair_prompt"]
+        self.repair_typed: str = data.get("repair_prompt_typed", data["repair_prompt"])
         self.clarify_prompt: str = data["clarify_prompt"]
         self.clarify_template: str = data.get("clarify_prompt_template", "Just to be sure, do you mean {options}?")
         self.clarify_or: str = data.get("clarify_or", "or")
@@ -67,7 +68,9 @@ class KnowledgeBase:
             return self._text(lang, "fallback_repeated", self.fallback_repeated)
         return self._text(lang, "fallback_out_of_scope", self.fallback_oos)
 
-    def repair(self, lang: str = "en") -> str:
+    def repair(self, lang: str = "en", typed: bool = False) -> str:
+        if typed and lang == "en":
+            return self.repair_typed
         return self._text(lang, "repair_prompt", self.repair_prompt)
 
     def has(self, intent: str) -> bool:

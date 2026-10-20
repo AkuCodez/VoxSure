@@ -21,6 +21,16 @@ function clientId(): string {
   return id;
 }
 
+/** Recent turns for the AI model: the user's messages and the assistant's real answers only
+ *  (clarification prompts, fallbacks and "please check the transcript" replies are interface chatter, not conversation). */
+export function conversationHistory(items: ChatItem[]): { role: "user" | "assistant"; text: string }[] {
+  return items
+    .filter((i) => i.role === "user" || i.turn?.action === "answer")
+    .slice(-6)
+    .map((i) => ({ role: i.role, text: i.text.slice(0, 600) }))
+    .filter((h) => h.text.trim());
+}
+
 export function useChat() {
   const [items, setItems] = useState<ChatItem[]>([]);
   const [status, setStatus] = useState<Status>("ready");
@@ -70,7 +80,7 @@ export function useChat() {
         attempts: attempts.current, edited: !!opts.edited, client_id: cid.current, use_memory: memoryOn,
         lang: opts.lang ?? (langRef.current === "auto" ? undefined : langRef.current),
         allow_general: generalOn,
-        history: itemsRef.current.slice(-6).map((i) => ({ role: i.role, text: i.text.slice(0, 600) })).filter((h) => h.text.trim()),
+        history: conversationHistory(itemsRef.current),
       });
       attempts.current = turn.action === "answer" ? 0 : attempts.current + 1;
       setInsight({ mode, language: turn.lang, languageProbability: opts.langProb, asrConfidence: opts.asr, asrMs: opts.asrMs, durationS: opts.durationS, turn });

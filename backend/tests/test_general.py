@@ -218,15 +218,15 @@ def test_provider_selection_from_environment(monkeypatch):
     for k in ("ANTHROPIC_API_KEY", "GENERAL_API_KEY"):
         monkeypatch.delenv(k, raising=False)
     cfg = dict(general_base_url="https://api.groq.com/openai/v1", general_model="m", general_provider_name="Groq")
-    assert build_general(Settings(**cfg)) is None                     # no keys -> feature off
+    assert build_general(Settings(_env_file=None, **cfg)) is None                     # no keys -> feature off
     monkeypatch.setenv("GENERAL_API_KEY", "x")
-    g = build_general(Settings(**cfg))                                 # settings are read at construction
+    g = build_general(Settings(_env_file=None, **cfg))                                 # settings are read at construction
     assert isinstance(g, OpenAICompatAnswerer) and g.provider_name == "Groq"
     monkeypatch.setenv("ANTHROPIC_API_KEY", "y")
-    assert type(build_general(Settings(**cfg))).__name__ == "GeneralAnswerer"   # 'auto' prefers Claude when its key exists
-    assert isinstance(build_general(Settings(general_provider="openai_compat", general_base_url="https://x/v1", general_model="m")), OpenAICompatAnswerer)
-    assert build_general(Settings(general_answers_enabled=False)) is None
-    assert build_general(Settings(general_provider="openai_compat")) is None   # missing url/model -> off, not a crash
+    assert type(build_general(Settings(_env_file=None, **cfg))).__name__ == "GeneralAnswerer"   # 'auto' prefers Claude when its key exists
+    assert isinstance(build_general(Settings(_env_file=None, general_provider="openai_compat", general_base_url="https://x/v1", general_model="m")), OpenAICompatAnswerer)
+    assert build_general(Settings(_env_file=None, general_answers_enabled=False)) is None
+    assert build_general(Settings(_env_file=None, general_provider="openai_compat")) is None   # missing url/model -> off, not a crash
 
 
 def test_keys_in_a_dotenv_file_are_honoured(tmp_path, monkeypatch):
@@ -245,3 +245,36 @@ def test_health_names_the_models_in_use(vox):
     assert h["general_provider"] == "Groq" and h["general_model"] == "some-model"
     assert h["translation_ready"] is True and h["asr_model"] == "fake.en" and h["intent_ready"] is True
     assert "key" not in str(h).lower()          # never exposes credentials
+
+
+# ---------- unsure-but-clear messages go to the general model; doubtful speech does not ----------
+def test_unsure_typed_message_is_answered_by_the_general_model_not_a_transcript_prompt(vox):
+    vox.general = FakeGeneral(reply="I don't know your name yet. What should I call you?")
+    r = turn(TestClient(create_app(vox)), "gibberish words")        # classifier: low confidence on every intent
+    assert r["action"] == "answer" and r["answer_source"] == "general_ai" and "name" in r["response"]
+
+
+def test_doubtful_speech_still_asks_to_check_the_transcript(vox):
+    vox.general = FakeGeneral()
+    r = turn(TestClient(create_app(vox)), "gibberish words", input_mode="voice", asr_confidence=0.2)
+    assert r["action"] == "clarify" and r["clarify_kind"] == "repair" and vox.general.calls == []
+
+
+def test_clearly_heard_speech_that_is_not_a_campus_question_goes_to_the_general_model(vox):
+    vox.general = FakeGeneral()
+    r = turn(TestClient(create_app(vox)), "gibberish words", input_mode="voice", asr_confidence=0.9)
+    assert r["answer_source"] == "general_ai"
+
+
+def test_typed_unsure_message_without_ai_gets_wording_that_does_not_mention_a_transcript(client):
+    r = turn(client, "gibberish words")
+    assert r["action"] == "clarify" and r["clarify_kind"] == "repair"
+    assert "transcript" not in r["response"].lower() and "rephrase" in r["response"].lower()
+    v = turn(client, "gibberish words", input_mode="voice", asr_confidence=0.9)
+    assert "transcript" in v["response"].lower()                    # voice keeps the check-what-I-heard prompt
+
+
+def test_competing_campus_intents_still_clarify_even_with_ai_on(vox):
+    vox.general = FakeGeneral()
+    r = turn(TestClient(create_app(vox)), "when does it open")
+    assert r["action"] == "clarify" and r["clarify_kind"] == "disambiguate" and vox.general.calls == []
