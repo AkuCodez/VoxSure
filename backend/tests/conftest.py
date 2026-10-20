@@ -30,6 +30,7 @@ class FakeClassifier:
         self.table = {
             "when does the library open": dist(library_hours=0.97),
             "hello": dist(greeting=0.98),
+            "what is my name": dist(greeting=0.97),   # classifier confuses it with "what is your name"
             "when does it open": dist(library_hours=0.45, hostel_info=0.40),
             "gibberish words": dist(library_hours=0.20, fee_payment=0.19, exam_info=0.18),
             "what is the weather": dist(out_of_scope=0.95),

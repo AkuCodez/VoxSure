@@ -34,7 +34,10 @@ foreach ($f in $tracked) {
 
 Push-Location $stage
 try {
+  $ErrorActionPreference = "Continue"   # git writes progress/warnings to stderr; failures are checked via exit codes below
   git init -q -b main
+  git config core.autocrlf false        # keep files byte-for-byte (Linux build)
+  git config core.safecrlf false
   @(
     "*.safetensors filter=lfs diff=lfs merge=lfs -text",
     "*.png filter=lfs diff=lfs merge=lfs -text",
@@ -44,8 +47,9 @@ try {
     "*.wav filter=lfs diff=lfs merge=lfs -text"
   ) | Set-Content -Encoding ascii .gitattributes
   git lfs install --local | Out-Null
-  git add -A
-  git -c user.name="VoxSure" -c user.email="deploy@voxsure.local" commit -q -m "VoxSure deployment snapshot"
+  git add -A 2>$null
+  git -c user.name="VoxSure" -c user.email="deploy@voxsure.local" commit -q -m "VoxSure deployment snapshot" 2>$null
+  if ($LASTEXITCODE -ne 0) { throw "Could not create the snapshot commit." }
   Write-Host ""
   Write-Host "Snapshot ready in $stage"
   Write-Host ("Files: " + (git ls-files | Measure-Object).Count)
@@ -60,6 +64,7 @@ try {
   if ($answer -ne "YES") { Write-Host "Cancelled. Nothing was uploaded."; return }
   git remote add space "https://huggingface.co/spaces/$Space"
   git push --force space main
+  if ($LASTEXITCODE -ne 0) { throw "Upload failed (check the Space name and that your token has WRITE access)." }
   Write-Host ""
   Write-Host "Uploaded. Watch the build at: https://huggingface.co/spaces/$Space  (first build takes a long while)."
   Write-Host "Live URL when running: https://$($Space.Replace('/', '-').ToLower()).hf.space"

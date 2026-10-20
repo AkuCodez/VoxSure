@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import re
 import time
 import uuid
 
@@ -16,6 +17,8 @@ from ..services.asr import AudioDecodeError, NoSpeechError
 from ..services.knowledge import numbers_preserved
 
 router = APIRouter(prefix="/api/v1")
+
+PERSONAL_QUESTION = re.compile(r"\b(my name|who am i|do you (know|remember) me|my age|how old am i|where do i live)\b", re.I)
 
 ALLOWED_AUDIO_PREFIXES = ("audio/",)
 ALLOWED_AUDIO_EXACT = {"video/webm", "video/mp4", "application/ogg"}
@@ -139,6 +142,12 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
         conf = max(probs.values())
         candidates = [Candidate(intent=k, label=kb.label(k), probability=round(v, 4))
                       for k, v in sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:3]]
+
+    # Questions about the USER's own details ("what is my name?") must never be answered with the assistant's own
+    # introduction or a greeting, even if the classifier confuses them with "what is your name?".
+    if (action == "answer" and intent_name in ("about_bot", "greeting") and body.chosen_intent is None
+            and PERSONAL_QUESTION.search(text_en)):
+        action, intent_name, kind, reason, d_options = "fallback", None, None, "out_of_scope", []
 
     def render(code: str) -> str:
         if action == "answer":

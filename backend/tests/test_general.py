@@ -278,3 +278,19 @@ def test_competing_campus_intents_still_clarify_even_with_ai_on(vox):
     vox.general = FakeGeneral()
     r = turn(TestClient(create_app(vox)), "when does it open")
     assert r["action"] == "clarify" and r["clarify_kind"] == "disambiguate" and vox.general.calls == []
+
+
+# ---------- questions about the user's own details ----------
+def test_what_is_my_name_is_never_answered_with_the_assistants_intro(client):
+    r = turn(client, "What is my name?")
+    assert r["action"] == "fallback" and r["intent"] is None            # not the greeting / about-the-bot answer
+
+
+def test_what_is_my_name_goes_to_the_general_model_when_available(vox):
+    vox.general = FakeGeneral(reply="I don't know your name yet.")
+    r = turn(TestClient(create_app(vox)), "What is my name?")
+    assert r["answer_source"] == "general_ai" and "don't know" in r["response"]
+
+
+def test_asking_the_assistants_own_name_still_works(client):
+    assert turn(client, "hello")["action"] == "answer"                 # ordinary greeting unaffected
