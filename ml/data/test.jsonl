@@ -1,253 +1,337 @@
-{"text": "so how do i get a refund of my feeds", "intent": "fee_payment", "group": 72}
-{"text": "excuse me how do i renew you a libary book", "intent": "library_borrow", "group": 17}
-{"text": "what is the meaning of life", "intent": "out_of_scope", "group": 262}
-{"text": "can i attend more than one company's selection process", "intent": "placement_process", "group": 123}
-{"text": "so how do i apply for a merit scholarship today", "intent": "scholarship_aid", "group": 129}
-{"text": "hey how do i apply a merit scholar ship", "intent": "scholarship_aid", "group": 129}
-{"text": "quick question do i get a refund of my fees", "intent": "fee_payment", "group": 72}
-{"text": "do you know any good vacation spots", "intent": "out_of_scope", "group": 284}
-{"text": "What is the speed of light?", "intent": "out_of_scope", "group": 281}
-{"text": "hi how do i for a merit scholarship", "intent": "scholarship_aid", "group": 129}
-{"text": "quick question hi there", "intent": "greeting", "group": 177}
-{"text": "so hey there", "intent": "greeting", "group": 185}
-{"text": "can you tell me can you tell me the last working day before vacation", "intent": "academic_calendar", "group": 44}
-{"text": "quick question what is the speed of light please", "intent": "out_of_scope", "group": 281}
-{"text": "um translate sentence into spanish", "intent": "out_of_scope", "group": 261}
-{"text": "which model are you please", "intent": "about_bot", "group": 228}
-{"text": "please tell me can you diagnose headache", "intent": "out_of_scope", "group": 272}
-{"text": "can you tell me i am unable to access my course materials", "intent": "it_helpdesk", "group": 111}
-{"text": "Where can I park my bicycle or bike?", "intent": "campus_services", "group": 172}
-{"text": "can tell me who are you", "intent": "about_bot", "group": 219}
-{"text": "Hi there", "intent": "greeting", "group": 177}
-{"text": "can you tell me what are the dates of the winter break if you know", "intent": "academic_calendar", "group": 33}
-{"text": "i want to know can you tell me the last working day before vacation today", "intent": "academic_calendar", "group": 44}
-{"text": "okay so hi there please", "intent": "greeting", "group": 177}
-{"text": "please tell me what happens if i miss an because of illness", "intent": "exam_info", "group": 56}
-{"text": "how long does it take to get a degree certificate", "intent": "certificates", "group": 146}
-{"text": "okay so who you", "intent": "about_bot", "group": 219}
-{"text": "does the camp us have a counselling service", "intent": "campus_services", "group": 175}
-{"text": "i want to know where is the it helpdesk located thanks", "intent": "it_helpdesk", "group": 107}
-{"text": "where can i park my bicycle or bike thanks", "intent": "campus_services", "group": 172}
-{"text": "What is the loan period for reference books?", "intent": "library_borrow", "group": 26}
-{"text": "how do i renew a library book", "intent": "library_borrow", "group": 17}
-{"text": "who is the president of the united states right now", "intent": "out_of_scope", "group": 258}
-{"text": "Can you tell me the last working day before vacation?", "intent": "academic_calendar", "group": 44}
-{"text": "um translate this into spanish", "intent": "out_of_scope", "group": 261}
-{"text": "I am unable to access my online course materials", "intent": "it_helpdesk", "group": 111}
-{"text": "how do i apply for a merit scholarship right now", "intent": "scholarship_aid", "group": 129}
-{"text": "i want to know how long does it take to get a certificate", "intent": "certificates", "group": 146}
-{"text": "um tell me the reading room timing", "intent": "library_hours", "group": 8}
-{"text": "what are the dates of the break", "intent": "academic_calendar", "group": 33}
-{"text": "i want to know which model are you", "intent": "about_bot", "group": 228}
-{"text": "hi how much is the hostile rent per seminar", "intent": "hostel_info", "group": 85}
-{"text": "excuse me which payment methods are accepted for fees thanks", "intent": "fee_payment", "group": 73}
-{"text": "so does the campus have a counselling service", "intent": "campus_services", "group": 175}
-{"text": "what the meaning of life", "intent": "out_of_scope", "group": 262}
-{"text": "where is the it helpdesk located", "intent": "it_helpdesk", "group": 107}
-{"text": "so where is the it helpdesk located today", "intent": "it_helpdesk", "group": 107}
-{"text": "okay so can i attend more than one company's selection process thanks", "intent": "placement_process", "group": 123}
-{"text": "good night and thanks if you know", "intent": "thanks_bye", "group": 215}
-{"text": "excuse me do you know any good spots", "intent": "out_of_scope", "group": 284}
-{"text": "so thanks you've really useful", "intent": "thanks_bye", "group": 214}
-{"text": "Tell me the reading room timings", "intent": "library_hours", "group": 8}
-{"text": "okay so where can i park my bicycle or bike", "intent": "campus_services", "group": 172}
-{"text": "Which model are you?", "intent": "about_bot", "group": 228}
-{"text": "tell me the reading timing", "intent": "library_hours", "group": 8}
-{"text": "Good night, and thanks", "intent": "thanks_bye", "group": 215}
-{"text": "who are you", "intent": "about_bot", "group": 219}
-{"text": "can you tell me is there a late entry permission for the hostel if you know", "intent": "hostel_info", "group": 95}
-{"text": "How much is the hostel rent per semester?", "intent": "hostel_info", "group": 85}
-{"text": "hey which model are you thanks", "intent": "about_bot", "group": 228}
-{"text": "i want to know can i get a free waiver based on my marks", "intent": "scholarship_aid", "group": 136}
-{"text": "Thanks, you've been really useful", "intent": "thanks_bye", "group": 214}
-{"text": "hi who are you thanks", "intent": "about_bot", "group": 219}
-{"text": "i want to know there", "intent": "greeting", "group": 185}
-{"text": "thanks you've been really useful", "intent": "thanks_bye", "group": 214}
-{"text": "can you tell me how can you help me", "intent": "help_capabilities", "group": 233}
-{"text": "How do I renew a library book?", "intent": "library_borrow", "group": 17}
-{"text": "can i get a fee waiver based on my marks", "intent": "scholarship_aid", "group": 136}
-{"text": "okay so who do i in the training and placement office", "intent": "placement_process", "group": 121}
-{"text": "How do I apply for a merit scholarship?", "intent": "scholarship_aid", "group": 129}
-{"text": "i want know how i renew a libary book", "intent": "library_borrow", "group": 17}
-{"text": "okay so who are you please", "intent": "about_bot", "group": 219}
-{"text": "which payment methods are accepted for fees right now", "intent": "fee_payment", "group": 73}
-{"text": "what are dates of the winter break", "intent": "academic_calendar", "group": 33}
-{"text": "hi where is the it helpdesk located please", "intent": "it_helpdesk", "group": 107}
-{"text": "excuse me what is the speed light", "intent": "out_of_scope", "group": 281}
-{"text": "can tell me can you diagnose my headache", "intent": "out_of_scope", "group": 272}
-{"text": "can you my headache", "intent": "out_of_scope", "group": 272}
-{"text": "um does the campus have a counselling service", "intent": "campus_services", "group": 175}
-{"text": "excuse me cheers that all", "intent": "thanks_bye", "group": 204}
-{"text": "Thank you", "intent": "thanks_bye", "group": 194}
-{"text": "please tell me long does it take to get a degree certificate", "intent": "certificates", "group": 146}
-{"text": "Can I get a fee waiver based on my marks?", "intent": "scholarship_aid", "group": 136}
-{"text": "so what topics do cover", "intent": "help_capabilities", "group": 235}
-{"text": "excuse me can you tell me the last working day before vacation", "intent": "academic_calendar", "group": 44}
-{"text": "i want to know thank you today", "intent": "thanks_bye", "group": 194}
-{"text": "so thank you", "intent": "thanks_bye", "group": 194}
-{"text": "what happens if i miss an exam because of illness", "intent": "exam_info", "group": 56}
-{"text": "do you know any good spots", "intent": "out_of_scope", "group": 284}
-{"text": "is there a late entry permission the hostel", "intent": "hostel_info", "group": 95}
-{"text": "okay so translate sentence into spanish", "intent": "out_of_scope", "group": 261}
-{"text": "can you tell me how do i get a refund of my fees please", "intent": "fee_payment", "group": 72}
-{"text": "when will the exam results be declared", "intent": "exam_info", "group": 51}
-{"text": "okay so how do apply for the migration certificate", "intent": "certificates", "group": 154}
-{"text": "how do i apply for the migration certificate", "intent": "certificates", "group": 154}
-{"text": "so when will the exam results be declared", "intent": "exam_info", "group": 51}
-{"text": "how do i renew a libary book", "intent": "library_borrow", "group": 17}
-{"text": "How can you help me?", "intent": "help_capabilities", "group": 233}
-{"text": "okay so where can i park my bicycle or bike right now", "intent": "campus_services", "group": 172}
-{"text": "good night and thanks", "intent": "thanks_bye", "group": 215}
-{"text": "hi can you diagnose my headache", "intent": "out_of_scope", "group": 272}
-{"text": "can you tell me i am unable to access my online course materials right now", "intent": "it_helpdesk", "group": 111}
-{"text": "okay so what is the loan period for reference books if you know", "intent": "library_borrow", "group": 26}
-{"text": "okay so thank you", "intent": "thanks_bye", "group": 194}
-{"text": "okay so is the loan period for reference books", "intent": "library_borrow", "group": 26}
-{"text": "okay so i attend more than one company's selection process", "intent": "placement_process", "group": 123}
-{"text": "so which are you", "intent": "about_bot", "group": 228}
-{"text": "please me which model are you", "intent": "about_bot", "group": 228}
-{"text": "so tell me the reading room timings right now", "intent": "library_hours", "group": 8}
-{"text": "what is the speed of light if you know", "intent": "out_of_scope", "group": 281}
-{"text": "how much is the hostile rent per seminar", "intent": "hostel_info", "group": 85}
-{"text": "excuse me good afternoon", "intent": "greeting", "group": 180}
-{"text": "Can you diagnose my headache?", "intent": "out_of_scope", "group": 272}
-{"text": "What is the meaning of life?", "intent": "out_of_scope", "group": 262}
-{"text": "i want to know who is the president of the united states", "intent": "out_of_scope", "group": 258}
-{"text": "who is the president of the united states today", "intent": "out_of_scope", "group": 258}
-{"text": "excuse me is there a late entry permission for the hostile", "intent": "hostel_info", "group": 95}
-{"text": "so what happens if miss an exam because of illness", "intent": "exam_info", "group": 56}
-{"text": "where can i park my or bike", "intent": "campus_services", "group": 172}
-{"text": "please tell me are there special library hours in the vacation", "intent": "library_hours", "group": 14}
-{"text": "please tell me who do i contact in the training and placement office if you know", "intent": "placement_process", "group": 121}
-{"text": "can you tell me where is the it helpdesk located today", "intent": "it_helpdesk", "group": 107}
-{"text": "excuse me how can you help me", "intent": "help_capabilities", "group": 233}
-{"text": "please tell me what topics do you cover", "intent": "help_capabilities", "group": 235}
-{"text": "what is the loan for reference books", "intent": "library_borrow", "group": 26}
-{"text": "What happens if I miss an exam because of illness?", "intent": "exam_info", "group": 56}
-{"text": "excuse me good night and thanks please", "intent": "thanks_bye", "group": 215}
-{"text": "How do I apply for the migration certificate?", "intent": "certificates", "group": 154}
-{"text": "which model are you", "intent": "about_bot", "group": 228}
-{"text": "What are the dates of the winter break?", "intent": "academic_calendar", "group": 33}
-{"text": "where can i park my bicycle or bike", "intent": "campus_services", "group": 172}
-{"text": "hi can i get a free waiver based on my marks", "intent": "scholarship_aid", "group": 136}
-{"text": "okay so can i get a fee waiver based on my marks right now", "intent": "scholarship_aid", "group": 136}
-{"text": "hi are there special library hours in the vacation thanks", "intent": "library_hours", "group": 14}
-{"text": "hey how long does it take to get a degree certificate please", "intent": "certificates", "group": 146}
-{"text": "i to know good afternoon", "intent": "greeting", "group": 180}
-{"text": "quick question how do i apply for the migration certificate right now", "intent": "certificates", "group": 154}
-{"text": "hey how long does it take to get a degree certificate", "intent": "certificates", "group": 146}
-{"text": "what is the loan period for reference books", "intent": "library_borrow", "group": 26}
-{"text": "what happens if i miss an example because of illness", "intent": "exam_info", "group": 56}
-{"text": "so does the camp us have a counselling service", "intent": "campus_services", "group": 175}
-{"text": "can you tell me what are the dates of the break", "intent": "academic_calendar", "group": 33}
-{"text": "okay so what the loan period for reference box", "intent": "library_borrow", "group": 26}
-{"text": "hey good night and thanks please", "intent": "thanks_bye", "group": 215}
-{"text": "Does the campus have a counselling service?", "intent": "campus_services", "group": 175}
-{"text": "how much is the hostel per seminar", "intent": "hostel_info", "group": 85}
-{"text": "does the campus have a counselling service", "intent": "campus_services", "group": 175}
-{"text": "excuse me how much is the hostile rent per semester", "intent": "hostel_info", "group": 85}
-{"text": "Hey there", "intent": "greeting", "group": 185}
-{"text": "which payment methods are accepted for fees", "intent": "fee_payment", "group": 73}
-{"text": "When will the exam results be declared?", "intent": "exam_info", "group": 51}
-{"text": "please tell me is there a late entry permission for the hostel if you know", "intent": "hostel_info", "group": 95}
-{"text": "what is the speed of light", "intent": "out_of_scope", "group": 281}
-{"text": "when will the exam results be declared if you know", "intent": "exam_info", "group": 51}
-{"text": "hi do i renew a library book", "intent": "library_borrow", "group": 17}
-{"text": "please tell me can i get a free waiver based on marks", "intent": "scholarship_aid", "group": 136}
-{"text": "i want to know you tell me the last working day before vacation", "intent": "academic_calendar", "group": 44}
-{"text": "hey hi there", "intent": "greeting", "group": 177}
-{"text": "how can you help me", "intent": "help_capabilities", "group": 233}
-{"text": "who is the president of the united states", "intent": "out_of_scope", "group": 258}
-{"text": "how do i get a refund of my fees", "intent": "fee_payment", "group": 72}
-{"text": "what are the dates of winter break", "intent": "academic_calendar", "group": 33}
-{"text": "excuse me how do i apply for a merit scholarship", "intent": "scholarship_aid", "group": 129}
-{"text": "quick question are there special library hours in the vacation today", "intent": "library_hours", "group": 14}
-{"text": "who do i contact in the training and placement office", "intent": "placement_process", "group": 121}
-{"text": "okay so what is the meaning of life today", "intent": "out_of_scope", "group": 262}
-{"text": "can you diagnose my headache", "intent": "out_of_scope", "group": 272}
-{"text": "excuse me are you", "intent": "about_bot", "group": 219}
-{"text": "um which payment methods are accepted for feeds", "intent": "fee_payment", "group": 73}
-{"text": "can you tell me can i get a free waiver based on my marks", "intent": "scholarship_aid", "group": 136}
-{"text": "i want to know what the speed of light", "intent": "out_of_scope", "group": 281}
-{"text": "how much is the hostel rent per semester", "intent": "hostel_info", "group": 85}
-{"text": "please tell me i am unable to access my course materials", "intent": "it_helpdesk", "group": 111}
-{"text": "Can I attend more than one company's selection process?", "intent": "placement_process", "group": 123}
-{"text": "can i attend more than one company's selection process today", "intent": "placement_process", "group": 123}
-{"text": "okay so me the reading room timings", "intent": "library_hours", "group": 8}
-{"text": "please me how can you help me", "intent": "help_capabilities", "group": 233}
-{"text": "hey who do i contact in the training and placement office today", "intent": "placement_process", "group": 121}
-{"text": "so which payment methods are accepted for feeds", "intent": "fee_payment", "group": 73}
-{"text": "can you tell me hey", "intent": "greeting", "group": 185}
-{"text": "hey how can you help me if you know", "intent": "help_capabilities", "group": 233}
-{"text": "is there a late entry permission for the hostel", "intent": "hostel_info", "group": 95}
-{"text": "please tell good afternoon", "intent": "greeting", "group": 180}
-{"text": "i want know thanks you've been really useful", "intent": "thanks_bye", "group": 214}
-{"text": "can you tell me what topics do you cover", "intent": "help_capabilities", "group": 235}
-{"text": "excuse me translate this sentence into spanish today", "intent": "out_of_scope", "group": 261}
-{"text": "so can attend than one company's selection process", "intent": "placement_process", "group": 123}
-{"text": "so which payment methods are accepted for fees if you know", "intent": "fee_payment", "group": 73}
-{"text": "quick question thank you", "intent": "thanks_bye", "group": 194}
-{"text": "Good afternoon", "intent": "greeting", "group": 180}
-{"text": "Which payment methods are accepted for fees?", "intent": "fee_payment", "group": 73}
-{"text": "please tell me does the camp us have a counselling", "intent": "campus_services", "group": 175}
-{"text": "can you tell me the last working day before vacation", "intent": "academic_calendar", "group": 44}
-{"text": "i want to know can you tell me the last working day before vacation right now", "intent": "academic_calendar", "group": 44}
-{"text": "quick question how can you help me right now", "intent": "help_capabilities", "group": 233}
-{"text": "so who do i contact in the training and placements office", "intent": "placement_process", "group": 121}
-{"text": "i am unable to access my online course materials please", "intent": "it_helpdesk", "group": 111}
-{"text": "how do i get a of my fees", "intent": "fee_payment", "group": 72}
-{"text": "who do i contact in the training and placement office if you know", "intent": "placement_process", "group": 121}
-{"text": "um what is the meaning life", "intent": "out_of_scope", "group": 262}
-{"text": "Where is the IT helpdesk located?", "intent": "it_helpdesk", "group": 107}
-{"text": "can you tell me hey there", "intent": "greeting", "group": 185}
-{"text": "how do i get a refund of my fees please", "intent": "fee_payment", "group": 72}
-{"text": "um tell the reading room timings", "intent": "library_hours", "group": 8}
-{"text": "i want to know how much is the hostel rent per semester", "intent": "hostel_info", "group": 85}
-{"text": "what are the dates of the winter break", "intent": "academic_calendar", "group": 33}
-{"text": "hey cheers that is all please", "intent": "thanks_bye", "group": 204}
-{"text": "okay so what topics do cover", "intent": "help_capabilities", "group": 235}
-{"text": "i unable to access my course materials", "intent": "it_helpdesk", "group": 111}
-{"text": "hi translate this sentence into spanish right now", "intent": "out_of_scope", "group": 261}
-{"text": "tell the reading room timing", "intent": "library_hours", "group": 8}
-{"text": "hi there please", "intent": "greeting", "group": 177}
-{"text": "hey good afternoon right now", "intent": "greeting", "group": 180}
-{"text": "so where can i park my bicycle or bike today", "intent": "campus_services", "group": 172}
-{"text": "quick question what do you cover", "intent": "help_capabilities", "group": 235}
-{"text": "How long does it take to get a degree certificate?", "intent": "certificates", "group": 146}
-{"text": "quick what happens if i miss an example because of illness", "intent": "exam_info", "group": 56}
-{"text": "hey who is the president the united states", "intent": "out_of_scope", "group": 258}
-{"text": "how do i renew you a library book", "intent": "library_borrow", "group": 17}
-{"text": "excuse me is there a late entry permission for the hostel if you know", "intent": "hostel_info", "group": 95}
-{"text": "so thanks been really useful", "intent": "thanks_bye", "group": 214}
-{"text": "How do I get a refund of my fees?", "intent": "fee_payment", "group": 72}
-{"text": "hey when will the example result be declared", "intent": "exam_info", "group": 51}
-{"text": "how do i apply for a merit scholarship", "intent": "scholarship_aid", "group": 129}
-{"text": "what is the loan period for reference books thanks", "intent": "library_borrow", "group": 26}
-{"text": "can you tell me what happens if i miss an exam because of illness thanks", "intent": "exam_info", "group": 56}
-{"text": "are there special library hours in the vacation", "intent": "library_hours", "group": 14}
-{"text": "excuse me cheers that is all please", "intent": "thanks_bye", "group": 204}
-{"text": "Cheers, that is all", "intent": "thanks_bye", "group": 204}
-{"text": "hey i am unable to access my online course materials please", "intent": "it_helpdesk", "group": 111}
-{"text": "please tell me what is the meaning of life", "intent": "out_of_scope", "group": 262}
-{"text": "hi when will the exam results be declared please", "intent": "exam_info", "group": 51}
-{"text": "Who is the president of the United States?", "intent": "out_of_scope", "group": 258}
-{"text": "so how do i apply for the certificate", "intent": "certificates", "group": 154}
-{"text": "so how long does it take to get a degree certificate today", "intent": "certificates", "group": 146}
-{"text": "do you know good vacation spots", "intent": "out_of_scope", "group": 284}
-{"text": "can i attend more than one company's selection process right now", "intent": "placement_process", "group": 123}
-{"text": "Translate this sentence into Spanish", "intent": "out_of_scope", "group": 261}
-{"text": "cheers that is all", "intent": "thanks_bye", "group": 204}
-{"text": "i to know what topics do you cover", "intent": "help_capabilities", "group": 235}
-{"text": "What topics do you cover?", "intent": "help_capabilities", "group": 235}
+{"text": "i want to know how do i for a freeship from the university", "intent": "scholarship_aid", "group": 161}
+{"text": "hi give me a recipe for chocolate cake thanks", "intent": "out_of_scope", "group": 321}
+{"text": "um when the course registration deadline", "intent": "academic_calendar", "group": 45}
+{"text": "can you tell me can you give me a stock tip today", "intent": "out_of_scope", "group": 315}
+{"text": "hi how do i apply for a single room in the hostel", "intent": "hostel_info", "group": 116}
+{"text": "please tell me is there a bookstore or stationery shop on campus", "intent": "campus_services", "group": 223}
+{"text": "How do I request a book that the library does not have?", "intent": "library_borrow", "group": 31}
+{"text": "please tell me where do i upload my income certificate for aid right now", "intent": "scholarship_aid", "group": 165}
+{"text": "what is the security deposit", "intent": "hostel_info", "group": 99}
+{"text": "quick question when is the course registration deadline right now", "intent": "academic_calendar", "group": 45}
+{"text": "where can i find the calendar", "intent": "academic_calendar", "group": 35}
+{"text": "how can i install the licensed software provided by the university", "intent": "it_helpdesk", "group": 136}
+{"text": "okay how do i get a free receipt", "intent": "fee_payment", "group": 84}
+{"text": "okay so when is the course registration deadline thanks", "intent": "academic_calendar", "group": 45}
+{"text": "okay so this sentence into spanish", "intent": "out_of_scope", "group": 313}
+{"text": "okay so when will the scholarship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "how do i request a book that the library does not have", "intent": "library_borrow", "group": 31}
+{"text": "What is the meaning of life?", "intent": "out_of_scope", "group": 314}
+{"text": "is there a late fee for delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "um how do i apply for an internship through the placement cell today", "intent": "placement_process", "group": 152}
+{"text": "where do i upload my income certificate for aid today", "intent": "scholarship_aid", "group": 165}
+{"text": "so how do i apply for revaluation of my paper", "intent": "exam_info", "group": 60}
+{"text": "please me appreciate it goodbye", "intent": "thanks_bye", "group": 259}
+{"text": "when will the scholar ship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "how do i apply for revaluation of my paper", "intent": "exam_info", "group": 60}
+{"text": "how do i complain about noise in the hostel thanks", "intent": "hostel_info", "group": 103}
+{"text": "How do I complain about noise in the hostel?", "intent": "hostel_info", "group": 103}
+{"text": "does campus have a counselling service", "intent": "campus_services", "group": 227}
+{"text": "so how do i apply for an through the placement cell", "intent": "placement_process", "group": 152}
+{"text": "quick question can i get a roommate of my choice today", "intent": "hostel_info", "group": 101}
+{"text": "Is there a bookstore or stationery shop on campus?", "intent": "campus_services", "group": 223}
+{"text": "See you later", "intent": "thanks_bye", "group": 251}
+{"text": "okay so where can i find the calendar", "intent": "academic_calendar", "group": 35}
+{"text": "how long can keep a borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "please tell what is the meaning of life", "intent": "out_of_scope", "group": 314}
+{"text": "can get a roommate of my choice", "intent": "hostel_info", "group": 101}
+{"text": "how do i enable two step verification on my university account", "intent": "it_helpdesk", "group": 127}
+{"text": "hi how do i apply for a single in the hostel", "intent": "hostel_info", "group": 116}
+{"text": "hi how do i download my hole tick it", "intent": "exam_info", "group": 57}
+{"text": "hi okay i'm done bye", "intent": "thanks_bye", "group": 261}
+{"text": "um hey anyone around", "intent": "greeting", "group": 242}
+{"text": "excuse me thank you thanks", "intent": "thanks_bye", "group": 246}
+{"text": "okay so how do i get a refund of my", "intent": "fee_payment", "group": 88}
+{"text": "how do i download my hall ticket", "intent": "exam_info", "group": 57}
+{"text": "when will the scholarship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "i want to know give me recipe for chocolate cake", "intent": "out_of_scope", "group": 321}
+{"text": "i want to know is the it helpdesk located", "intent": "it_helpdesk", "group": 139}
+{"text": "Hello", "intent": "greeting", "group": 228}
+{"text": "can i attend more than one company's selection process", "intent": "placement_process", "group": 155}
+{"text": "Can I get a roommate of my choice?", "intent": "hostel_info", "group": 101}
+{"text": "please tell me how can i install the licensed software provided by the university thanks", "intent": "it_helpdesk", "group": 136}
+{"text": "Is there a late fee for delayed payment?", "intent": "fee_payment", "group": 83}
+{"text": "i want to know how can i apply for a bonafide certificate", "intent": "certificates", "group": 185}
+{"text": "okay i'm done bye thanks", "intent": "thanks_bye", "group": 261}
+{"text": "how do i enable two step on my university account", "intent": "it_helpdesk", "group": 127}
+{"text": "who created this assistant today", "intent": "about_bot", "group": 282}
+{"text": "excuse me how do use this assistant", "intent": "help_capabilities", "group": 294}
+{"text": "can you tell me where do i upload my income certificate for aid", "intent": "scholarship_aid", "group": 165}
+{"text": "i want to know can i talk to a counsellor about stress please", "intent": "campus_services", "group": 203}
+{"text": "What is the last date to pay the semester fee?", "intent": "fee_payment", "group": 81}
+{"text": "what should i carry to the examination hole", "intent": "exam_info", "group": 62}
+{"text": "hi what are the working hours of the", "intent": "library_hours", "group": 11}
+{"text": "hi explain how holes work", "intent": "out_of_scope", "group": 332}
+{"text": "Where can I print documents using my student account?", "intent": "it_helpdesk", "group": 124}
+{"text": "how do i get my admit card for the test", "intent": "exam_info", "group": 67}
+{"text": "can you me a stock tip", "intent": "out_of_scope", "group": 315}
+{"text": "translate this sentence into spanish thanks", "intent": "out_of_scope", "group": 313}
+{"text": "how do i complain about noise in the hostel", "intent": "hostel_info", "group": 103}
+{"text": "what is the last date to pay the semester fee", "intent": "fee_payment", "group": 81}
+{"text": "quick question can i attend more than one company's selection process", "intent": "placement_process", "group": 155}
+{"text": "how do i get my admit card for the test right now", "intent": "exam_info", "group": 67}
+{"text": "What is the hostel security deposit?", "intent": "hostel_info", "group": 99}
+{"text": "Translate this sentence into Spanish", "intent": "out_of_scope", "group": 313}
+{"text": "quick question what are the latest news headlines", "intent": "out_of_scope", "group": 309}
+{"text": "What are the latest news headlines?", "intent": "out_of_scope", "group": 309}
+{"text": "can i talk to a counsellor about stress", "intent": "campus_services", "group": 203}
+{"text": "okay so thank you", "intent": "thanks_bye", "group": 246}
+{"text": "how i complain about noise in the hostel", "intent": "hostel_info", "group": 103}
+{"text": "how can i apply for a bona fide certificate", "intent": "certificates", "group": 185}
+{"text": "hey thank you if you know", "intent": "thanks_bye", "group": 246}
+{"text": "hey anyone around thanks", "intent": "greeting", "group": 242}
+{"text": "what if i something you do not know", "intent": "help_capabilities", "group": 295}
+{"text": "excuse me see later", "intent": "thanks_bye", "group": 251}
+{"text": "where can i print documents using my student account", "intent": "it_helpdesk", "group": 124}
+{"text": "hi explain how black holes work thanks", "intent": "out_of_scope", "group": 332}
+{"text": "um hey anyone around right now", "intent": "greeting", "group": 242}
+{"text": "excuse me hello", "intent": "greeting", "group": 228}
+{"text": "where is the it helpdesk located", "intent": "it_helpdesk", "group": 139}
+{"text": "can you tell me how do i apply for a freeship from the university if you know", "intent": "scholarship_aid", "group": 161}
+{"text": "want to know can i attend more than one company's selection process", "intent": "placement_process", "group": 155}
+{"text": "Okay, I'm done, bye", "intent": "thanks_bye", "group": 261}
+{"text": "i want to know how can i install the licensed software provided the university", "intent": "it_helpdesk", "group": 136}
+{"text": "i want to know translate this sentence into spanish if you know", "intent": "out_of_scope", "group": 313}
+{"text": "please tell me how long can i a borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "so does the camp us have a counselling service", "intent": "campus_services", "group": 227}
+{"text": "excuse me appreciate it goodbye", "intent": "thanks_bye", "group": 259}
+{"text": "i want to know how do i apply for an internship through the placements cell", "intent": "placement_process", "group": 152}
+{"text": "want to know how can i apply for a bona fide certificate", "intent": "certificates", "group": 185}
+{"text": "um how do i apply for of my paper", "intent": "exam_info", "group": 60}
+{"text": "i want to know can i talk to a counsellor about stress", "intent": "campus_services", "group": 203}
+{"text": "what is the last date to pay the seminar free", "intent": "fee_payment", "group": 81}
+{"text": "quick question tell me about yourself", "intent": "about_bot", "group": 278}
+{"text": "excuse me how do i complain about noise in the hostel please", "intent": "hostel_info", "group": 103}
+{"text": "please me what is the meaning of life", "intent": "out_of_scope", "group": 314}
+{"text": "explain how black holes work please", "intent": "out_of_scope", "group": 332}
+{"text": "quick question where can i find the academic calendar", "intent": "academic_calendar", "group": 35}
+{"text": "Thank you", "intent": "thanks_bye", "group": 246}
+{"text": "please tell me there a late fee for delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "Appreciate it, goodbye", "intent": "thanks_bye", "group": 259}
+{"text": "please tell me how do i download my hall ticket", "intent": "exam_info", "group": 57}
+{"text": "what are the latest news headlines", "intent": "out_of_scope", "group": 309}
+{"text": "how do i two step verification on my university account", "intent": "it_helpdesk", "group": 127}
+{"text": "okay so where can i print documents using my student account today", "intent": "it_helpdesk", "group": 124}
+{"text": "please tell me give me a recipe for chocolate cake if you know", "intent": "out_of_scope", "group": 321}
+{"text": "okay so how do i apply for a single room in the hostel thanks", "intent": "hostel_info", "group": 116}
+{"text": "When will the scholarship amount be credited?", "intent": "scholarship_aid", "group": 178}
+{"text": "quick question hello", "intent": "greeting", "group": 228}
+{"text": "please tell me created this assistant", "intent": "about_bot", "group": 282}
+{"text": "can i attend more than one company's selection process right now", "intent": "placement_process", "group": 155}
+{"text": "where do i upload my income certificate for aid", "intent": "scholarship_aid", "group": 165}
+{"text": "um how do i get admit card for the test", "intent": "exam_info", "group": 67}
+{"text": "quick how can i apply for a bonafide certificate", "intent": "certificates", "group": 185}
+{"text": "hi can i get a roommate of my choice thanks", "intent": "hostel_info", "group": 101}
+{"text": "do i request a book that the libary does not have", "intent": "library_borrow", "group": 31}
+{"text": "is there parking for students on campus", "intent": "campus_services", "group": 200}
+{"text": "can you tell me tell me about yourself please", "intent": "about_bot", "group": 278}
+{"text": "i want to know see later", "intent": "thanks_bye", "group": 251}
 {"text": "can you tell me are there special libary hours in the vacation", "intent": "library_hours", "group": 14}
-{"text": "um how do i apply for the migration certificate today", "intent": "certificates", "group": 154}
-{"text": "where the it helpdesk located", "intent": "it_helpdesk", "group": 107}
-{"text": "um when will the results be declared", "intent": "exam_info", "group": 51}
-{"text": "Who do I contact in the training and placement office?", "intent": "placement_process", "group": 121}
-{"text": "Is there a late entry permission for the hostel?", "intent": "hostel_info", "group": 95}
-{"text": "Do you know any good vacation spots?", "intent": "out_of_scope", "group": 284}
-{"text": "please tell me do you know any spots", "intent": "out_of_scope", "group": 284}
-{"text": "Are there special library hours in the vacation?", "intent": "library_hours", "group": 14}
-{"text": "how do i apply for the migration certificate if you know", "intent": "certificates", "group": 154}
+{"text": "hi is there a late free for delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "Hi there", "intent": "greeting", "group": 229}
+{"text": "Who created this assistant?", "intent": "about_bot", "group": 282}
+{"text": "how do i use this assistant", "intent": "help_capabilities", "group": 294}
+{"text": "so what is the last date to pay the semester fee thanks", "intent": "fee_payment", "group": 81}
+{"text": "okay so where do i upload my income certificate for aid today", "intent": "scholarship_aid", "group": 165}
+{"text": "please tell me what is the meaning of life please", "intent": "out_of_scope", "group": 314}
+{"text": "Where is the IT helpdesk located?", "intent": "it_helpdesk", "group": 139}
 {"text": "hey are there special libary in the vacation", "intent": "library_hours", "group": 14}
-{"text": "Who are you?", "intent": "about_bot", "group": 219}
+{"text": "excuse what are the working hours of the library", "intent": "library_hours", "group": 11}
+{"text": "how do i get a fee receipt", "intent": "fee_payment", "group": 84}
+{"text": "um is there a or stationery shop on camp us", "intent": "campus_services", "group": 223}
+{"text": "how long can i keep a borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "okay how long can i keep a borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "how do i apply for revaluation of my paper today", "intent": "exam_info", "group": 60}
+{"text": "where can i print documents using my student account thanks", "intent": "it_helpdesk", "group": 124}
+{"text": "please tell me what are the latest news headlines", "intent": "out_of_scope", "group": 309}
+{"text": "hey where can i find the academic calender", "intent": "academic_calendar", "group": 35}
+{"text": "How long can I keep a borrowed book?", "intent": "library_borrow", "group": 20}
+{"text": "so how long can i keep a borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "Tell me about yourself", "intent": "about_bot", "group": 278}
+{"text": "hey what is the hostile security deposit", "intent": "hostel_info", "group": 99}
+{"text": "i want to know how do i this assistant", "intent": "help_capabilities", "group": 294}
+{"text": "where can i print documents my student account", "intent": "it_helpdesk", "group": 124}
+{"text": "what are the working hours of the library today", "intent": "library_hours", "group": 11}
+{"text": "can you tell me can i to a counsellor about stress", "intent": "campus_services", "group": 203}
+{"text": "i want to know what should i carry to the examination hall", "intent": "exam_info", "group": 62}
+{"text": "excuse me how do i apply for a single room in the hostile", "intent": "hostel_info", "group": 116}
+{"text": "How do I download my hall ticket?", "intent": "exam_info", "group": 57}
+{"text": "okay so see later", "intent": "thanks_bye", "group": 251}
+{"text": "um tell me about yourself", "intent": "about_bot", "group": 278}
+{"text": "Give me a recipe for chocolate cake", "intent": "out_of_scope", "group": 321}
+{"text": "hey what if ask something you do not know", "intent": "help_capabilities", "group": 295}
+{"text": "so hi there", "intent": "greeting", "group": 229}
+{"text": "How do I use this assistant?", "intent": "help_capabilities", "group": 294}
+{"text": "hey what should i carry to the examination hall please", "intent": "exam_info", "group": 62}
+{"text": "me when is the course registration deadline", "intent": "academic_calendar", "group": 45}
+{"text": "i want to know how do i enable two step on my university account", "intent": "it_helpdesk", "group": 127}
+{"text": "what is the hostel security deposit", "intent": "hostel_info", "group": 99}
+{"text": "quick question who handles queries", "intent": "scholarship_aid", "group": 182}
+{"text": "How do I apply for revaluation of my paper?", "intent": "exam_info", "group": 60}
+{"text": "how do i get my admit card for the test today", "intent": "exam_info", "group": 67}
+{"text": "What if I ask something you do not know?", "intent": "help_capabilities", "group": 295}
+{"text": "i want to know how do i get a fee receipt", "intent": "fee_payment", "group": 84}
+{"text": "please tell me who scholarship queries", "intent": "scholarship_aid", "group": 182}
+{"text": "okay so there a late fee delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "how do i enable two step verification on my account", "intent": "it_helpdesk", "group": 127}
+{"text": "okay so how do i download my hall ticket", "intent": "exam_info", "group": 57}
+{"text": "how can i apply for a bonafide certificate", "intent": "certificates", "group": 185}
+{"text": "Explain how black holes work", "intent": "out_of_scope", "group": 332}
+{"text": "please tell me how do i apply for a freeship from the university if you know", "intent": "scholarship_aid", "group": 161}
+{"text": "um how do i request a book that the library does not have if you know", "intent": "library_borrow", "group": 31}
+{"text": "i want to know can i get a roommate of my choice today", "intent": "hostel_info", "group": 101}
+{"text": "quick question how do i apply for a single room in the hostel", "intent": "hostel_info", "group": 116}
+{"text": "is there a or stationery shop on campus", "intent": "campus_services", "group": 223}
+{"text": "hey what are the working hours of the libary", "intent": "library_hours", "group": 11}
+{"text": "um hi there today", "intent": "greeting", "group": 229}
+{"text": "how long can i keep borrowed book", "intent": "library_borrow", "group": 20}
+{"text": "Can I attend more than one company's selection process?", "intent": "placement_process", "group": 155}
+{"text": "Can I talk to a counsellor about stress?", "intent": "campus_services", "group": 203}
+{"text": "um can i talk to a counsellor about stress today", "intent": "campus_services", "group": 203}
+{"text": "um how i get a refund of fees", "intent": "fee_payment", "group": 88}
+{"text": "um what are latest news headlines", "intent": "out_of_scope", "group": 309}
+{"text": "can you tell me okay i'm done bye today", "intent": "thanks_bye", "group": 261}
+{"text": "excuse me i lost my original degree can i get a duplicate right now", "intent": "certificates", "group": 198}
+{"text": "um can you give me a stock tip thanks", "intent": "out_of_scope", "group": 315}
+{"text": "so how do i get my card for the test", "intent": "exam_info", "group": 67}
+{"text": "excuse me is there parking for on campus", "intent": "campus_services", "group": 200}
+{"text": "Is there parking for students on campus?", "intent": "campus_services", "group": 200}
+{"text": "i lost my original degree can i get a duplicate", "intent": "certificates", "group": 198}
+{"text": "excuse me how i apply for freeship from the university", "intent": "scholarship_aid", "group": 161}
+{"text": "can you me how do i enable two step verification on my university account", "intent": "it_helpdesk", "group": 127}
+{"text": "How do I get a refund of my fees?", "intent": "fee_payment", "group": 88}
+{"text": "excuse me who handles scholar ship queries", "intent": "scholarship_aid", "group": 182}
+{"text": "okay so who created this assistant", "intent": "about_bot", "group": 282}
+{"text": "hi what is the hostile security deposit", "intent": "hostel_info", "group": 99}
+{"text": "when is the course registration deadline", "intent": "academic_calendar", "group": 45}
+{"text": "i want to know how can i apply for bonafide certificate", "intent": "certificates", "group": 185}
+{"text": "can you tell me i lost my original degree can i get a duplicate", "intent": "certificates", "group": 198}
+{"text": "How can I install the licensed software provided by the university?", "intent": "it_helpdesk", "group": 136}
+{"text": "okay so hey anyone around", "intent": "greeting", "group": 242}
+{"text": "so how do i get a fee", "intent": "fee_payment", "group": 84}
+{"text": "can i get a of my choice", "intent": "hostel_info", "group": 101}
+{"text": "how do i apply for an internship through the placement cell", "intent": "placement_process", "group": 152}
+{"text": "how can install the licensed software provided by the university", "intent": "it_helpdesk", "group": 136}
+{"text": "please tell me where do i upload my income certificate for aid if you know", "intent": "scholarship_aid", "group": 165}
+{"text": "um when is the course registration deadline", "intent": "academic_calendar", "group": 45}
+{"text": "where can i find the academic calendar", "intent": "academic_calendar", "group": 35}
+{"text": "hi does the camp us have counselling service", "intent": "campus_services", "group": 227}
+{"text": "can you tell me what is the hostel security deposit", "intent": "hostel_info", "group": 99}
+{"text": "please tell me how i get a free receipt", "intent": "fee_payment", "group": 84}
+{"text": "What are the working hours of the library?", "intent": "library_hours", "group": 11}
+{"text": "okay so is there parking students on campus", "intent": "campus_services", "group": 200}
+{"text": "appreciate it goodbye", "intent": "thanks_bye", "group": 259}
+{"text": "hey i lost my original degree can i get a duplicate", "intent": "certificates", "group": 198}
+{"text": "quick question is parking for students on camp us", "intent": "campus_services", "group": 200}
+{"text": "what are the working hours of the library", "intent": "library_hours", "group": 11}
+{"text": "hey handles scholarship queries", "intent": "scholarship_aid", "group": 182}
+{"text": "can you tell me hi there", "intent": "greeting", "group": 229}
+{"text": "How do I apply for a freeship from the university?", "intent": "scholarship_aid", "group": 161}
+{"text": "When is the course registration deadline?", "intent": "academic_calendar", "group": 45}
+{"text": "you tell me give me a recipe for chocolate", "intent": "out_of_scope", "group": 321}
+{"text": "hey is there a bookstore or stationery shop on camp us", "intent": "campus_services", "group": 223}
+{"text": "excuse me what should i carry to the examination hall today", "intent": "exam_info", "group": 62}
+{"text": "please tell me can i attend more one company's selection process", "intent": "placement_process", "group": 155}
+{"text": "quick question how do i get a refund of my feeds", "intent": "fee_payment", "group": 88}
+{"text": "does the campus have a counselling service", "intent": "campus_services", "group": 227}
+{"text": "How do I apply for an internship through the placement cell?", "intent": "placement_process", "group": 152}
+{"text": "excuse me tell me about yourself thanks", "intent": "about_bot", "group": 278}
+{"text": "so how do i apply for a freeship from the university", "intent": "scholarship_aid", "group": 161}
+{"text": "excuse me is there a late free for delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "What should I carry to the examination hall?", "intent": "exam_info", "group": 62}
+{"text": "okay so do i apply for an internship through the placement cell", "intent": "placement_process", "group": 152}
+{"text": "How do I enable two step verification on my university account?", "intent": "it_helpdesk", "group": 127}
+{"text": "what should i carry to the examination hall", "intent": "exam_info", "group": 62}
+{"text": "okay so when the scholarship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "quick question hello today", "intent": "greeting", "group": 228}
+{"text": "please tell me how can i install the licensed provided by the university", "intent": "it_helpdesk", "group": 136}
+{"text": "hi this sentence into spanish", "intent": "out_of_scope", "group": 313}
+{"text": "okay so give me a recipe for chocolate cake today", "intent": "out_of_scope", "group": 321}
+{"text": "can you give me a stock tip", "intent": "out_of_scope", "group": 315}
+{"text": "hey how do i download my hall ticket", "intent": "exam_info", "group": 57}
+{"text": "hey how do about in the hostile", "intent": "hostel_info", "group": 103}
+{"text": "hey can i attend more than one company's selection process today", "intent": "placement_process", "group": 155}
+{"text": "Are there special library hours in the vacation?", "intent": "library_hours", "group": 14}
+{"text": "is there a bookstore or stationery shop on campus", "intent": "campus_services", "group": 223}
+{"text": "Hey, anyone around?", "intent": "greeting", "group": 242}
+{"text": "hey is there parking for students on campus today", "intent": "campus_services", "group": 200}
+{"text": "can you tell me does the campus have a counselling service right now", "intent": "campus_services", "group": 227}
+{"text": "quick question what should i carry to the examination hall", "intent": "exam_info", "group": 62}
+{"text": "I lost my original degree, can I get a duplicate?", "intent": "certificates", "group": 198}
+{"text": "hi is there a fee for delayed payment", "intent": "fee_payment", "group": 83}
+{"text": "um hello right now", "intent": "greeting", "group": 228}
+{"text": "are there special library hours in the vacation", "intent": "library_hours", "group": 14}
+{"text": "can you give me a stock tip right now", "intent": "out_of_scope", "group": 315}
+{"text": "Where can I find the academic calendar?", "intent": "academic_calendar", "group": 35}
+{"text": "can you tell me what if i ask something you do not know thanks", "intent": "help_capabilities", "group": 295}
+{"text": "okay so i a counsellor about stress", "intent": "campus_services", "group": 203}
+{"text": "can you tell me what is the last date to pay the semester fee", "intent": "fee_payment", "group": 81}
+{"text": "hi tell about yourself", "intent": "about_bot", "group": 278}
+{"text": "um do i complain about noise in the hostile", "intent": "hostel_info", "group": 103}
+{"text": "how do i get a refund of my fees please", "intent": "fee_payment", "group": 88}
+{"text": "um how do i apply for revaluation of my paper", "intent": "exam_info", "group": 60}
+{"text": "um how do i get a refund of my feeds", "intent": "fee_payment", "group": 88}
+{"text": "how do i get a free receipt", "intent": "fee_payment", "group": 84}
+{"text": "can you tell me explain how black holes work", "intent": "out_of_scope", "group": 332}
+{"text": "how do i apply for an internship through the placements cell", "intent": "placement_process", "group": 152}
+{"text": "i to know thank you", "intent": "thanks_bye", "group": 246}
+{"text": "quick question are there special library hours in the vacation today", "intent": "library_hours", "group": 14}
+{"text": "so where is the it located", "intent": "it_helpdesk", "group": 139}
+{"text": "what is the meaning of life", "intent": "out_of_scope", "group": 314}
+{"text": "how do i apply for a freeship from the university", "intent": "scholarship_aid", "group": 161}
+{"text": "please tell me what is last date to pay the seminar free", "intent": "fee_payment", "group": 81}
+{"text": "so where can i documents using my student account", "intent": "it_helpdesk", "group": 124}
+{"text": "How can I apply for a bonafide certificate?", "intent": "certificates", "group": 185}
+{"text": "so when will the scholar ship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "please tell me tell me about yourself please", "intent": "about_bot", "group": 278}
+{"text": "hi what is the last date to pay the fee", "intent": "fee_payment", "group": 81}
+{"text": "how i use this assistant", "intent": "help_capabilities", "group": 294}
+{"text": "appreciate it goodbye right now", "intent": "thanks_bye", "group": 259}
+{"text": "hey how do i download my hall tick it", "intent": "exam_info", "group": 57}
+{"text": "hey does the campus have a counselling service", "intent": "campus_services", "group": 227}
+{"text": "who created this assistant", "intent": "about_bot", "group": 282}
+{"text": "okay so where is the it helpdesk located", "intent": "it_helpdesk", "group": 139}
+{"text": "quick question who handles scholar ship queries", "intent": "scholarship_aid", "group": 182}
+{"text": "what if i ask something you do not know", "intent": "help_capabilities", "group": 295}
+{"text": "please tell me is there parking for on camp us", "intent": "campus_services", "group": 200}
+{"text": "are latest news headlines", "intent": "out_of_scope", "group": 309}
+{"text": "please tell me i lost my original degree i get a duplicate", "intent": "certificates", "group": 198}
+{"text": "How do I get a fee receipt?", "intent": "fee_payment", "group": 84}
+{"text": "what if i ask something you do know", "intent": "help_capabilities", "group": 295}
+{"text": "i documents using my student account", "intent": "it_helpdesk", "group": 124}
+{"text": "Can you give me a stock tip?", "intent": "out_of_scope", "group": 315}
+{"text": "please tell me are there special library hours in the vacation", "intent": "library_hours", "group": 14}
+{"text": "how do i get a refund of my fees", "intent": "fee_payment", "group": 88}
+{"text": "so how do i use this assistant", "intent": "help_capabilities", "group": 294}
+{"text": "okay so how can i install the licensed provided by the university", "intent": "it_helpdesk", "group": 136}
+{"text": "where is the it located", "intent": "it_helpdesk", "group": 139}
+{"text": "i want know where can i find the academic calendar", "intent": "academic_calendar", "group": 35}
+{"text": "what if ask something you do not know", "intent": "help_capabilities", "group": 295}
+{"text": "can you tell me how do i use this", "intent": "help_capabilities", "group": 294}
+{"text": "please tell me when will the scholar ship amount be credited", "intent": "scholarship_aid", "group": 178}
+{"text": "quick question see you later today", "intent": "thanks_bye", "group": 251}
+{"text": "um do i request a book that libary does not have", "intent": "library_borrow", "group": 31}
+{"text": "translate sentence into spanish", "intent": "out_of_scope", "group": 313}
+{"text": "hi are there special library hours in the vacation thanks", "intent": "library_hours", "group": 14}
+{"text": "Does the campus have a counselling service?", "intent": "campus_services", "group": 227}
+{"text": "Who handles scholarship queries?", "intent": "scholarship_aid", "group": 182}
+{"text": "okay so do i apply for re evaluation of my paper", "intent": "exam_info", "group": 60}
+{"text": "quick question how do i request a book that the libary not have", "intent": "library_borrow", "group": 31}
+{"text": "How do I get my admit card for the test?", "intent": "exam_info", "group": 67}
+{"text": "um what is the meaning of life", "intent": "out_of_scope", "group": 314}
+{"text": "okay so handles scholarship queries", "intent": "scholarship_aid", "group": 182}
+{"text": "How do I apply for a single room in the hostel?", "intent": "hostel_info", "group": 116}
+{"text": "can i get a roommate of my choice", "intent": "hostel_info", "group": 101}
+{"text": "i want to know how do i request a book that the library does not have", "intent": "library_borrow", "group": 31}
+{"text": "so i lost my original degree can i get a duplicate if you know", "intent": "certificates", "group": 198}
+{"text": "how do i get my admit card for the test if you know", "intent": "exam_info", "group": 67}
+{"text": "so explain how black holes work if you know", "intent": "out_of_scope", "group": 332}
+{"text": "hi who created this assistant today", "intent": "about_bot", "group": 282}
+{"text": "can you tell me there", "intent": "greeting", "group": 229}
+{"text": "how do i apply for a single room in the hostel", "intent": "hostel_info", "group": 116}
+{"text": "okay so where the it helpdesk located", "intent": "it_helpdesk", "group": 139}
+{"text": "Where do I upload my income certificate for aid?", "intent": "scholarship_aid", "group": 165}
+{"text": "please me what is the hostile security deposit", "intent": "hostel_info", "group": 99}
+{"text": "um is there a bookstore stationery shop on", "intent": "campus_services", "group": 223}
+{"text": "okay i'm done bye", "intent": "thanks_bye", "group": 261}
+{"text": "okay so what are the working hours of the library please", "intent": "library_hours", "group": 11}
+{"text": "okay so who created assistant", "intent": "about_bot", "group": 282}

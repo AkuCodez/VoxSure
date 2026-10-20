@@ -4,12 +4,13 @@ import asyncio
 import time
 import uuid
 
-from fastapi import APIRouter, File, HTTPException, Request, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.concurrency import run_in_threadpool
 
+from ..core.languages import LANGS, detect_text_language, display_name
 from ..core.policy import OOS, decide
 from ..schemas.models import (Candidate, Thresholds, FeedbackRequest, FeedbackResponse, HealthResponse, IntentRequest,
-                              IntentResponse, IntentScore, MemoryItem, Option, TranscribeResponse,
+                              IntentResponse, IntentScore, MemoryItem, Option, TranscribeResponse, WordScore,
                               TurnRequest, TurnResponse)
 from ..services.asr import AudioDecodeError, NoSpeechError
 
@@ -38,7 +39,7 @@ async def health(request: Request) -> HealthResponse:
 
 
 @router.post("/transcribe", response_model=TranscribeResponse)
-async def transcribe(request: Request, audio: UploadFile = File(...)) -> TranscribeResponse:
+async def transcribe(request: Request, audio: UploadFile = File(...), language: str | None = Form(None)) -> TranscribeResponse:
     s = state(request)
     if s.transcriber is None:
         raise err(503, "asr_unavailable", "Speech recognition is unavailable. Please type your question.")
@@ -50,10 +51,14 @@ async def transcribe(request: Request, audio: UploadFile = File(...)) -> Transcr
         raise err(400, "empty_audio", "No audio was received. Please try recording again.")
     if len(data) > s.settings.max_audio_bytes:
         raise err(413, "audio_too_large", "That recording is too long. Please keep it under about 30 seconds.")
+    if language in (None, "", "auto"):
+        language = None
+    elif language not in LANGS:
+        raise err(422, "unsupported_language", "That language is not supported.")
     t0 = time.perf_counter()
     try:
         async with s.asr_lock:
-            result = await asyncio.wait_for(run_in_threadpool(s.transcriber.transcribe, data),
+            result = await asyncio.wait_for(run_in_threadpool(s.transcriber.transcribe, data, language),
                                             timeout=s.settings.asr_timeout_s)
     except asyncio.TimeoutError:
         raise err(504, "asr_timeout", "Speech recognition timed out. Please try again or type your question.")
@@ -63,7 +68,10 @@ async def transcribe(request: Request, audio: UploadFile = File(...)) -> Transcr
         raise err(422, "decode_failed", "I couldn't read that audio. Please try again or type your question.")
     return TranscribeResponse(transcript=result.text, asr_confidence=round(result.confidence, 4),
                               duration_s=round(result.duration_s, 2),
-                              latency_ms=round((time.perf_counter() - t0) * 1000, 1))
+                              latency_ms=round((time.perf_counter() - t0) * 1000, 1),
+                              language=result.language, language_name=display_name(result.language),
+                              language_probability=round(result.language_probability, 3),
+                              words=[WordScore(word=w.word, probability=round(w.probability, 3)) for w in result.words])
 
 
 def _classify(s, text: str) -> dict[str, float]:
@@ -94,11 +102,23 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
     if not text:
         raise err(422, "empty_text", "Text must not be empty.")
 
+    lang = body.lang if body.lang in LANGS else detect_text_language(text)
+    tr = s.translator
+    translation_available = lang == "en" or tr is not None
+
     memory_applied = False
     if body.use_memory and body.client_id:
         remembered = await run_in_threadpool(s.db.lookup, body.client_id, text)
         if remembered:
             text, memory_applied = remembered, True
+
+    # The classifier and knowledge base are English: translate non-English input to English first.
+    text_en = text
+    if lang != "en" and tr is not None:
+        try:
+            text_en = await run_in_threadpool(tr.translate, text, lang, "en")
+        except Exception:
+            translation_available = False
 
     kb = s.kb
     candidates: list[Candidate] = []
@@ -108,7 +128,7 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
         action, intent_name, kind, options, reason, conf = "answer", body.chosen_intent, None, [], "user_confirmed", 1.0
         response = kb.answer(intent_name)
     else:
-        probs = await run_in_threadpool(_classify, s, text)
+        probs = await run_in_threadpool(_classify, s, text_en)
         d = decide(probs, s.policy, asr_conf=body.asr_confidence, attempts=body.attempts)
         action, intent_name, kind, reason = d.action, d.intent, d.clarify_kind, d.reason
         conf = max(probs.values())
@@ -124,6 +144,16 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
         else:
             response = kb.repair_prompt
 
+    # Reply in the user's language (static answers are cached after the first translation).
+    if lang != "en" and tr is not None and translation_available:
+        try:
+            response = await run_in_threadpool(tr.translate, response, "en", lang)
+            options = [Option(intent=o.intent, label=await run_in_threadpool(tr.translate, o.label, "en", lang))
+                       for o in options]
+            candidates = [c.model_copy(update={"label": c.label}) for c in candidates]
+        except Exception:
+            translation_available = False
+
     latency = (time.perf_counter() - t0) * 1000
     turn_id = uuid.uuid4().hex[:16]
     if s.settings.log_metrics:
@@ -133,12 +163,14 @@ async def chat_turn(request: Request, body: TurnRequest) -> TurnResponse:
                 clarify_kind=kind, top_prob=float(conf), latency_ms=latency, edited=int(body.edited)))
         except Exception:  # metrics must never break the user flow
             pass
+    verified = lang == "en" or lang in s.language_status.get("verified", [])
     return TurnResponse(
         turn_id=turn_id, transcript=text, action=action, clarify_kind=kind, intent=intent_name,
         confidence=round(float(conf), 4), response=response, options=options, candidates=candidates,
         thresholds=Thresholds(t_high=s.policy.t_high, margin=s.policy.margin, t_low=s.policy.t_low),
-        reason=reason,
-        memory_applied=memory_applied,
+        reason=reason, memory_applied=memory_applied, lang=lang, lang_name=display_name(lang),
+        lang_verified=verified, translated_input=text_en if (lang != "en" and tr is not None) else None,
+        translation_available=translation_available,
         model_version=getattr(s.classifier, "version", "n/a"), latency_ms=round(latency, 1))
 
 

@@ -1,25 +1,25 @@
-{"text": "Tell me the rules", "plausible": ["hostel_info", "library_borrow", "exam_info"]}
-{"text": "How early should I arrive?", "plausible": ["exam_info", "placement_process"]}
-{"text": "When will it be credited?", "plausible": ["scholarship_aid", "fee_payment"]}
-{"text": "Is it open on weekends?", "plausible": ["library_hours", "campus_services"]}
-{"text": "When does it start?", "plausible": ["academic_calendar", "placement_process", "campus_services"]}
-{"text": "What is the fine?", "plausible": ["library_borrow", "fee_payment"]}
-{"text": "I lost my card", "plausible": ["library_borrow", "certificates"]}
-{"text": "Where can I see the list?", "plausible": ["hostel_info", "placement_process", "exam_info"]}
-{"text": "When do I get it back?", "plausible": ["library_borrow", "exam_info", "certificates"]}
-{"text": "Where do I go for that?", "plausible": ["certificates", "it_helpdesk", "campus_services"]}
-{"text": "Is the form available online?", "plausible": ["scholarship_aid", "certificates", "exam_info"]}
+{"text": "Do I have to pay for that?", "plausible": ["fee_payment", "certificates", "campus_services"]}
 {"text": "What documents do I need?", "plausible": ["placement_process", "scholarship_aid", "certificates"]}
-{"text": "Check my status", "plausible": ["scholarship_aid", "fee_payment", "exam_info"]}
-{"text": "Can I change it?", "plausible": ["hostel_info", "academic_calendar"]}
-{"text": "Can I extend it?", "plausible": ["library_borrow", "academic_calendar", "hostel_info"]}
-{"text": "What's the last date?", "plausible": ["academic_calendar", "fee_payment", "scholarship_aid"]}
-{"text": "I missed the date", "plausible": ["academic_calendar", "fee_payment", "scholarship_aid"]}
-{"text": "When is the next one?", "plausible": ["academic_calendar", "exam_info", "placement_process"]}
-{"text": "Tell me more about the process", "plausible": ["placement_process", "certificates", "hostel_info"]}
-{"text": "I need to reset it", "plausible": ["it_helpdesk", "hostel_info"]}
+{"text": "How do I apply?", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
 {"text": "Do I need permission?", "plausible": ["hostel_info", "certificates", "placement_process"]}
+{"text": "When does it open?", "plausible": ["library_hours", "campus_services"]}
+{"text": "I need help with my form", "plausible": ["scholarship_aid", "certificates", "fee_payment"]}
+{"text": "Can I get a receipt?", "plausible": ["fee_payment", "certificates"]}
+{"text": "I have a problem with my account", "plausible": ["it_helpdesk", "fee_payment"]}
+{"text": "I want to apply for it", "plausible": ["scholarship_aid", "hostel_info", "placement_process"]}
+{"text": "How much does it cost?", "plausible": ["fee_payment", "hostel_info", "certificates"]}
+{"text": "Tell me more about the process", "plausible": ["placement_process", "certificates", "hostel_info"]}
+{"text": "Is it free?", "plausible": ["campus_services", "fee_payment"]}
+{"text": "How early should I arrive?", "plausible": ["exam_info", "placement_process"]}
+{"text": "It is not working", "plausible": ["it_helpdesk", "campus_services"]}
+{"text": "Is it open on weekends?", "plausible": ["library_hours", "campus_services"]}
 {"text": "I want information about registration", "plausible": ["academic_calendar", "placement_process"]}
+{"text": "What is the fine?", "plausible": ["library_borrow", "fee_payment"]}
+{"text": "Tell me about the results", "plausible": ["exam_info", "placement_process"]}
+{"text": "Can I extend it?", "plausible": ["library_borrow", "academic_calendar", "hostel_info"]}
 {"text": "Who do I contact?", "plausible": ["it_helpdesk", "hostel_info", "placement_process"]}
-{"text": "The portal is not showing it", "plausible": ["it_helpdesk", "exam_info", "fee_payment"]}
-{"text": "What is the procedure?", "plausible": ["certificates", "exam_info", "placement_process"]}
+{"text": "When is the next one?", "plausible": ["academic_calendar", "exam_info", "placement_process"]}
+{"text": "I lost my card", "plausible": ["library_borrow", "certificates"]}
+{"text": "Tell me about the dates", "plausible": ["academic_calendar", "exam_info"]}
+{"text": "When will it be credited?", "plausible": ["scholarship_aid", "fee_payment"]}
+{"text": "Is it allowed?", "plausible": ["exam_info", "hostel_info"]}

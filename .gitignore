@@ -11,3 +11,6 @@ frontend/dist/
 ml/eval_audio/
 *.wav
 *.webm
+ml/artifacts/nllb-ct2/
+.hf_cache/
+.tmp/

@@ -7,11 +7,20 @@ from pydantic import BaseModel, Field
 ClientId = Field(default=None, min_length=8, max_length=64, pattern=r"^[A-Za-z0-9_-]+$")
 
 
+class WordScore(BaseModel):
+    word: str
+    probability: float
+
+
 class TranscribeResponse(BaseModel):
     transcript: str
     asr_confidence: float
     duration_s: float
     latency_ms: float
+    language: str = "en"
+    language_name: str = "English"
+    language_probability: float = 1.0
+    words: list[WordScore] = []
 
 
 class IntentRequest(BaseModel):
@@ -36,6 +45,7 @@ class TurnRequest(BaseModel):
     input_mode: Literal["voice", "text"] = "text"
     asr_confidence: float | None = Field(default=None, ge=0, le=1)
     chosen_intent: str | None = Field(default=None, max_length=40)  # user picked a clarification option
+    lang: str | None = Field(default=None, min_length=2, max_length=3, pattern=r"^[a-z]+$")  # None = detect
     attempts: int = Field(default=0, ge=0, le=10)
     edited: bool = False
     client_id: str | None = ClientId
@@ -72,6 +82,11 @@ class TurnResponse(BaseModel):
     thresholds: Thresholds | None = None
     reason: str
     memory_applied: bool = False
+    lang: str = "en"
+    lang_name: str = "English"
+    lang_verified: bool = True
+    translated_input: str | None = None
+    translation_available: bool = True
     model_version: str
     latency_ms: float
 

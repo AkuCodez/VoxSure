@@ -16,7 +16,9 @@ class Settings(BaseSettings):
     knowledge_base_path: Path = REPO_ROOT / "backend" / "app" / "data" / "knowledge_base.json"
     frontend_dist: Path = REPO_ROOT / "frontend" / "dist"
 
-    whisper_model: str = "base.en"
+    nllb_dir: Path = REPO_ROOT / "ml" / "artifacts" / "nllb-ct2"
+    language_status_path: Path = REPO_ROOT / "backend" / "app" / "data" / "language_status.json"
+    whisper_model: str = "small"  # multilingual; use base.en for English-only/lower latency
     whisper_compute_type: str = "int8"
     whisper_cache_dir: str | None = None
     asr_timeout_s: float = 45.0

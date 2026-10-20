@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
@@ -30,6 +31,8 @@ class VoxState:
     db: Database
     classifier: Any = None
     transcriber: Any = None
+    translator: Any = None
+    language_status: dict = field(default_factory=dict)
     asr_lock: asyncio.Lock = field(default_factory=asyncio.Lock)
 
 
@@ -42,6 +45,19 @@ def build_state(settings: Settings) -> VoxState:
         state.classifier = IntentClassifier(settings.intent_model_dir)
     except Exception:
         log.exception("intent model failed to load")
+    try:
+        if settings.language_status_path.exists():
+            state.language_status = json.loads(settings.language_status_path.read_text(encoding="utf-8"))
+    except Exception:
+        log.exception("language status failed to load")
+    try:
+        if (settings.nllb_dir / "model.bin").exists():
+            from .services.translate import Translator
+            state.translator = Translator(settings.nllb_dir)
+        else:
+            log.warning("NLLB model not found at %s; non-English requests fall back to English", settings.nllb_dir)
+    except Exception:
+        log.exception("translation model failed to load")
     try:
         from .services.asr import Transcriber
         state.transcriber = Transcriber(settings.whisper_model, settings.whisper_compute_type,

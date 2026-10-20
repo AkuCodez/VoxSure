@@ -254,6 +254,30 @@ def main() -> None:
         "caveat": "Simulated upper bound: memory only helps EXACT repeats of an already-corrected utterance; it does not generalise.",
     }
 
+    # ---- Bootstrap 95% confidence intervals (1000 resamples of the test items, paired) ----
+    from sklearn.metrics import f1_score
+    brng = np.random.default_rng(SEED)
+    dec_b = [baseline_decision(p) for p in tp]
+    dec_c = [decide(p, best) for p in tp]
+    nc = len(test)
+    pred_d = p_test_T.argmax(1)
+    f1_d, f1_b, wr_b, wr_c, cl_c, dwr = [], [], [], [], [], []
+    for _ in range(1000):
+        ix = brng.integers(0, nc, nc)
+        f1_d.append(f1_score(ytest[ix], pred_d[ix], average="macro", labels=range(len(labels)), zero_division=0))
+        f1_b.append(f1_score(ytest[ix], base_pred[ix], average="macro", labels=range(len(labels)), zero_division=0))
+        jx = np.concatenate([ix, brng.integers(nc, len(test_rows), len(test_rows) - nc)])
+        sb = score([test_rows[i] for i in jx], [dec_b[i] for i in jx])
+        sc = score([test_rows[i] for i in jx], [dec_c[i] for i in jx])
+        wr_b.append(sb["wrong_answer_rate"]); wr_c.append(sc["wrong_answer_rate"]); cl_c.append(sc["clarification_rate"])
+        dwr.append(sb["wrong_answer_rate"] - sc["wrong_answer_rate"])
+    ci = lambda v: [float(np.percentile(v, 2.5)), float(np.percentile(v, 97.5))]
+    report["bootstrap_95ci"] = {
+        "n_resamples": 1000, "note": "Resamples test items with replacement; ambiguous items resampled separately.",
+        "macro_f1_distilbert": ci(f1_d), "macro_f1_baseline": ci(f1_b),
+        "wrong_answer_rate_B": ci(wr_b), "wrong_answer_rate_C": ci(wr_c),
+        "wrong_answer_rate_reduction_B_minus_C": ci(dwr), "clarification_rate_C": ci(cl_c)}
+
     (REPORT / "intent_eval.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     _plot_confusion(report["A_distilbert"]["confusion_matrix"], labels)
     a, b = report["A_baseline_tfidf_logreg"], report["A_distilbert"]

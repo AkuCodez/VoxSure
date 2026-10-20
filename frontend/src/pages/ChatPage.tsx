@@ -44,11 +44,11 @@ export default function ChatPage() {
   const status = rec.recording ? "listening" : chat.status;
   const onMic = () => {
     chat.stopAudio();
-    if (rec.recording) rec.stop();
-    else { chat.setError(null); chat.setStatus("listening"); void rec.start(); }
+    if (rec.recording || rec.starting) rec.stop();   // stop, or cancel a pending permission request
+    else { chat.setError(null); chat.setStatus("ready"); void rec.start(); }
   };
   const ask = (q: string) => void chat.sendText(q);
-  const locked = chat.busy || rec.recording;
+  const locked = chat.busy || rec.recording || rec.starting;
 
   return (
     <div className="bg-console flex h-dvh w-full flex-col overflow-hidden">
@@ -138,7 +138,7 @@ export default function ChatPage() {
             </div>
           </main>
 
-          <Composer recording={rec.recording} seconds={rec.seconds} maxSeconds={rec.maxSeconds} busy={chat.busy}
+          <Composer recording={rec.recording} starting={rec.starting} seconds={rec.seconds} maxSeconds={rec.maxSeconds} busy={chat.busy}
             micAvailable={mic.ok} levels={rec.levels} onMic={onMic} onSend={(t) => void chat.sendText(t)} />
         </div>
 

@@ -39,13 +39,28 @@ class FakeClassifier:
         return self.table.get(text.lower().strip("?. "), dist(out_of_scope=0.9))
 
 
+class FakeTranslator:
+    """Deterministic stand-in for NLLB: known phrases map to English, replies get a language prefix."""
+    TO_EN = {"पुस्तकालय कब खुलता है": "when does the library open",
+             "ਲਾਇਬ੍ਰੇਰੀ ਕਦੋਂ ਖੁੱਲ੍ਹਦੀ ਹੈ": "when does the library open",
+             "wann öffnet die bibliothek": "when does the library open"}
+
+    def translate(self, text, src, tgt):
+        if src == tgt:
+            return text
+        if tgt == "en":
+            return self.TO_EN.get(text.strip("?. ").lower(), text)
+        return f"[{tgt}] {text}"
+
+
 class FakeTranscriber:
     model_name = "fake.en"
 
     def __init__(self):
         self.mode = "ok"
 
-    def transcribe(self, audio: bytes):
+    def transcribe(self, audio: bytes, language=None):
+        self.last_language = language
         if self.mode == "nospeech":
             raise NoSpeechError()
         if self.mode == "decode":
@@ -62,7 +77,7 @@ def vox(tmp_path):
                         asr_timeout_s=0.2, frontend_dist=tmp_path / "nodist")
     return VoxState(settings=settings, kb=KnowledgeBase(settings.knowledge_base_path),
                     policy=PolicyParams(), db=Database(settings.database_url),
-                    classifier=FakeClassifier(), transcriber=FakeTranscriber())
+                    classifier=FakeClassifier(), transcriber=FakeTranscriber(), translator=FakeTranslator())
 
 
 @pytest.fixture
